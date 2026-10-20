@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en" data-t="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="copyright" content="© 2026 Ramesh Bhat">
+<title>Vision Workshop Sheet · KK Wagh University</title>
+<style>
+:root{--ink:#15243A;--paper:#FBFAF7;--card:#fff;--line:#E3E0D7;--mid:#4A5B72;--acc:#B5471F;--accbg:#F8E7DF;--ok:#1E7A4C;--okbg:#DDF1E5;--warn:#9A6A00;--warnbg:#FBF0CF;--bad:#B3261E;--badbg:#F9DEDB;--sel:#1F4E8C;--selbg:#E3EDF9}
+html[data-t="dark"]{--ink:#EDF1F6;--paper:#0E1725;--card:#16223A;--line:#2A3956;--mid:#9DAEC4;--acc:#E2703F;--accbg:#3A2418;--ok:#5FD197;--okbg:#17372A;--warn:#F0C45A;--warnbg:#3B3012;--bad:#FF8A80;--badbg:#401B19;--sel:#8DB8F2;--selbg:#1D3050}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--line);background:var(--card);flex-wrap:wrap}
+header h1{font-size:19px;margin:0;font-weight:700;letter-spacing:.2px}
+header h1 small{display:block;font-size:12.5px;font-weight:500;color:var(--mid)}
+.hbtns{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+button{font:inherit;cursor:pointer}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 13px;border-radius:8px;font-size:14px}
+.btn:hover{border-color:var(--acc)}
+.btn.pri{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+.btn.sm{padding:4px 10px;font-size:13px}
+.btn.danger{color:var(--bad)}
+nav{position:sticky;top:0;z-index:5;display:flex;gap:4px;padding:8px 16px;background:var(--paper);border-bottom:1px solid var(--line);overflow-x:auto}
+.tab{border:1px solid transparent;background:transparent;color:var(--mid);padding:8px 14px;border-radius:8px;font-size:14.5px;white-space:nowrap;display:flex;align-items:center;gap:7px}
+.tab:hover{color:var(--ink)}
+.tab.act{background:var(--card);border-color:var(--line);color:var(--ink);font-weight:700}
+.tab .dot{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.tab.done .dot{background:var(--ok)}
+main{flex:1;max-width:1180px;width:100%;margin:0 auto;padding:20px 20px 40px}
+.page{display:none}
+.page.show{display:block}
+h2{font-size:24px;margin:0 0 4px}
+.lead{color:var(--mid);margin:0 0 18px;max-width:820px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:16px}
+.card h3{margin:0 0 4px;font-size:17px}
+.card .sub{margin:0 0 10px;color:var(--mid);font-size:14.5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:820px){.grid2{grid-template-columns:1fr}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px}
+.chip{border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:7px 12px;border-radius:999px;font-size:14.5px}
+.chip:hover{border-color:var(--sel)}
+.chip.on{background:var(--selbg);border-color:var(--sel);color:var(--sel);font-weight:600}
+.chip.on::before{content:"● ";font-size:11px}
+.addrow{display:flex;gap:8px}
+input[type=text],textarea{width:100%;font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+input[type=text]:focus,textarea:focus{outline:2px solid var(--sel);outline-offset:0}
+textarea{resize:vertical;min-height:90px}
+.live{background:var(--accbg);border-left:4px solid var(--acc);padding:12px 16px;border-radius:8px;font-size:17px}
+.live b{color:var(--acc)}
+.tip{background:var(--selbg);border-radius:8px;padding:10px 14px;font-size:14.5px;color:var(--ink);margin:10px 0}
+.callout{border-left:4px solid var(--acc);background:var(--accbg);padding:10px 14px;border-radius:6px;margin:10px 0;font-size:15px}
+.steps{counter-reset:s;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.steps li{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.steps li::before{content:counter(s);display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--acc);color:#fff;align-items:center;justify-content:center;font-weight:700;margin-bottom:6px}
+.steps li b{display:block}
+.tens{padding:14px 0;border-top:1px solid var(--line)}
+.tens:first-of-type{border-top:0}
+.tens .lr{display:flex;justify-content:space-between;font-weight:600;font-size:15px;gap:12px}
+.tens .q{color:var(--mid);font-size:14px;margin:2px 0 6px}
+.track{position:relative;height:30px;margin:6px 0;border-radius:15px;background:linear-gradient(90deg,var(--selbg),var(--accbg));border:1px solid var(--line)}
+.vdot{position:absolute;top:8px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--sel);opacity:.75;border:1px solid var(--card)}
+.mean{position:absolute;top:-4px;bottom:-4px;width:4px;margin-left:-2px;background:var(--acc);border-radius:2px;transition:left .4s}
+input[type=range]{width:100%;accent-color:var(--acc)}
+.trow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:4px}
+.status{font-size:14px;font-weight:600;padding:3px 10px;border-radius:999px}
+.status.ok{background:var(--okbg);color:var(--ok)}
+.status.split{background:var(--badbg);color:var(--bad)}
+.status.none{background:var(--paper);color:var(--mid);border:1px solid var(--line)}
+.slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.slot label{font-weight:600;font-size:14px;display:block;margin-bottom:3px}
+.slot .sg{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.slot .sg button{font-size:12.5px;border:1px dashed var(--line);background:transparent;color:var(--mid);padding:2px 8px;border-radius:999px}
+.slot .sg button:hover{border-color:var(--acc);color:var(--acc)}
+.preview{font-size:19px;line-height:1.55;padding:16px 18px;border-radius:10px;background:var(--card);border:2px dashed var(--acc);margin:8px 0}
+.ph{color:var(--mid);font-style:italic}
+.wc{font-size:14px;font-weight:600}
+.wc.ok{color:var(--ok)}.wc.warn{color:var(--warn)}.wc.bad{color:var(--bad)}
+mark{background:var(--warnbg);color:var(--warn);padding:0 3px;border-radius:3px;font-weight:600}
+.chk{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:10px 0;border-top:1px solid var(--line);align-items:start}
+.chk:first-of-type{border-top:0}
+.ico{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.ico.ok{background:var(--okbg);color:var(--ok)}
+.ico.warn{background:var(--warnbg);color:var(--warn)}
+.ico.bad{background:var(--badbg);color:var(--bad)}
+.ico.na{background:var(--paper);color:var(--mid);border:1px solid var(--line)}
+.chk b{display:block}
+.chk span.d{color:var(--mid);font-size:14.5px}
+.tri{display:flex;gap:6px;margin-top:6px}
+.tri button{border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:3px 12px;border-radius:6px;font-size:13.5px}
+.tri button.y.on{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:700}
+.tri button.u.on{background:var(--warnbg);border-color:var(--warn);color:var(--warn);font-weight:700}
+.tri button.n.on{background:var(--badbg);border-color:var(--bad);color:var(--bad);font-weight:700}
+.meter{height:16px;border-radius:8px;background:var(--line);overflow:hidden;margin:8px 0}
+.meter i{display:block;height:100%;background:var(--ok);width:0;transition:width .5s}
+.ver{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:start;padding:12px 0;border-top:1px solid var(--line)}
+.ver:first-of-type{border-top:0}
+.rank{width:40px;height:40px;border-radius:50%;background:var(--selbg);color:var(--sel);display:flex;align-items:center;justify-content:center;font-weight:800}
+.ver .t{font-size:16.5px}
+.ver .m{font-size:13px;color:var(--mid);margin-top:2px}
+.ver .a{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.final{border:3px solid var(--ok);background:var(--okbg);border-radius:14px;padding:20px 24px;margin-bottom:16px}
+.final .k{font-size:12.5px;letter-spacing:1.5px;font-weight:800;color:var(--ok)}
+.final .t{font-size:24px;line-height:1.4;margin:6px 0 10px;font-weight:600}
+.frow{display:grid;grid-template-columns:200px 1fr;gap:10px;align-items:center;margin:8px 0}
+@media(max-width:700px){.frow{grid-template-columns:1fr}}
+.frow label{font-weight:600;font-size:14.5px}
+.frow .eg{color:var(--mid);font-size:13px;font-weight:400;display:block}
+.summary{background:var(--card);border:2px solid var(--ink);border-radius:12px;padding:20px 24px}
+.summary h3{margin:14px 0 4px;font-size:15px;letter-spacing:1px;text-transform:uppercase;color:var(--acc)}
+.summary p,.summary li{margin:3px 0}
+.toast{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:9px 18px;border-radius:8px;font-size:14.5px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:20;max-width:90vw}
+.toast.show{opacity:1}
+footer{border-top:1px solid var(--line);background:var(--card);padding:10px 20px;font-size:13px;color:var(--mid);display:flex;gap:16px;flex-wrap:wrap}
+footer .keys{flex-basis:100%}
+kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;font-size:12px;background:var(--paper)}
+@media print{
+ header .hbtns,nav,.btn,.tri,.addrow,.chip:not(.on),.toast,.no-print,.sg{display:none!important}
+ body{background:#fff;color:#000}
+ .page{display:none}.page.show{display:block}
+ .card,.summary,.final{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Vision Workshop Sheet<small>K K Wagh proposed university · build the vision statement together</small></h1>
+  <div class="hbtns">
+    <button class="btn" data-act="theme" title="Dark / light (D)">◐ Theme</button>
+    <button class="btn" data-act="full" title="Full screen (F)">⛶ Full screen</button>
+    <button class="btn" data-act="print">🖶 Print</button>
+    <button class="btn danger" data-act="reset" title="Reset (R)">↺ Reset</button>
+  </div>
+</header>
+<nav id="nav"></nav>
+
+<main>
+<!-- 0 BRIEF -->
+<section class="page show" id="p0">
+  <h2>Before you start</h2>
+  <p class="lead">A vision is a destination 10–15 years out, not a list of activities. This sheet takes the team from <b>who we are</b> to <b>one tested sentence</b> in six short rounds. Run it in a 90-minute workshop, projected, one facilitator typing.</p>
+  <ol class="steps">
+    <li><b>Identity</b>Pick what the university will be known for, who it serves, where, and what changes by 2040.</li>
+    <li><b>Tensions</b>Each member votes on five trade-offs. Spread of votes shows where the team really disagrees.</li>
+    <li><b>Compose</b>Build the sentence from slots or start from a preset. Keep it to 40 words or fewer.</li>
+    <li><b>Stress-test</b>Auto-checks for length, clichés, place and horizon, then six judgement tests.</li>
+    <li><b>Shortlist</b>Save versions, vote with +1, pick the final.</li>
+    <li><b>Cascade</b>Draft mission, values and 2030 goals. Print a one-page summary.</li>
+  </ol>
+  <div class="callout"><b>The tension to name:</b> a vision that every university could sign says nothing. The test is whether a rival would refuse to sign it.</div>
+  <div class="card">
+    <h3>Context the team brings in</h3>
+    <p class="sub">From the skill-list review of the five schools.</p>
+    <ul>
+      <li>Visible cluster: agri-engineering, agri-business, biotechnology, agriculture, food technology.</li>
+      <li>Strong hands-on potential, but assessment, industry linkage and certification are still thin.</li>
+      <li>Location: Nashik, an agri-industry belt (grapes, onions, food processing).</li>
+    </ul>
+    <button class="btn pri" data-go="1">Start with Identity →</button>
+  </div>
+</section>
+
+<!-- 1 IDENTITY -->
+<section class="page" id="p1">
+  <h2>1 · Identity</h2>
+  <p class="lead">Choose the few things that make this university distinctive. Click chips to select; add your own. Limits keep the vision sharp.</p>
+  <div class="grid2">
+    <div class="card"><h3>Known for <small id="c-strengths"></small></h3><p class="sub">Pick up to 3 distinctive strengths.</p><div class="chips" id="g-strengths"></div><div class="addrow"><input type="text" placeholder="Add your own…" data-add="strengths"><button class="btn sm" data-addbtn="strengths">Add</button></div></div>
+    <div class="card"><h3>Serving <small id="c-who"></small></h3><p class="sub">Pick up to 3 beneficiaries.</p><div class="chips" id="g-who"></div><div class="addrow"><input type="text" placeholder="Add your own…" data-add="who"><button class="btn sm" data-addbtn="who">Add</button></div></div>
+    <div class="card"><h3>Rooted in <small id="c-where"></small></h3><p class="sub">Pick up to 2 places.</p><div class="chips" id="g-where"></div><div class="addrow"><input type="text" placeholder="Add your own…" data-add="where"><button class="btn sm" data-addbtn="where">Add</button></div></div>
+    <div class="card"><h3>By 2040, what is true? <small id="c-outcome"></small></h3><p class="sub">Pick up to 3 outcomes.</p><div class="chips" id="g-outcome"></div><div class="addrow"><input type="text" placeholder="Add your own…" data-add="outcome"><button class="btn sm" data-addbtn="outcome">Add</button></div></div>
+  </div>
+  <div class="live" id="idline"></div>
+  <p><button class="btn pri" data-go="2">Next: Tensions →</button></p>
+</section>
+
+<!-- 2 TENSIONS -->
+<section class="page" id="p2">
+  <h2>2 · Tensions</h2>
+  <p class="lead">Every member moves the slider and clicks <b>Record vote</b>. Dots are individual votes; the orange bar is the team average. A wide spread means discuss before you write.</p>
+  <div class="tip no-print">Facilitator: ask the most extreme voters to explain first. <button class="btn sm" data-act="simvotes">Simulate a 7-member team</button> <button class="btn sm" data-act="clearvotes">Clear all votes</button></div>
+  <div class="card" id="tensions"></div>
+  <div class="live" id="tensum">Record at least one vote per tension to see the team's direction.</div>
+  <p><button class="btn pri" data-go="3">Next: Compose →</button></p>
+</section>
+
+<!-- 3 COMPOSE -->
+<section class="page" id="p3">
+  <h2>3 · Compose</h2>
+  <p class="lead">Fill the slots, or load a preset, then polish by hand in the draft box. The draft box is what gets tested and saved.</p>
+  <div class="card">
+    <h3>Template</h3>
+    <p class="sub">To be a <b>[qualifier]</b> university that <b>[verb]</b> <b>[who]</b> through <b>[approach]</b>, creating <b>[outcome]</b> in <b>[place]</b> by <b>[year]</b>.</p>
+    <div class="slots" id="slots"></div>
+    <div class="trow" style="margin-top:12px">
+      <button class="btn" data-act="fillid">Fill from my Identity picks</button>
+      <button class="btn pri" data-act="compose">Compose sentence ↓</button>
+    </div>
+    <div class="preview" id="preview"></div>
+  </div>
+  <div class="card">
+    <h3>Draft box <span class="wc" id="wc"></span></h3>
+    <p class="sub">Edit freely. Try reading it aloud to a farmer.</p>
+    <textarea id="draft" placeholder="Compose a sentence above, load a preset, or type your own…"></textarea>
+    <div class="trow" style="margin-top:10px">
+      <span style="color:var(--mid);font-size:14px">Presets:</span>
+      <button class="btn sm" data-preset="0">A · Skill + enterprise</button>
+      <button class="btn sm" data-preset="1">B · Region + impact</button>
+      <button class="btn sm" data-preset="2">C · Short</button>
+      <button class="btn sm" data-act="cleardraft">Clear</button>
+      <button class="btn pri" data-go="4" style="margin-left:auto">Next: Stress-test →</button>
+    </div>
+  </div>
+</section>
+
+<!-- 4 STRESS TEST -->
+<section class="page" id="p4">
+  <h2>4 · Stress-test</h2>
+  <p class="lead">Automatic checks first, then six judgement tests answered by the room. Weak spots are flagged so you know what to rewrite.</p>
+  <div class="preview" id="tdraft"></div>
+  <div class="card"><h3>Automatic checks</h3><div id="auto"></div></div>
+  <div class="card"><h3>Judgement tests <small style="color:var(--mid);font-weight:400">(room decides: Yes / Unsure / No)</small></h3><div id="manual"></div></div>
+  <div class="card">
+    <h3>Readiness: <span id="rpct">0%</span></h3>
+    <div class="meter"><i id="rbar"></i></div>
+    <p id="rverd" style="margin:0"></p>
+  </div>
+  <p><button class="btn" data-go="3">← Back to edit</button> <button class="btn pri" data-go="5">Next: Shortlist →</button></p>
+</section>
+
+<!-- 5 SHORTLIST -->
+<section class="page" id="p5">
+  <h2>5 · Shortlist</h2>
+  <p class="lead">Save competing versions with the author's name. Everyone adds +1 to versions they could defend. The highest becomes the final, or merge the best phrases back in Compose.</p>
+  <div id="finalbox"></div>
+  <div class="card">
+    <h3>Save the current draft</h3>
+    <div class="grid2">
+      <input type="text" id="vby" placeholder="Author / group (e.g. Agri-Eng team)">
+      <input type="text" id="vnote" placeholder="One-line rationale (optional)">
+    </div>
+    <div class="trow" style="margin-top:10px"><button class="btn pri" data-act="savever">Save version</button><button class="btn" data-act="samples">Load 3 sample versions</button></div>
+  </div>
+  <div class="card"><h3>Versions (ranked by +1)</h3><div id="vers"></div></div>
+  <p><button class="btn pri" data-go="6">Next: Cascade →</button></p>
+</section>
+
+<!-- 6 CASCADE -->
+<section class="page" id="p6">
+  <h2>6 · Cascade</h2>
+  <p class="lead">A vision only works if it flows into mission, values and goals someone can be held to.</p>
+  <div class="card">
+    <h3>Mission: how we deliver the vision</h3>
+    <div class="frow"><label>We educate by…<span class="eg">e.g. making every student produce, test and sell</span></label><input type="text" data-m="edu"></div>
+    <div class="frow"><label>We partner with…<span class="eg">e.g. farmers, FPOs, processors, OEMs</span></label><input type="text" data-m="par"></div>
+    <div class="frow"><label>We research…<span class="eg">e.g. problems that Nashik growers and plants face</span></label><input type="text" data-m="res"></div>
+  </div>
+  <div class="card"><h3>Values <small id="c-values"></small></h3><p class="sub">Pick up to 5.</p><div class="chips" id="g-values"></div></div>
+  <div class="card">
+    <h3>2030 goals: make it measurable</h3>
+    <div class="frow"><label>Employability<span class="eg">graduates employed or in enterprise within 6 months</span></label><input type="text" data-gl="emp" placeholder="e.g. 80%"></div>
+    <div class="frow"><label>Certification<span class="eg">students with an industry-recognised skill certificate</span></label><input type="text" data-gl="cert" placeholder="e.g. 90%"></div>
+    <div class="frow"><label>Industry co-design<span class="eg">employer / industry partners shaping programmes</span></label><input type="text" data-gl="ind" placeholder="e.g. 50 partners"></div>
+    <div class="frow"><label>Rural enterprise<span class="eg">student-founded ventures incubated</span></label><input type="text" data-gl="ent" placeholder="e.g. 100 ventures"></div>
+    <div class="frow"><label>Quality recognition<span class="eg">accreditation or ranking ambition</span></label><input type="text" data-gl="acc" placeholder="e.g. NAAC A+, NIRF top 100"></div>
+  </div>
+  <div class="summary" id="summary"></div>
+  <p class="no-print"><button class="btn pri" data-act="copysum">Copy summary</button> <button class="btn" data-act="print">🖶 Print one-page summary</button></p>
+</section>
+</main>
+
+<div class="toast" id="toast"></div>
+<footer>
+  <span>Nothing you enter is stored or transmitted. Refreshing the page clears everything, so copy or print before you close.</span>
+  <span style="margin-left:auto">© 2026 Ramesh Bhat &nbsp;·&nbsp; Build 2026-10-20a</span>
+  <span class="keys"><kbd>←</kbd> <kbd>→</kbd> previous / next round · <kbd>Home</kbd> <kbd>End</kbd> first / last · <kbd>D</kbd> dark / light · <kbd>F</kbd> full screen · <kbd>R</kbd> reset (press twice)</span>
+</footer>
+
+<script>
+(function(){
+'use strict';
+var TABS=['Brief','1 Identity','2 Tensions','3 Compose','4 Stress-test','5 Shortlist','6 Cascade'];
+var GROUPS={
+ strengths:{max:3,items:['Agri-food value chains','Biotechnology & life sciences','Agri-engineering & machinery','Agri-business & enterprise','Learning by doing (skill-first)','Industry co-designed programmes','Climate-smart, sustainable farming','Digital & AI in agriculture','Nutrition & health']},
+ who:{max:3,items:['Rural & first-generation learners','Farmers & FPOs','Agri-industry & MSMEs','Women entrepreneurs','Young innovators']},
+ where:{max:2,items:['Nashik','Maharashtra','India','Global south']},
+ outcome:{max:3,items:['Job-ready graduates','Rural entrepreneurs','Higher farmer incomes','Transformed agri-value chains','Globally recognised research','Sustainable food systems']},
+ values:{max:5,items:['Integrity','Dignity of skilled work','Farmer-first','Innovation','Sustainability','Inclusion','Industry partnership','Rigour','Service','Collaboration']}
+};
+var DIMS=[
+ {id:'scope',l:'Specialist (agri-food-bio)',r:'Broad multi-disciplinary',q:'Do we go deep on one cluster or become a general university?'},
+ {id:'mode',l:'Practice / skill-first',r:'Research-first',q:'What is the primary identity: doing or discovering?'},
+ {id:'reach',l:'Regional (Nashik / Maharashtra)',r:'National / global',q:'Where must we be known?'},
+ {id:'access',l:'Access-first (rural, first-gen)',r:'Selective / premium',q:'Whom do we admit and design for?'},
+ {id:'engine',l:'Teaching excellence',r:'Industry & enterprise engine',q:'Are we mainly a school, or an economic engine for the region?'}
+];
+var SLOTS=[
+ {k:'q',label:'Qualifier',ph:'e.g. skill-first, Nashik-rooted',sg:['skill-first','practice-led','Nashik-rooted','enterprise-driven']},
+ {k:'v',label:'Verb',ph:'e.g. transforms',sg:['transforms','builds','prepares','empowers']},
+ {k:'who',label:'Who',ph:'e.g. rural learners into agri-leaders',sg:['rural learners','farmers and young entrepreneurs','first-generation students']},
+ {k:'how',label:'Approach',ph:'e.g. learning by doing with industry',sg:['learning by doing','industry-co-designed practice','hands-on, certified skills']},
+ {k:'out',label:'Outcome',ph:'e.g. livelihoods and enterprises',sg:['livelihoods and enterprises','job-ready graduates','stronger agri-value chains']},
+ {k:'where',label:'Place',ph:'e.g. Nashik, Maharashtra and India',sg:['Nashik','Maharashtra','India']},
+ {k:'yr',label:'Year',ph:'2040',sg:['2035','2040']}
+];
+var PRESETS=[
+ 'To be India\u2019s leading skill-first university for agriculture, food, biotechnology and engineering, producing job-ready graduates and rural entrepreneurs who transform agri-value chains by 2040.',
+ 'A Nashik-rooted, globally respected university where learning by doing turns farm, food and technology knowledge into livelihoods, enterprises and sustainable growth.',
+ 'Practice-led education for agri-food and technology leadership in India.'
+];
+var CLICHES=['excellence','world-class','world class','holistic','synergy','best-in-class','state-of-the-art','cutting-edge','premier','leading','nurture','hub of','centre of','center of','global standards'];
+var MANUAL=[
+ {k:'rival',t:'Rival test',d:'Would a rival university refuse to sign this because it is not true for them?'},
+ {k:'meas',t:'Verifiable in 15 years',d:'Could an outsider tell in 2040 whether we achieved it?'},
+ {k:'insp',t:'Inspiring when read aloud',d:'Read it to the room. Does anyone lean forward?'},
+ {k:'skill',t:'Skill-first signal',d:'Does it show hands-on, employable learning, not just knowledge?'},
+ {k:'align',t:'Aligned to the Society\u2019s values and NEP 2020',d:'Would the founders and regulators recognise themselves in it?'},
+ {k:'plain',t:'Understood by a farmer',d:'Plain words, no jargon.'}
+];
+var SAMPLES=[
+ {by:'Agri-Eng team',note:'Emphasis on machines and precision',text:'To be a skill-first university where engineers, farmers and food technologists learn by doing, building the machines, products and enterprises that lift Nashik\u2019s agriculture by 2040.'},
+ {by:'Biotech team',note:'Science with local impact',text:'To be a practice-led university that turns biotechnology and food science into job-ready graduates and rural start-ups for India\u2019s farms and factories by 2040.'},
+ {by:'ABM team',note:'Business and livelihoods',text:'To be the university that makes rural learners into agri-entrepreneurs and leaders, strengthening farmer incomes and agri-value chains across Maharashtra by 2040.'}
+];
+var S;
+function fresh(){return{sel:{strengths:[],who:[],where:[],outcome:[],values:[]},extra:{strengths:[],who:[],where:[],outcome:[],values:[]},votes:{},slots:{yr:'2040'},draft:'',chk:{},versions:[],nid:1,final:null,m:{},gl:{},tab:0,resetArm:0};}
+S=fresh();
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function toast(m){var t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.h);toast.h=setTimeout(function(){t.classList.remove('show');},2200);}
+function words(t){var m=t.trim().match(/\S+/g);return m?m.length:0;}
+function listJoin(a){if(!a.length)return '';if(a.length===1)return a[0];return a.slice(0,-1).join(', ')+' and '+a[a.length-1];}
+
+/* NAV */
+function buildNav(){var n=$('#nav');n.innerHTML='';TABS.forEach(function(t,i){var b=document.createElement('button');b.className='tab';b.setAttribute('data-go',i);b.innerHTML='<span class="dot"></span>'+esc(t);n.appendChild(b);});}
+function go(i){S.tab=Math.max(0,Math.min(TABS.length-1,i));$$('.page').forEach(function(p,k){p.classList.toggle('show',k===S.tab);});$$('.tab').forEach(function(t,k){t.classList.toggle('act',k===S.tab);});if(S.tab===4)renderTest();if(S.tab===5)renderVersions();if(S.tab===6)renderSummary();if(S.tab===3)renderCompose();window.scrollTo(0,0);}
+function doneFlags(){
+ var d=[];d[0]=true;
+ d[1]=['strengths','who','where','outcome'].every(function(g){return S.sel[g].length>0;});
+ d[2]=DIMS.every(function(x){return (S.votes[x.id]||[]).length>0;});
+ d[3]=words(S.draft)>=8;
+ d[4]=Object.keys(S.chk).length>=MANUAL.length;
+ d[5]=!!S.final;
+ d[6]=S.sel.values.length>0&&!!(S.m.edu||S.m.par||S.m.res);
+ $$('.tab').forEach(function(t,k){t.classList.toggle('done',!!d[k]);});
+}
+
+/* CHIPS */
+function renderChips(g){
+ var box=$('#g-'+g),all=GROUPS[g].items.concat(S.extra[g]);box.innerHTML='';
+ all.forEach(function(v){var b=document.createElement('button');b.className='chip'+(S.sel[g].indexOf(v)>=0?' on':'');b.setAttribute('data-g',g);b.setAttribute('data-v',v);b.textContent=v;box.appendChild(b);});
+ var c=$('#c-'+g);if(c)c.textContent='('+S.sel[g].length+'/'+GROUPS[g].max+')';
+}
+function toggleChip(g,v){
+ var a=S.sel[g],i=a.indexOf(v);
+ if(i>=0)a.splice(i,1);
+ else{if(a.length>=GROUPS[g].max){toast('Limit is '+GROUPS[g].max+'. Drop one first. Focus is the point.');return;}a.push(v);}
+ renderChips(g);idLine();doneFlags();
+}
+function addExtra(g){var inp=$('[data-add="'+g+'"]');if(!inp)return;var v=inp.value.trim();if(!v)return;if(GROUPS[g].items.concat(S.extra[g]).indexOf(v)<0)S.extra[g].push(v);inp.value='';toggleChip(g,v);}
+function idLine(){
+ var s=S.sel,e=$('#idline');
+ if(!s.strengths.length&&!s.who.length&&!s.where.length&&!s.outcome.length){e.innerHTML='Select chips above to see your identity in one line.';return;}
+ e.innerHTML='A university known for <b>'+esc(listJoin(s.strengths)||'…')+'</b>, serving <b>'+esc(listJoin(s.who)||'…')+'</b>, rooted in <b>'+esc(listJoin(s.where)||'…')+'</b>, and by 2040 delivering <b>'+esc(listJoin(s.outcome)||'…')+'</b>.';
+}
+
+/* TENSIONS */
+function stats(a){if(!a.length)return null;var m=a.reduce(function(x,y){return x+y;},0)/a.length;var v=a.reduce(function(x,y){return x+(y-m)*(y-m);},0)/a.length;return{m:m,sd:Math.sqrt(v),n:a.length};}
+function buildTensions(){
+ var box=$('#tensions');box.innerHTML='';
+ DIMS.forEach(function(d){
+  var div=document.createElement('div');div.className='tens';
+  div.innerHTML='<div class="lr"><span>◀ '+esc(d.l)+'</span><span>'+esc(d.r)+' ▶</span></div><div class="q">'+esc(d.q)+'</div><div class="track" id="tr-'+d.id+'"></div><input type="range" min="0" max="100" value="50" id="rg-'+d.id+'"><div class="trow"><button class="btn sm pri" data-vote="'+d.id+'">Record vote</button><button class="btn sm" data-unvote="'+d.id+'">Undo last</button><span class="status none" id="st-'+d.id+'">No votes</span></div>';
+  box.appendChild(div);
+ });
+ DIMS.forEach(function(d){drawTrack(d.id);});
+}
+function drawTrack(id){
+ var tr=$('#tr-'+id),a=S.votes[id]||[],st=stats(a),lab=$('#st-'+id);
+ tr.innerHTML='';
+ a.forEach(function(v){var s=document.createElement('span');s.className='vdot';s.style.left=v+'%';tr.appendChild(s);});
+ if(st){var m=document.createElement('span');m.className='mean';m.style.left=st.m+'%';tr.appendChild(m);
+  var split=st.n>1&&st.sd>20;lab.className='status '+(split?'split':'ok');
+  lab.textContent=st.n+' vote'+(st.n>1?'s':'')+' · avg '+Math.round(st.m)+' · '+(st.n<2?'need more votes':(split?'SPLIT: discuss':'aligned'));
+ }else{lab.className='status none';lab.textContent='No votes';}
+ tenSum();doneFlags();
+}
+function side(m,l,r){if(m<35)return l;if(m>65)return r;return 'a balance of both';}
+function tenSum(){
+ var e=$('#tensum'),parts=[],any=false;
+ DIMS.forEach(function(d){var st=stats(S.votes[d.id]||[]);if(st){any=true;parts.push('<b>'+esc(d.q.replace(/\?$/,''))+':</b> '+esc(side(st.m,d.l,d.r))+(st.n>1&&st.sd>20?' <span class="status split">split</span>':''));}});
+ e.innerHTML=any?parts.join('<br>'):'Record at least one vote per tension to see the team\u2019s direction.';
+}
+function simVotes(){
+ var seeds={scope:[25,30,35,20,60,30,25],mode:[20,25,15,30,70,20,35],reach:[40,60,35,75,55,30,45],access:[15,20,25,10,20,70,15],engine:[70,75,60,55,35,80,65]};
+ DIMS.forEach(function(d){S.votes[d.id]=seeds[d.id].slice();drawTrack(d.id);});toast('Sample votes loaded. Note which tensions are split.');
+}
+
+/* COMPOSE */
+function buildSlots(){
+ var box=$('#slots');box.innerHTML='';
+ SLOTS.forEach(function(s){
+  var d=document.createElement('div');d.className='slot';
+  var sg=s.sg.map(function(x){return '<button data-sg="'+s.k+'" data-v="'+esc(x)+'">'+esc(x)+'</button>';}).join('');
+  d.innerHTML='<label for="s-'+s.k+'">'+esc(s.label)+'</label><input type="text" id="s-'+s.k+'" data-slot="'+s.k+'" placeholder="'+esc(s.ph)+'" value="'+esc(S.slots[s.k]||'')+'"><div class="sg">'+sg+'</div>';
+  box.appendChild(d);
+ });
+}
+function composeText(){
+ var p=S.slots;function g(k,l){return p[k]&&p[k].trim()?p[k].trim():'<span class="ph">['+l+']</span>';}
+ return 'To be '+(p.q&&p.q.trim()?'a ':'a ')+g('q','qualifier')+' university that '+g('v','verb')+' '+g('who','who')+' through '+g('how','approach')+', creating '+g('out','outcome')+' in '+g('where','place')+' by '+g('yr','year')+'.';
+}
+function plainCompose(){
+ var p=S.slots;for(var k in p){}
+ var need=['q','v','who','how','out','where','yr'];
+ var t='To be a '+(p.q||'').trim()+' university that '+(p.v||'').trim()+' '+(p.who||'').trim()+' through '+(p.how||'').trim()+', creating '+(p.out||'').trim()+' in '+(p.where||'').trim()+' by '+(p.yr||'').trim()+'.';
+ return t.replace(/\s+/g,' ').replace(/ ,/g,',');
+}
+function renderCompose(){
+ $('#preview').innerHTML=composeText();
+ $('#draft').value=S.draft;updateWc();
+}
+function updateWc(){
+ var n=words(S.draft),e=$('#wc');
+ e.textContent=n?'· '+n+' words'+(n<=40?' ✓':' (aim ≤ 40)'):'';
+ e.className='wc '+(n===0?'':(n<=40?'ok':(n<=50?'warn':'bad')));
+}
+function fillId(){
+ var s=S.sel;
+ if(s.who.length)S.slots.who=listJoin(s.who).toLowerCase().replace(/^./,function(c){return c;});
+ if(s.where.length)S.slots.where=listJoin(s.where);
+ if(s.outcome.length)S.slots.out=listJoin(s.outcome).toLowerCase();
+ if(s.strengths.length&&!S.slots.how)S.slots.how=s.strengths[0].toLowerCase().replace(/\s*\(.*\)/,'');
+ buildSlots();renderCompose();toast('Slots filled from Identity. Edit to taste.');
+}
+
+/* TEST */
+function renderTest(){
+ var t=S.draft.trim();
+ var h=esc(t);CLICHES.forEach(function(c){h=h.replace(new RegExp('('+c.replace(/[-]/g,'\\-')+')','ig'),'<mark>$1</mark>');});
+ $('#tdraft').innerHTML=t?h:'<span class="ph">No draft yet. Go back to Compose.</span>';
+ var n=words(t),found=[];
+ CLICHES.forEach(function(c){if(t.toLowerCase().indexOf(c)>=0)found.push(c);});
+ var autos=[
+  n===0?{s:'na',t:'Length',d:'No draft.'}:(n<8?{s:'warn',t:'Length',d:n+' words: too thin to say anything distinctive.'}:(n<=40?{s:'ok',t:'Length',d:n+' words. Within the 40-word limit.'}:(n<=50?{s:'warn',t:'Length',d:n+' words. Trim to 40 or fewer.'}:{s:'bad',t:'Length',d:n+' words. Too long to remember.'}))),
+  !t?{s:'na',t:'Clichés',d:'No draft.'}:(found.length?{s:'warn',t:'Clichés',d:'Generic words found (highlighted): '+found.join(', ')+'. Replace with something only you can claim.'}:{s:'ok',t:'Clichés',d:'No stock phrases detected.'}),
+  !t?{s:'na',t:'Place named',d:'No draft.'}:(/nashik|maharashtra|india|rural|region|bharat/i.test(t)?{s:'ok',t:'Place named',d:'Roots the vision in a place.'}:{s:'warn',t:'Place named',d:'No place or region. A rival anywhere could sign this.'}),
+  !t?{s:'na',t:'Time horizon',d:'No draft.'}:(/20[2-5]\d|\b\d+\s*years?\b/i.test(t)?{s:'ok',t:'Time horizon',d:'A date makes it checkable.'}:{s:'warn',t:'Time horizon',d:'No year. Add one (e.g. by 2040) so it can be verified.'}),
+  !t?{s:'na',t:'Beneficiary named',d:'No draft.'}:(/student|learner|graduate|farmer|entrepreneur|youth|women|rural|industry|communit/i.test(t)?{s:'ok',t:'Beneficiary named',d:'Says who benefits.'}:{s:'warn',t:'Beneficiary named',d:'Does not say who the university is for.'})
+ ];
+ var ic={ok:'✓',warn:'!',bad:'✕',na:'–'};
+ $('#auto').innerHTML=autos.map(function(a){return '<div class="chk"><div class="ico '+a.s+'">'+ic[a.s]+'</div><div><b>'+esc(a.t)+'</b><span class="d">'+esc(a.d)+'</span></div></div>';}).join('');
+ $('#manual').innerHTML=MANUAL.map(function(m){var v=S.chk[m.k]||'';
+  return '<div class="chk"><div class="ico '+(v==='y'?'ok':v==='u'?'warn':v==='n'?'bad':'na')+'">'+(v==='y'?'✓':v==='u'?'?':v==='n'?'✕':'–')+'</div><div><b>'+esc(m.t)+'</b><span class="d">'+esc(m.d)+'</span><div class="tri"><button class="y'+(v==='y'?' on':'')+'" data-chk="'+m.k+'" data-r="y">Yes</button><button class="u'+(v==='u'?' on':'')+'" data-chk="'+m.k+'" data-r="u">Unsure</button><button class="n'+(v==='n'?' on':'')+'" data-chk="'+m.k+'" data-r="n">No</button></div></div></div>';}).join('');
+ var pts=autos.filter(function(a){return a.s==='ok';}).length;
+ MANUAL.forEach(function(m){var v=S.chk[m.k];if(v==='y')pts+=1;else if(v==='u')pts+=.5;});
+ var tot=autos.length+MANUAL.length,pct=Math.round(pts/tot*100);
+ $('#rpct').textContent=pct+'%';$('#rbar').style.width=pct+'%';
+ var worst=[];autos.forEach(function(a){if(a.s==='warn'||a.s==='bad')worst.push(a.t);});MANUAL.forEach(function(m){if(S.chk[m.k]==='n'||S.chk[m.k]==='u')worst.push(m.t);});
+ var v;
+ if(!t)v='Write a draft first.';
+ else if(Object.keys(S.chk).length<MANUAL.length)v='Answer all six judgement tests. The room\u2019s doubt is the most useful signal.';
+ else if(pct>=85)v='Ready to shortlist. Save it and let rival versions compete.';
+ else v='Rewrite before shortlisting. Fix first: '+worst.slice(0,3).join(', ')+'.';
+ $('#rverd').textContent=v;doneFlags();
+}
+
+/* SHORTLIST */
+function renderVersions(){
+ var fb=$('#finalbox');
+ if(S.final){var f=S.versions.filter(function(x){return x.id===S.final;})[0];
+  if(f){fb.innerHTML='<div class="final"><div class="k">FINAL VISION STATEMENT</div><div class="t">'+esc(f.text)+'</div><div class="no-print"><button class="btn pri" data-copy="'+f.id+'">Copy</button> <button class="btn" data-act="unfinal">Re-open</button></div></div>';}
+  else{S.final=null;fb.innerHTML='';}
+ }else fb.innerHTML='';
+ var box=$('#vers');
+ if(!S.versions.length){box.innerHTML='<p class="ph">No versions yet. Save the current draft or load the samples.</p>';doneFlags();return;}
+ var sorted=S.versions.slice().sort(function(a,b){return b.v-a.v||a.id-b.id;});
+ box.innerHTML=sorted.map(function(x,i){
+  return '<div class="ver"><div class="rank">'+(i+1)+'</div><div><div class="t">'+esc(x.text)+'</div><div class="m">'+esc(x.by||'Anonymous')+' · '+words(x.text)+' words'+(x.note?' · '+esc(x.note):'')+' · <b>+'+x.v+'</b></div></div><div class="a"><button class="btn sm" data-plus="'+x.id+'">+1</button><button class="btn sm" data-load="'+x.id+'">Edit</button><button class="btn sm pri" data-final="'+x.id+'">Make final</button><button class="btn sm danger" data-del="'+x.id+'">✕</button></div></div>';
+ }).join('');
+ doneFlags();
+}
+function saveVer(text,by,note){text=(text||'').trim();if(!text){toast('The draft is empty. Compose first.');return false;}S.versions.push({id:S.nid++,text:text,by:by||'',note:note||'',v:0});return true;}
+
+/* CASCADE */
+function renderSummary(){
+ var vis=S.final?(S.versions.filter(function(x){return x.id===S.final;})[0]||{}).text:S.draft;
+ var h='<h3>Vision</h3><p style="font-size:19px"><b>'+(vis?esc(vis):'<span class="ph">Not yet decided</span>')+'</b></p>';
+ var m=S.m,parts=[];
+ if(m.edu)parts.push('We educate by '+esc(m.edu));if(m.par)parts.push('we partner with '+esc(m.par));if(m.res)parts.push('we research '+esc(m.res));
+ h+='<h3>Mission</h3><p>'+(parts.length?parts.join('; ')+'.':'<span class="ph">Not yet drafted</span>')+'</p>';
+ h+='<h3>Values</h3><p>'+(S.sel.values.length?esc(S.sel.values.join(' · ')):'<span class="ph">None picked</span>')+'</p>';
+ var gl=[['emp','Employability'],['cert','Certification'],['ind','Industry partners'],['ent','Rural ventures'],['acc','Recognition']].filter(function(x){return S.gl[x[0]];});
+ h+='<h3>2030 goals</h3>'+(gl.length?'<ul>'+gl.map(function(x){return '<li>'+x[1]+': '+esc(S.gl[x[0]])+'</li>';}).join('')+'</ul>':'<p class="ph">No targets set</p>');
+ var id=S.sel;
+ h+='<h3>Identity</h3><p>Known for '+esc(listJoin(id.strengths)||'…')+'; serving '+esc(listJoin(id.who)||'…')+'; rooted in '+esc(listJoin(id.where)||'…')+'.</p>';
+ var sp=[];DIMS.forEach(function(d){var st=stats(S.votes[d.id]||[]);if(st)sp.push(esc(side(st.m,d.l,d.r)));});
+ if(sp.length)h+='<h3>Team lean on the tensions</h3><p>'+sp.join(' · ')+'</p>';
+ $('#summary').innerHTML=h;doneFlags();
+}
+function summaryText(){return $('#summary').innerText;}
+
+/* COPY */
+function copyText(t){
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){toast('Copied');},function(){fallbackCopy(t);});}else fallbackCopy(t);
+}
+function fallbackCopy(t){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy');toast('Copied');}catch(e){toast('Select and copy manually');}document.body.removeChild(a);}
+
+/* RESET / THEME / FULL */
+function toggleTheme(){var h=document.documentElement,d=h.getAttribute('data-t')==='dark';h.setAttribute('data-t',d?'light':'dark');}
+function goFull(){if(!document.fullscreenElement){if(document.documentElement.requestFullscreen)document.documentElement.requestFullscreen();}else{if(document.exitFullscreen)document.exitFullscreen();}}
+function doReset(){
+ var now=Date.now();
+ if(now-S.resetArm<2500){var tab=S.tab;S=fresh();initAll();go(tab);toast('Everything cleared');return;}
+ S.resetArm=now;toast('Press Reset again within 2 seconds to clear everything');
+}
+function initAll(){
+ ['strengths','who','where','outcome','values'].forEach(renderChips);
+ idLine();buildTensions();buildSlots();renderCompose();
+ $$('[data-m]').forEach(function(i){i.value=S.m[i.getAttribute('data-m')]||'';});
+ $$('[data-gl]').forEach(function(i){i.value=S.gl[i.getAttribute('data-gl')]||'';});
+ $('#vby').value='';$('#vnote').value='';doneFlags();
+}
+
+/* EVENTS (delegated) */
+document.addEventListener('click',function(ev){
+ var el=ev.target.closest?ev.target.closest('button'):null;if(!el)return;
+ if(el.hasAttribute('data-go')){go(parseInt(el.getAttribute('data-go'),10));return;}
+ if(el.classList.contains('chip')){toggleChip(el.getAttribute('data-g'),el.getAttribute('data-v'));return;}
+ if(el.hasAttribute('data-addbtn')){addExtra(el.getAttribute('data-addbtn'));return;}
+ if(el.hasAttribute('data-vote')){var id=el.getAttribute('data-vote');(S.votes[id]=S.votes[id]||[]).push(parseInt($('#rg-'+id).value,10));drawTrack(id);return;}
+ if(el.hasAttribute('data-unvote')){var u=el.getAttribute('data-unvote');if(S.votes[u])S.votes[u].pop();drawTrack(u);return;}
+ if(el.hasAttribute('data-sg')){var k=el.getAttribute('data-sg');S.slots[k]=el.getAttribute('data-v');var inp=$('#s-'+k);if(inp)inp.value=S.slots[k];$('#preview').innerHTML=composeText();return;}
+ if(el.hasAttribute('data-preset')){S.draft=PRESETS[parseInt(el.getAttribute('data-preset'),10)];$('#draft').value=S.draft;updateWc();doneFlags();toast('Preset loaded. Now make it yours.');return;}
+ if(el.hasAttribute('data-chk')){S.chk[el.getAttribute('data-chk')]=el.getAttribute('data-r');renderTest();return;}
+ if(el.hasAttribute('data-plus')){var p=+el.getAttribute('data-plus');S.versions.forEach(function(x){if(x.id===p)x.v++;});renderVersions();return;}
+ if(el.hasAttribute('data-load')){var l=+el.getAttribute('data-load');S.versions.forEach(function(x){if(x.id===l){S.draft=x.text;}});go(3);return;}
+ if(el.hasAttribute('data-final')){S.final=+el.getAttribute('data-final');renderVersions();toast('Marked as final');return;}
+ if(el.hasAttribute('data-del')){var d=+el.getAttribute('data-del');S.versions=S.versions.filter(function(x){return x.id!==d;});if(S.final===d)S.final=null;renderVersions();return;}
+ if(el.hasAttribute('data-copy')){var c=+el.getAttribute('data-copy');S.versions.forEach(function(x){if(x.id===c)copyText(x.text);});return;}
+ var a=el.getAttribute('data-act');if(!a)return;
+ if(a==='theme')toggleTheme();
+ else if(a==='full')goFull();
+ else if(a==='print')window.print();
+ else if(a==='reset')doReset();
+ else if(a==='simvotes')simVotes();
+ else if(a==='clearvotes'){S.votes={};DIMS.forEach(function(x){drawTrack(x.id);});}
+ else if(a==='fillid')fillId();
+ else if(a==='compose'){S.draft=plainCompose();$('#draft').value=S.draft;updateWc();doneFlags();toast('Composed. Polish it in the draft box.');}
+ else if(a==='cleardraft'){S.draft='';$('#draft').value='';updateWc();doneFlags();}
+ else if(a==='savever'){if(saveVer(S.draft,$('#vby').value.trim(),$('#vnote').value.trim())){$('#vby').value='';$('#vnote').value='';renderVersions();toast('Version saved');}}
+ else if(a==='samples'){SAMPLES.forEach(function(s){saveVer(s.text,s.by,s.note);});renderVersions();}
+ else if(a==='unfinal'){S.final=null;renderVersions();}
+ else if(a==='copysum')copyText(summaryText());
+});
+document.addEventListener('input',function(ev){
+ var t=ev.target;
+ if(t.id==='draft'){S.draft=t.value;updateWc();doneFlags();}
+ else if(t.hasAttribute('data-slot')){S.slots[t.getAttribute('data-slot')]=t.value;$('#preview').innerHTML=composeText();}
+ else if(t.hasAttribute('data-m')){S.m[t.getAttribute('data-m')]=t.value;renderSummary();}
+ else if(t.hasAttribute('data-gl')){S.gl[t.getAttribute('data-gl')]=t.value;renderSummary();}
+});
+document.addEventListener('keydown',function(ev){
+ var t=ev.target,tag=t&&t.tagName,typ=t&&t.type;
+ if(tag==='TEXTAREA'||(tag==='INPUT'&&(typ==='text'||typ==='range'||typ==='search'||typ==='email'||typ==='number')))
+  { if(ev.key==='Enter'&&tag==='INPUT'&&t.hasAttribute('data-add')){addExtra(t.getAttribute('data-add'));} return; }
+ if(ev.ctrlKey||ev.metaKey||ev.altKey)return;
+ var k=ev.key;
+ if(k===' '&&tag==='BUTTON')return;
+ if(k==='ArrowRight'||k===' '){ev.preventDefault();go(S.tab+1);}
+ else if(k==='ArrowLeft'){ev.preventDefault();go(S.tab-1);}
+ else if(k==='Home'){go(0);}
+ else if(k==='End'){go(TABS.length-1);}
+ else if(k==='d'||k==='D'){toggleTheme();}
+ else if(k==='f'||k==='F'){goFull();}
+ else if(k==='r'||k==='R'){doReset();}
+});
+
+buildNav();initAll();go(0);
+window.__S=function(){return S;};
+})();
+</script>
+</body>
+</html>
