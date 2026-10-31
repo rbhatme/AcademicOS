@@ -1,0 +1,1794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sigma Tech — Staging an R&amp;D Investment (v3, interactive)</title>
+<style>
+  :root{
+    --ink:#1f2733; --paper:#f6f7f9; --card:#ffffff; --line:#dfe3e8;
+    --brand:#1d3f72; --brand-d:#132c50; --accent:#c17f2c; --accent-d:#96611e;
+    --good:#2e7d32; --bad:#c62828; --warn:#e6a23c; --info:#2b6cb0; --purp:#6a4c93;
+    --shadow:0 1px 2px rgba(16,24,40,.06),0 4px 16px rgba(16,24,40,.08);
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:"Avenir Next","Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--paper); color:var(--ink); line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:22px 18px 60px}
+  header.top{
+    background:linear-gradient(135deg,#0f2547,#1d3f72);
+    color:#fff;border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);
+    position:relative;overflow:hidden;
+  }
+  header.top:after{content:"";position:absolute;right:-40px;top:-40px;width:220px;height:220px;
+    background:radial-gradient(circle at center,rgba(255,255,255,.12),transparent 60%)}
+  .kicker{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;opacity:.85;font-weight:600}
+  header.top h1{margin:.15em 0 .1em;font-size:1.55rem;line-height:1.25}
+  header.top p{margin:.2em 0 0;opacity:.92;max-width:74ch;font-size:.95rem}
+  .byline{margin-top:12px;font-size:.84rem;opacity:.95;letter-spacing:.02em;
+    border-top:1px solid rgba(255,255,255,.22);padding-top:10px;display:inline-block}
+  .crumb{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}
+  .chip{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);
+    padding:3px 10px;border-radius:999px;font-size:.72rem;font-weight:600;letter-spacing:.02em}
+  .chip.adv{background:rgba(193,127,44,.35);border-color:rgba(193,127,44,.6)}
+  .layout{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:18px}
+  @media(max-width:920px){.layout{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:20px 22px}
+  .card h2{margin:.1em 0 .5em;font-size:1.15rem}
+  .card h3{margin:1em 0 .4em;font-size:1rem}
+  .muted{color:#5b6672;font-size:.9rem}
+  .tag{display:inline-block;background:#eaf0f8;color:var(--brand-d);border:1px solid #cdd9ea;
+    font-size:.7rem;font-weight:700;letter-spacing:.04em;padding:2px 8px;border-radius:6px;text-transform:uppercase}
+  .tag.adv{background:#f7ecdd;color:var(--accent-d);border-color:#ecd6b3}
+  .narrative{background:#fbf8f2;border-left:4px solid var(--accent);padding:14px 16px;border-radius:8px;
+    margin:12px 0;font-size:.95rem}
+  .narrative b.tx{color:var(--accent-d)}
+  .quote{background:#f4f6fa;border-left:4px solid var(--info);padding:12px 16px;border-radius:8px;
+    margin:10px 0;font-size:.92rem;font-style:italic;color:#334}
+  .quote .who{display:block;margin-top:6px;font-style:normal;font-weight:700;font-size:.8rem;color:#5b6672}
+  .btn{appearance:none;border:none;cursor:pointer;font:inherit;font-weight:600;border-radius:10px;
+    padding:11px 18px;transition:transform .04s ease, box-shadow .2s ease}
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--brand);color:#fff}
+  .btn-primary:hover{background:var(--brand-d)}
+  .btn-ghost{background:#eef1f3;color:var(--ink)}
+  .btn-ghost:hover{background:#e3e7ea}
+  .btn-adv{background:#fff;border:1.5px dashed var(--accent);color:var(--accent-d)}
+  .btn-sm{padding:8px 12px;font-size:.85rem;border-radius:9px}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .spacer{flex:1}
+
+  table.ref{width:100%;border-collapse:collapse;font-size:.86rem;margin:10px 0}
+  table.ref th,table.ref td{padding:6px 8px;border-bottom:1px solid #eef1f3;text-align:right}
+  table.ref th:first-child,table.ref td:first-child{text-align:left}
+  table.ref th{background:#f5f7fa;font-weight:700;color:#31404e}
+  table.ref tr.tot td{font-weight:800;border-top:2px solid var(--line)}
+
+  .fieldgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+  .fld{border:1px solid var(--line);border-radius:11px;background:#fbfcfd;padding:11px 12px}
+  .fld label{display:block;font-size:.82rem;color:#41525f;margin-bottom:6px;line-height:1.3}
+  .fld .inrow{display:flex;align-items:center;gap:6px}
+  .fld .inrow span.pre{color:#7a848f;font-size:.85rem}
+  .fld .inrow input[type=text]{font:inherit;font-size:.95rem;padding:8px 9px;border:1px solid var(--line);
+    border-radius:9px;background:#fff;color:var(--ink);width:100%}
+  .fld input:focus{outline:2px solid #cdd9ea;border-color:var(--brand)}
+  .fld .calc{margin-top:5px;font-size:.76rem;min-height:1.05em;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#7a848f}
+  .fld .calc.ok{color:var(--good);font-weight:700}
+  .fld .calc.err{color:var(--bad)}
+  .fld .calc.hint{color:#9aa3ad;font-style:italic;font-family:inherit}
+  .fhelp{border:1px solid var(--line);border-radius:11px;background:#f7f9fb;padding:9px 12px;margin:0 0 12px;font-size:.8rem;color:#41525f}
+  .fhelp b{color:var(--ink)}
+  .fhelp code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#fff;border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:.94em}
+  .fld .fb{margin-top:6px;font-size:.78rem;min-height:1.1em}
+  .fld.ok{border-color:var(--good);background:#f2f9f2}
+  .fld.bad{border-color:var(--bad);background:#fdf5f4}
+  .fld .fb.ok{color:var(--good);font-weight:700}
+  .fld .fb.bad{color:var(--bad);font-weight:700}
+
+  .choice{margin:14px 0}
+  .choice .qtext{font-weight:600;font-size:.94rem;margin-bottom:8px}
+  .choice .opts{display:flex;flex-direction:column;gap:7px}
+  .choice .opts button{position:relative;text-align:left;border:1px solid var(--line);background:#fff;border-radius:9px;
+    padding:9px 12px 9px 34px;font:inherit;font-size:.88rem;cursor:pointer;color:var(--ink);
+    transition:background .12s ease,border-color .12s ease}
+  .choice .opts button::before{content:"";position:absolute;left:12px;top:50%;transform:translateY(-50%);
+    width:13px;height:13px;border-radius:50%;border:1.5px solid #b9c2cc;background:#fff;box-sizing:border-box}
+  .choice .opts button:hover{background:#f5f7fa}
+  .choice .opts button:focus-visible{outline:2px solid #cdd9ea;outline-offset:2px}
+  /* chosen, before the answer is revealed: neutral brand tint, never green */
+  .choice .opts button.sel{border-color:var(--brand);background:#eef3fa;font-weight:700}
+  .choice .opts button.sel::before{border-color:var(--brand);background:var(--brand);box-shadow:inset 0 0 0 2.5px #fff}
+  .choice .opts button.sel-ok{border-color:var(--good);background:#f2f9f2;font-weight:700}
+  .choice .opts button.sel-ok::before{border-color:var(--good);background:var(--good);box-shadow:inset 0 0 0 2.5px #fff}
+  .choice .opts button.sel-bad{border-color:var(--bad);background:#fdf5f4;font-weight:700}
+  .choice .opts button.sel-bad::before{border-color:var(--bad);background:var(--bad);box-shadow:inset 0 0 0 2.5px #fff}
+  .choice .opts button.reveal-ok{border-color:var(--good);background:#f2f9f2}
+  .choice .opts button.reveal-ok::before{border-color:var(--good)}
+  .choice .opts button[disabled]{cursor:default}
+  .choice .why{margin-top:8px;font-size:.85rem;padding:9px 11px;border-radius:8px;background:#eef2f6;display:none}
+  .choice .why.show{display:block}
+
+  .checklist{margin:14px 0}
+  .checklist .item{display:flex;gap:9px;align-items:flex-start;border:1px solid var(--line);border-radius:9px;
+    padding:9px 11px;margin:6px 0;background:#fff;cursor:pointer;font-size:.88rem}
+  .checklist .item input{margin-top:3px}
+  .checklist .item.ck-ok{border-color:var(--good);background:#f2f9f2}
+  .checklist .item.ck-bad{border-color:var(--bad);background:#fdf5f4}
+  .checklist .item.ck-missed{border-color:var(--warn);background:#fdf6ea}
+
+  .feedback{border-radius:10px;padding:12px 14px;margin:12px 0;font-size:.9rem;display:none}
+  .feedback.show{display:block}
+  .feedback.good{background:#e9f6ec;border:1px solid #bfe3c7;color:#1e5e26}
+  .feedback.bad{background:#fdecea;border:1px solid #f3c1bd;color:#7d1f1a}
+  .feedback.info{background:#eef2f9;border:1px solid #cfd9ec;color:#2c3e5c}
+  .feedback .jr{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.8rem;
+    background:rgba(0,0,0,.05);padding:8px 10px;border-radius:8px;margin-top:8px;white-space:pre-wrap}
+
+  .side .card{margin-bottom:16px}
+  .metergrid{display:grid;gap:10px}
+  .meter .lbl{display:flex;justify-content:space-between;font-size:.78rem;font-weight:700;margin-bottom:4px}
+  .track{height:9px;background:#edf0f2;border-radius:999px;overflow:hidden}
+  .fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--brand));transition:width .3s ease}
+  .pollbox{background:#0c1e3a;color:#e9f0fb;border-radius:12px;padding:14px 16px}
+  .pollbox .ph{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;opacity:.75;margin-bottom:8px}
+  .pollbox .row button{flex:1}
+  .pollbtn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#fff;
+    border-radius:9px;padding:9px 0;font:inherit;font-weight:700;cursor:pointer}
+  .pollbtn.sel{background:var(--accent);border-color:var(--accent)}
+
+  .keyfacts{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:6px}
+  .keyfacts th,.keyfacts td{padding:5px 6px;border-bottom:1px solid #eef1f3;text-align:right}
+  .keyfacts th:first-child,.keyfacts td:first-child{text-align:left}
+  .keyfacts tr.tot td{font-weight:800;border-top:2px solid var(--line)}
+
+  .results{text-align:center;padding:10px 0}
+  .dims{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
+  @media(max-width:720px){.dims{grid-template-columns:repeat(2,1fr)}}
+  .dim{border:1px solid var(--line);border-radius:12px;padding:14px}
+  .dim .lv{font-size:1.3rem;font-weight:800;margin:.2em 0}
+  .lv.High{color:var(--good)} .lv.Medium{color:var(--warn)} .lv.Low{color:var(--bad)}
+  .title-award{background:linear-gradient(135deg,#0f2547,#1d3f72);color:#fff;border-radius:12px;padding:16px;margin:10px 0}
+  .title-award .t{font-size:1.2rem;font-weight:800}
+  details{background:#fbfcfd;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:10px 0}
+  details summary{cursor:pointer;font-weight:700}
+  details.advbox{background:#fffaf2;border:1.5px dashed var(--accent);padding:14px 16px}
+  details.advbox summary{color:var(--accent-d)}
+  .foot{margin-top:26px;font-size:.78rem;color:#77828d;text-align:center}
+  .gate{background:#fdf6ec;border:1px solid #edd8ad;border-radius:12px;padding:16px;margin:14px 0}
+
+  /* ---- access gate ---- */
+  #accessGate{position:fixed;inset:0;background:linear-gradient(135deg,#0f2547,#1d3f72);
+    display:flex;align-items:center;justify-content:center;z-index:999;padding:20px}
+  #accessGate .box{background:#fff;border-radius:16px;padding:32px 30px;max-width:380px;width:100%;
+    box-shadow:0 8px 32px rgba(0,0,0,.28);text-align:center}
+  #accessGate h2{margin:.2em 0 .1em;font-size:1.2rem;color:var(--ink)}
+  #accessGate p{color:#5b6672;font-size:.88rem;margin:.3em 0 16px}
+  #accessGate input{font:inherit;font-size:1rem;padding:11px 12px;border:1px solid var(--line);
+    border-radius:9px;width:100%;margin-bottom:10px;text-align:center;letter-spacing:.02em}
+  #accessGate input:focus{outline:2px solid #cdd9ea;border-color:var(--brand)}
+  #accessGate button{width:100%}
+  #accessGate .err{color:var(--bad);font-size:.84rem;min-height:1.2em;margin-top:8px}
+  #simRoot{display:none}
+  .progress{font-size:.8rem;color:#7a848f}
+  .stepdot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--line);margin:0 2px}
+  .stepdot.on{background:var(--brand)}
+  .stepdot.done{background:var(--good)}
+  svg.payoff{width:100%;height:auto;max-width:520px;display:block;margin:10px auto}
+  .kv{display:flex;justify-content:space-between;font-size:.86rem;padding:4px 0;border-bottom:1px dashed #eef1f3}
+  .kv b{font-variant-numeric:tabular-nums}
+
+  /* ---- v3: page navigation, answer register, walk-away lab ---- */
+  .pillbar{position:sticky;top:0;z-index:50;background:rgba(246,247,249,.96);backdrop-filter:blur(4px);
+    display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:10px 0;margin-top:12px;border-bottom:1px solid var(--line)}
+  .pills{display:flex;flex-wrap:wrap;gap:6px}
+  .pill{border:1.5px solid var(--line);background:#fff;color:#5b6672;border-radius:999px;padding:4px 11px;
+    font:inherit;font-size:.74rem;font-weight:700;cursor:pointer}
+  .pill:hover{border-color:var(--brand);color:var(--brand)}
+  .pill.done{border-color:#9fd0a8;color:var(--good)}
+  .pill.on{background:var(--brand);border-color:var(--brand);color:#fff}
+  .pill:disabled{opacity:.38;cursor:default}
+  .pill:disabled:hover{border-color:var(--line);color:#5b6672}
+  .barright{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .regchip{font-size:.74rem;font-weight:700;color:var(--good);background:#e9f6ec;border:1px solid #bfe3c7;
+    border-radius:999px;padding:4px 10px;white-space:nowrap}
+  .linkbtn{background:none;border:none;font:inherit;font-size:.74rem;font-weight:700;color:#7a848f;cursor:pointer;
+    text-decoration:underline;padding:4px 2px}
+  .linkbtn.armed{color:var(--bad)}
+  .pager{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:16px;padding-top:12px;border-top:1px solid #eef1f3}
+  .btn.armed{background:#fdecea;color:var(--bad)}
+  .btn[disabled]{opacity:.35;cursor:default}
+  .missing{outline:2.5px solid var(--warn);outline-offset:3px;border-radius:11px}
+  .feedback.warn{background:#fdf6ea;border:1px solid #edd8ad;color:#7a5410}
+  .restore{display:none;align-items:center;gap:10px;flex-wrap:wrap;background:#eef2f9;border:1px solid #cfd9ec;
+    color:#2c3e5c;border-radius:10px;padding:9px 14px;margin-top:12px;font-size:.86rem}
+  .regline{margin-top:10px;font-size:.78rem;color:#5b6672}
+
+  .branches{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+  @media(max-width:720px){.branches{grid-template-columns:1fr}}
+  .branch-card{border:2px solid var(--line);border-radius:12px;padding:13px 14px;background:#fff}
+  .branch-card.is-cont{border-color:#9fd0a8}
+  .branch-card.is-walk{border-color:#e9b3ae}
+  .branch-card .bt{font-weight:800;color:var(--brand-d);font-size:.98rem}
+  .branch-card .p{font-size:.78rem;color:#7a848f;margin-top:2px}
+  .branch-card .net{font-size:.84rem;color:#41525f;margin-top:8px;line-height:1.6}
+  .branch-card .nodeval{margin-top:9px;font-size:.86rem;background:#f5f7fa;border-radius:8px;padding:7px 9px;
+    font-variant-numeric:tabular-nums}
+  .toggle-row{display:flex;gap:8px;margin-top:10px}
+  .toggle-btn{flex:1;padding:9px 6px;border-radius:9px;border:1.5px solid var(--line);background:#fff;font:inherit;
+    font-size:.84rem;font-weight:700;cursor:pointer;color:var(--ink)}
+  .toggle-btn:hover{border-color:var(--brand)}
+  .toggle-btn.on.proceed{background:#e9f6ec;border-color:var(--good);color:var(--good)}
+  .toggle-btn.on.walk{background:#fdecea;border-color:var(--bad);color:var(--bad)}
+  .readout{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+  .readout .tile{flex:1;min-width:170px;border:2px solid var(--line);border-radius:11px;padding:10px 12px;text-align:center;background:#fff}
+  .readout .tile .lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:#5b6672;font-weight:700}
+  .readout .tile .val{font-size:1.3rem;font-weight:800;margin-top:4px;color:var(--brand-d);font-variant-numeric:tabular-nums}
+  .status-msg{margin-top:12px;padding:10px 14px;border-radius:10px;font-size:.88rem;font-weight:600}
+  .status-msg.optimal{background:#e9f6ec;color:#1e5e26;border:1px solid #bfe3c7}
+  .status-msg.suboptimal{background:#fdf6ea;color:#7a5410;border:1px solid #edd8ad}
+  .slider-row{margin-top:10px}
+  .slider-row label{font-size:.9rem;font-weight:600}
+  input[type=range]{width:100%;margin-top:8px;accent-color:var(--brand);height:6px}
+  .callout2{background:#fbf8f2;border:1px solid #ecd6b3;color:#5a4010;padding:11px 14px;border-radius:10px;font-size:.88rem;margin-top:12px}
+
+  .sheetwrap{overflow-x:auto;margin-top:8px}
+  table.sheet{width:100%;border-collapse:collapse;font-size:.8rem;text-align:left}
+  table.sheet th{background:var(--brand);color:#fff;padding:7px 8px;font-size:.7rem;letter-spacing:.04em;text-transform:uppercase;position:sticky;top:0}
+  table.sheet td{padding:6px 8px;border-bottom:1px solid #eef1f3;vertical-align:top}
+  table.sheet tr:nth-child(even) td{background:#fafbfc}
+  table.sheet td.res{font-weight:800;text-align:center;white-space:nowrap}
+  table.sheet td.res.ok{color:var(--good)} table.sheet td.res.bad{color:var(--bad)} table.sheet td.res.na{color:#9aa3ad;font-weight:600}
+  table.sheet td.pg{white-space:nowrap;color:#5b6672;font-weight:700}
+
+  @media print{
+    .pillbar,.pager,.restore,#accessGate{display:none !important}
+    body{background:#fff}
+    .card{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<div id="accessGate">
+  <div class="box">
+    <h2>Sigma Tech &#8212; Staging an R&amp;D Investment</h2>
+    <p>This simulation is for enrolled participants. Enter the passcode your instructor shared to continue.</p>
+    <input type="password" id="gatePw" placeholder="Passcode" autocomplete="off">
+    <button class="btn btn-primary" id="gateBtn">Enter the simulation</button>
+    <div class="err" id="gateErr"></div>
+  </div>
+</div>
+
+<div class="wrap" id="simRoot">
+
+  <header class="top">
+    <div class="kicker">A Capital Budgeting Simulation · Companion to the R&amp;D Managers of the Future course</div>
+    <h1>Sigma Tech — Staging an R&amp;D Investment</h1>
+    <p>Rahul Mehta has ninety minutes before the finance committee reconvenes on Project S. Build the decision tree
+       yourself, find out what the flexibility to stop is worth, and then see the same number through the lens of
+       real options &#8212; before Krishnan asks the question nobody in the room could answer.</p>
+    <div class="byline">Simulation authored by <b>Ramesh Bhat</b> &nbsp;·&nbsp; August 2026</div>
+    <div class="crumb">
+      <span class="chip">Stage 1 · Committed Basis</span>
+      <span class="chip">Stage 2 · The Decision Tree</span>
+      <span class="chip">Stage 2½ · Walk-away Lab</span>
+      <span class="chip">Stage 3 · Real Options</span>
+      <span class="chip adv">Advanced · Risk-Neutral Pricing</span>
+      <span class="chip">Stage 4 · Krishnan&#8217;s Challenge</span>
+    </div>
+  </header>
+
+  <nav class="pillbar" aria-label="Pages">
+    <div class="pills" id="pills"></div>
+    <div class="barright">
+      <span class="regchip" id="regChip">✓ 0 answers registered</span>
+      <button class="linkbtn" data-act="resetall" data-label="Reset everything">Reset everything</button>
+    </div>
+  </nav>
+
+  <div class="restore" id="restoreNote">
+    <span>Welcome back — your earlier answers were restored from this browser.</span>
+    <span class="spacer"></span>
+    <button class="btn btn-ghost btn-sm" data-act="resetall" data-label="Start fresh instead">Start fresh instead</button>
+  </div>
+
+  <!-- INTRO -->
+  <section id="scr-intro" class="card" style="margin-top:18px">
+    <span class="tag">Briefing</span>
+    <h2>Your task</h2>
+    <p class="muted">You are advising Rahul Mehta, VP for R&amp;D at <b>Sigma Tech Limited</b>. Project S is a Rs 500
+    million sensor-fusion programme: Rs 300 million now, and a further Rs 200 million a year from now &#8212;
+    but only if the first year&#8217;s results warrant it. Across four stages you will (1) value Project S the way
+    Iyer did, as one committed outlay, (2) build the decision tree yourself and value it as a staged investment,
+    then step into a <b>walk-away lab</b> where you make the continue-or-walk call at each node and put a price on
+    walking away, (3) discover that the gap between those two answers is a real option, worth naming and pricing
+    properly, and (4) confront the governance question that decides whether any of it is real.</p>
+
+    <div class="narrative">
+      <b>No option-pricing formulas in Stages 1 &amp; 2.</b> Everything through the decision tree is expected-value
+      arithmetic and present value at Sigma Tech&#8217;s twenty per cent hurdle rate &#8212; exactly what the teaching
+      note calls it: &#8220;the entire quantitative burden is a two-period decision tree solved by backward induction.&#8221;
+      Option theory arrives afterwards, as a way of seeing what you have already built.
+    </div>
+
+    <p class="muted">You are scored on four dimensions &#8212; <b>Accuracy</b> (your arithmetic against the verified
+    figures), <b>Judgment</b> (the continue/stop calls and concept questions), <b>Options</b> (mapping the case onto
+    option theory, and pricing the flexibility), and <b>Governance</b> (what would make the option real).</p>
+
+    <div class="narrative" style="border-left-color:var(--good)">
+      <b>How this works.</b> Every number you type and every option you click is registered as you go and kept in
+      this browser &#8212; the counter in the bar above shows how many. Every page has <b>&#8592; Back</b> and
+      <b>&#8635; Reset this page</b>, and the pills let you jump to any page you have already reached. The results page
+      gives you a full answer sheet you can download.
+    </div>
+
+    <div class="narrative" style="border-left-color:var(--info)">
+      <b>Quick poll before you start.</b> Gut call: should Mehta recommend funding Project S?
+    </div>
+    <div class="row" id="pollA" style="margin:6px 0 4px">
+      <button class="btn btn-ghost" data-act="poll" data-which="open" data-v="fund">Fund it</button>
+      <button class="btn btn-ghost" data-act="poll" data-which="open" data-v="no">Don&#8217;t fund it</button>
+    </div>
+
+    <div class="pager" id="pager-intro"></div>
+  </section>
+
+  <!-- STAGE 1 -->
+  <section id="scr-s1" class="layout" style="display:none">
+    <div>
+      <div class="card">
+        <span class="tag">Stage 1 · The committed basis (Question 1)</span>
+        <h2>If STL commits all Rs 500 million today</h2>
+        <div class="narrative">
+          Iyer&#8217;s method: treat the full Rs 500 million as the cost of entry &#8212; Rs 300 million now, Rs 200
+          million in a year, both certain &#8212; against whatever cash flows arrive. Exhibit 2 gives the scenarios.
+        </div>
+        <table class="ref">
+          <tr><th>Timing</th><th>Investment</th></tr>
+          <tr><td>t = 0</td><td>300</td></tr>
+          <tr><td>t = 1</td><td>200</td></tr>
+        </table>
+        <table class="ref">
+          <tr><th>Scenario</th><th>Probability</th><th>Year-1 net inflow</th></tr>
+          <tr><td>O &#8212; meets defence spec</td><td>0.50</td><td>400</td></tr>
+          <tr><td>P &#8212; civil survey accuracy only</td><td>0.50</td><td>200</td></tr>
+        </table>
+        <table class="ref">
+          <tr><th>Branch</th><th>Cond. prob.</th><th>Year-2 net inflow</th></tr>
+          <tr><td>O, up (+30%)</td><td>0.60</td><td>520</td></tr>
+          <tr><td>O, down (&#8722;30%)</td><td>0.40</td><td>280</td></tr>
+          <tr><td>P, up (+20%)</td><td>0.20</td><td>240</td></tr>
+          <tr><td>P, down (&#8722;20%)</td><td>0.80</td><td>160</td></tr>
+        </table>
+        <p class="muted" style="font-size:.82rem">Discount rate 20%. All figures Rs million.</p>
+
+        <div id="s1-body"></div>
+        <div class="feedback" id="s1-fb"></div>
+        <div class="pager" id="pager-s1"></div>
+      </div>
+    </div>
+    <aside class="side">
+      <div class="card">
+        <h3 style="margin:.1em 0 .5em;font-size:.9rem">Your dimensions</h3>
+        <div class="meters-host"></div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- GATE -->
+  <section id="scr-gate" class="card" style="display:none;margin-top:18px">
+    <div class="gate">
+      <h2 style="margin:.1em 0 .3em">Instructor pause &#8212; before the tree</h2>
+      <p class="muted">Discuss: both structures give an expected year-one and year-two inflow of exactly Rs 300
+      million. What does that equality hide? What would you need to know about STL&#8217;s decision-making to trust
+      a staged valuation more than a committed one?</p>
+    </div>
+    <div class="pager" id="pager-gate"></div>
+  </section>
+
+  <!-- STAGE 2 -->
+  <section id="scr-s2" class="layout" style="display:none">
+    <div>
+      <div class="card">
+        <span class="tag">Stage 2 · The decision tree (Question 2)</span>
+        <h2 id="s2-title">Solve backward from t = 1</h2>
+        <div class="narrative" id="s2-narr"></div>
+        <div id="s2-body"></div>
+        <div class="feedback" id="s2-fb"></div>
+        <div class="pager" id="pager-s2"></div>
+      </div>
+    </div>
+    <aside class="side">
+      <div class="card">
+        <h3 style="margin:.1em 0 .5em;font-size:.9rem">Your dimensions</h3>
+        <div class="meters-host"></div>
+      </div>
+      <div class="card">
+        <h3 style="margin:.1em 0 .5em;font-size:.9rem">The tree so far</h3>
+        <div id="treeSummary" class="muted" style="font-size:.82rem">Nothing solved yet.</div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- STAGE 2½ : WALK-AWAY LAB -->
+  <section id="scr-walk" class="card" style="display:none;margin-top:18px">
+    <span class="tag">Stage 2½ · The walk-away lab</span>
+    <h2>Make the t = 1 call yourself &#8212; continue or walk away?</h2>
+    <div class="narrative">
+      It is June 2027. Mehta now knows whether STL is in Scenario O or Scenario P. At each node he can
+      <b>continue</b> &#8212; pay the Rs 200 million second tranche for a year-two asset worth its continuation value
+      &#8212; or <b>walk away</b>. Toggle each node and watch the staged NPV and the value of the flexibility move.
+      Iyer&#8217;s committed basis is simply &#8220;continue at both nodes, whatever happens&#8221;.
+    </div>
+    <div class="branches" id="wkNodes"></div>
+    <div class="readout" id="wkReadout"></div>
+    <div class="status-msg" id="wkStatus"></div>
+
+    <h3 style="margin-top:22px">Walking away is rarely free</h3>
+    <p class="muted">Stopping has a price of its own: severance for a team already hired, cancellation charges on
+    tooling orders, a customer who was told to expect a product. Drag the slider to put a number on the cost of
+    walking away. The node cards and readouts above update with it, and the chart traces what the flexibility is
+    worth at every exit cost.</p>
+    <div class="slider-row">
+      <label for="wkSlider">Exit cost if STL walks away at a node: <b id="wkCval">Rs 0m</b></label>
+      <input type="range" id="wkSlider" min="0" max="80" step="1" value="0">
+    </div>
+    <div id="wkChart" style="margin-top:8px"></div>
+    <div class="callout2" id="wkHint">Look for two points on the curve: the exit cost at which the staged NPV
+    falls to zero, and the exit cost beyond which the flexibility is worth nothing at all. Then register your
+    reading below.</div>
+
+    <h3 style="margin-top:22px">Register your reading of the lab</h3>
+    <div id="wkQ"></div>
+    <div class="feedback" id="walk-fb"></div>
+    <div class="pager" id="pager-walk"></div>
+  </section>
+
+  <!-- STAGE 3 -->
+  <section id="scr-s3" class="card" style="display:none;margin-top:18px">
+    <span class="tag">Stage 3 · Real options</span>
+    <h2>The same tree, a different lens</h2>
+    <div class="narrative">
+      Look again at what you just built. At t = 1, STL has the <b>right, not the obligation</b>, to pay Rs 200
+      million for whatever the year-two cash flow turns out to be worth. That is a call option. The Rs 300 million
+      you already spent buys two things at once: a certain year-one cash flow, and this option on year two.
+    </div>
+    <div id="s3-map"></div>
+    <div class="feedback" id="s3-map-fb"></div>
+
+    <h3>The payoff, drawn</h3>
+    <p class="muted">The option pays STL the amount by which the year-two asset is worth more than the Rs 200
+    million it costs to acquire &#8212; and nothing when it is worth less. Confirm the two payoffs from your own
+    Stage 2 numbers.</p>
+    <svg class="payoff" viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
+      <rect x="40" y="20" width="133.3" height="180" fill="#eef1f3"/>
+      <rect x="173.3" y="20" width="266.7" height="180" fill="#f7ecdd"/>
+      <line x1="40" y1="200" x2="440" y2="200" stroke="#8a94a1" stroke-width="1.5"/>
+      <line x1="40" y1="20" x2="40" y2="200" stroke="#8a94a1" stroke-width="1.5"/>
+      <polyline points="40,200 173.3,200 377.7,27.5" fill="none" stroke="#1d3f72" stroke-width="3"/>
+      <circle cx="102.2" cy="200" r="5" fill="#c62828"/>
+      <text x="102.2" y="218" font-size="11" text-anchor="middle" fill="#334">S&#8595; 146.7</text>
+      <text x="102.2" y="231" font-size="10" text-anchor="middle" fill="#7d1f1a">payoff 0</text>
+      <circle cx="173.3" cy="200" r="5" fill="#41525f"/>
+      <text x="173.3" y="14" font-size="11" text-anchor="middle" fill="#334">K = 200</text>
+      <circle cx="377.7" cy="27.5" r="5" fill="#1e5e26"/>
+      <text x="377.7" y="16" font-size="11" text-anchor="middle" fill="#334">S&#8593; 353.3</text>
+      <text x="410" y="45" font-size="11" text-anchor="middle" fill="#1e5e26">payoff 153.3</text>
+      <text x="107" y="34" font-size="10.5" text-anchor="middle" fill="#5b6672">out of the money &#8212; abandon</text>
+      <text x="306" y="34" font-size="10.5" text-anchor="middle" fill="#96611e">in the money &#8212; continue</text>
+      <text x="240" y="245" font-size="11" text-anchor="middle" fill="#5b6672">value of the year-two asset, S (Rs million)</text>
+    </svg>
+
+    <div id="s3-payoff"></div>
+    <div class="feedback" id="s3-payoff-fb"></div>
+
+    <h3>Value it as an avoided loss</h3>
+    <p class="muted">The teaching note is blunt about this: seeing the option value as a leftover from subtracting
+    two NPVs means you have not understood it yet. Seeing it as the value of a loss STL <i>avoids</i> means you have.
+    Work it from the P branch.</p>
+    <div id="s3-avoid"></div>
+    <div class="feedback" id="s3-avoid-fb"></div>
+    <div id="s3-understand"></div>
+    <div class="feedback" id="s3-understand-fb"></div>
+
+    <details class="advbox" id="advDetails">
+      <summary>Advanced &amp; optional &#8212; price the option properly, with risk-neutral probabilities</summary>
+      <p class="muted" style="margin-top:10px">The teaching note flags this as a natural extension, not a
+      requirement. Everything above discounted the option&#8217;s payoff at the same 20% rate used for the
+      underlying operating cash flows. Formal option pricing does not do that &#8212; it builds a risk-neutral
+      probability from the up and down movements of the underlying, and discounts at the <b>risk-free</b> rate
+      instead. Try it, using STL&#8217;s own risk-free rate from Exhibit 4 (6.8%).</p>
+      <div id="s3-adv"></div>
+      <div class="feedback" id="s3-adv-fb"></div>
+      <div class="row" style="margin-top:8px">
+        <div class="spacer"></div>
+        <button class="btn btn-adv btn-sm" id="adv-check" data-act="advcheck">Check the advanced round</button>
+      </div>
+    </details>
+
+    <div class="feedback" id="s3-fb"></div>
+    <div class="pager" id="pager-s3"></div>
+  </section>
+
+  <!-- STAGE 4 -->
+  <section id="scr-s4" class="card" style="display:none;margin-top:18px">
+    <span class="tag">Stage 4 · Krishnan&#8217;s challenge (Question 4)</span>
+    <h2>Is the second tranche genuinely discretionary?</h2>
+    <div class="quote">Anjali Desai: &#8220;We are not being asked to spend five hundred million rupees today. We
+    are being asked to spend three hundred. The other two hundred is a decision we make next June, when we will
+    know something we do not know now.&#8221;</div>
+    <div class="quote">Krishnan: &#8220;Is that actually true? Or is it discretionary in the model and mandatory in
+    the room, because by next June we will have hired the team and told the customer, and nobody will want to be
+    the person who stopped it?&#8221;</div>
+    <p class="muted">Nobody in the room answered him. The staged valuation is worth Rs 22.22 million only if STL
+    will actually stop at the P node &#8212; and, as the walk-away lab showed, only if stopping is cheap. Select
+    every safeguard below that would make the option real rather than an accounting convenience.</p>
+    <div id="s4-checklist"></div>
+    <div class="feedback" id="s4-checklist-fb"></div>
+    <div id="s4-mcq"></div>
+    <div class="feedback" id="s4-mcq-fb"></div>
+
+    <div class="narrative" style="border-left-color:var(--info)">
+      <b>Final call.</b> Same question as the start: should Mehta recommend funding Project S?
+    </div>
+    <div class="row" id="pollB" style="margin:6px 0 4px"></div>
+
+    <div class="feedback" id="s4-fb"></div>
+    <div class="pager" id="pager-s4"></div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="scr-res" class="card" style="display:none;margin-top:18px">
+    <div class="results">
+      <span class="tag">Epilogue</span>
+      <h2>What exactly did you commit to today?</h2>
+      <div class="title-award"><div class="t" id="resTitle">&#8212;</div><div id="resSub" style="opacity:.9;font-size:.9rem"></div></div>
+      <div class="dims">
+        <div class="dim"><div class="muted">Accuracy</div><div class="lv" id="dAcc">&#8212;</div><div class="muted" id="pAcc"></div></div>
+        <div class="dim"><div class="muted">Judgment</div><div class="lv" id="dJud">&#8212;</div><div class="muted" id="pJud"></div></div>
+        <div class="dim"><div class="muted">Options</div><div class="lv" id="dOpt">&#8212;</div><div class="muted" id="pOpt"></div></div>
+        <div class="dim"><div class="muted">Governance</div><div class="lv" id="dGov">&#8212;</div><div class="muted" id="pGov"></div></div>
+      </div>
+      <p class="muted" id="resNote" style="max-width:70ch;margin:0 auto"></p>
+
+      <div class="narrative" style="text-align:left;max-width:560px;margin:16px auto">
+        <b>Your poll, before and after.</b>
+        <div id="pollCompare" style="margin-top:6px"></div>
+      </div>
+
+      <details style="text-align:left;margin-top:16px">
+        <summary>Model answers &#8212; the board summary of key numbers</summary>
+        <div id="modelAns" style="font-size:.85rem"></div>
+      </details>
+
+      <div style="text-align:left;margin-top:18px">
+        <h3>Your answer sheet</h3>
+        <p class="muted" id="sheetNote" style="margin:.2em 0"></p>
+        <div class="sheetwrap"><table class="sheet" id="ansSheet"></table></div>
+      </div>
+    </div>
+    <div class="pager" id="pager-res"></div>
+  </section>
+
+  <div class="foot">
+    Sigma Tech Limited: Staging an R&amp;D Investment. Figures in Rs million, discount rate 20% unless noted.
+    For classroom use as a basis for discussion.<br>
+    Simulation authored by Ramesh Bhat · August 2026<br>
+    Keys: <b>&#8594;</b> next page (once checked) · <b>&#8592;</b> previous page<br>
+    <span style="opacity:.75">Build 2026-10-31 · walk-away lab, answer register, back &amp; reset on every page</span>
+  </div>
+</div>
+
+<script>
+/* ============ ACCESS GATE ============ */
+(function(){
+  var PASSCODE = "rbhatR&D2026";
+  function tryEnter(){
+    var v = document.getElementById('gatePw').value;
+    if(v === PASSCODE){
+      document.getElementById('accessGate').style.display='none';
+      document.getElementById('simRoot').style.display='block';
+      boot();
+    }else{
+      document.getElementById('gateErr').textContent = 'That passcode is not correct. Check with your instructor and try again.';
+      document.getElementById('gatePw').focus();
+      document.getElementById('gatePw').select();
+    }
+  }
+  document.getElementById('gateBtn').addEventListener('click', tryEnter);
+  document.getElementById('gatePw').addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); tryEnter(); } });
+  document.getElementById('gatePw').focus();
+})();
+
+/* ============ HELPERS ============ */
+function $(id){ return document.getElementById(id); }
+function esc(s){ return (s===null||s===undefined?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function r2(x){ return (Math.round(x*100)/100).toFixed(2); }
+function sg(x){ return (x>=0?'+':'−')+r2(Math.abs(x)); }
+function nowISO(){ try{ return new Date().toISOString(); }catch(e){ return ''; } }
+
+/* ============ STATE: one register for every answer ============
+   R.items[id] holds each question's answer as it is typed or clicked
+   (raw / sel), and, once checked, its value, correctness and credit.
+   Everything is saved to this browser after every change, and every
+   page is re-drawn from R — so Back, Reset and reloads never lose or
+   double-count an answer. Scores are recomputed from R, never added up. */
+var STORE_KEY='sigmaTech_sim_v3';
+function freshState(){
+  return { v:3, items:{}, pages:{}, polls:{open:null, close:null},
+           walk:{O:'cont', P:'cont', c:0}, cur:0, maxSeen:0, started:nowISO() };
+}
+var R = freshState();
+function save(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(R)); }catch(e){} }
+function loadSaved(){
+  try{
+    var s=localStorage.getItem(STORE_KEY); if(!s) return null;
+    var o=JSON.parse(s);
+    return (o && o.v===3 && o.items && o.pages) ? o : null;
+  }catch(e){ return null; }
+}
+function item(id){ return R.items[id] || (R.items[id]={}); }
+function pg(id){ return R.pages[id] || (R.pages[id]={checked:false, warned:false, attempts:0}); }
+function val(id){ var it=R.items[id]; return (it && typeof it.value==='number') ? it.value : null; }
+
+/* registry of every scorable question: id -> {kind, dim, obj} */
+var DEF={};
+function reg(kind, list, dimDefault){ list.forEach(function(o){ DEF[o.id]={kind:kind, dim:o.dim||dimDefault, obj:o}; }); }
+function ids(list){ return list.map(function(o){ return o.id; }); }
+
+/* ============ SCORING (recomputed from the register) ============ */
+var DIMS=[['acc','Accuracy'],['jud','Judgment'],['opt','Options'],['gov','Governance']];
+function tally(){
+  var S={acc:{ok:0,tot:0}, jud:{ok:0,tot:0}, opt:{ok:0,tot:0}, gov:{ok:0,tot:0}};
+  Object.keys(R.items).forEach(function(id){
+    var it=R.items[id], d=DEF[id];
+    if(!d || !it.checked) return;
+    S[d.dim].tot++; S[d.dim].ok += (it.credit||0);
+  });
+  return S;
+}
+function pct(d){ return d.tot? Math.round(100*d.ok/d.tot):0; }
+function band(p){ return p>=80?'High':(p>=55?'Medium':'Low'); }
+function renderMeters(){
+  var S=tally(), h='<div class="metergrid">';
+  DIMS.forEach(function(x){
+    var d=S[x[0]], p=pct(d);
+    h+='<div class="meter"><div class="lbl"><span>'+x[1]+'</span><span>'+(d.tot?p+'%':'—')+'</span></div>'+
+       '<div class="track"><div class="fill" style="width:'+p+'%"></div></div></div>';
+  });
+  var c=regCounts();
+  h+='</div><div class="regline">✓ '+c.n+' of '+c.k+' answers registered</div>';
+  var hosts=document.querySelectorAll('.meters-host');
+  for(var i=0;i<hosts.length;i++) hosts[i].innerHTML=h;
+}
+function regCounts(){
+  var n=0, k=2;
+  if(R.polls.open) n++;
+  if(R.polls.close) n++;
+  Object.keys(DEF).forEach(function(id){
+    var d=DEF[id]; if(d.kind==='calc') return;
+    k++;
+    var it=R.items[id]; if(!it) return;
+    if(d.kind==='field'){ if(it.raw && String(it.raw).trim()) n++; }
+    else if(d.kind==='choice'){ if(it.sel!==undefined && it.sel!==null) n++; }
+    else if(d.kind==='check'){ if(it.checked || (it.sel && it.sel.some(Boolean))) n++; }
+    else if(d.kind==='policy'){ if(it.checked) n++; }
+  });
+  return {n:n, k:k};
+}
+function updateRegCount(){
+  var c=regCounts();
+  $('regChip').textContent='✓ '+c.n+' / '+c.k+' answers registered';
+  var lines=document.querySelectorAll('.regline');
+  for(var i=0;i<lines.length;i++) lines[i].textContent='✓ '+c.n+' of '+c.k+' answers registered';
+}
+
+/* ============ FORMULA ENTRY: safe expression evaluator ============
+   Participants may type a plain number, or a formula after "=",
+   e.g. =100/(1+.02)^2 . No eval() is used anywhere: the string is
+   tokenised and parsed by a small recursive descent parser, so nothing
+   the participant types can execute as code.                          */
+var FN_HELP = 'sqrt abs exp ln log round min max pow  ·  df(r,n) pv(a,r,n) af(r,n)  ·  pi e';
+function fmtNum(x){
+  if(!isFinite(x)) return String(x);
+  var a=Math.abs(x);
+  if(a!==0 && (a<0.0001 || a>=1e12)) return x.toExponential(4);
+  return (Math.round(x*1e6)/1e6).toString();
+}
+function tokenize(s){
+  var t=[], i=0, n=s.length;
+  while(i<n){
+    var c=s.charAt(i);
+    if(c===' '||c==='\t'||c==='\n'){ i++; continue; }
+    if((c>='0'&&c<='9')||c==='.'){
+      var j=i, dots=0;
+      while(j<n){ var d=s.charAt(j); if(d>='0'&&d<='9'){j++;} else if(d==='.'){dots++;j++;} else break; }
+      if(dots>1) throw new Error('too many decimal points');
+      if(j<n && (s.charAt(j)==='e'||s.charAt(j)==='E')){
+        var k=j+1; if(k<n && (s.charAt(k)==='+'||s.charAt(k)==='-')) k++;
+        var st=k; while(k<n && s.charAt(k)>='0' && s.charAt(k)<='9') k++;
+        if(k>st) j=k;
+      }
+      t.push({t:'num', v:parseFloat(s.slice(i,j))}); i=j; continue;
+    }
+    if((c>='a'&&c<='z')||(c>='A'&&c<='Z')||c==='_'){
+      var j2=i;
+      while(j2<n){ var e=s.charAt(j2); if((e>='a'&&e<='z')||(e>='A'&&e<='Z')||(e>='0'&&e<='9')||e==='_') j2++; else break; }
+      t.push({t:'id', v:s.slice(i,j2).toLowerCase()}); i=j2; continue;
+    }
+    if('+-*/^%(),'.indexOf(c)>=0){ t.push({t:c}); i++; continue; }
+    throw new Error('cannot read the character "'+c+'"');
+  }
+  return t;
+}
+var FORMULA_FNS = {
+  sqrt:function(x){return Math.sqrt(x);},
+  abs:function(x){return Math.abs(x);},
+  exp:function(x){return Math.exp(x);},
+  ln:function(x){return Math.log(x);},
+  log:function(x){return Math.log(x)/Math.LN10;},
+  round:function(x,d){ d=(d===undefined?0:d); var m=Math.pow(10,d); return Math.round(x*m)/m; },
+  min:function(){ return Math.min.apply(null, arguments); },
+  max:function(){ return Math.max.apply(null, arguments); },
+  pow:function(a,b){ return Math.pow(a,b); },
+  df:function(r,n){ return Math.pow(1+r,-n); },
+  pv:function(a,r,n){ return a*Math.pow(1+r,-n); },
+  af:function(r,n){ return r===0 ? n : (1-Math.pow(1+r,-n))/r; }
+};
+var FORMULA_CONSTS = { pi:Math.PI, e:Math.E };
+function parseTokens(tk){
+  var p=0;
+  function peek(){ return tk[p]; }
+  function nx(){ return tk[p++]; }
+  function expr(){
+    var v=term();
+    while(peek() && (peek().t==='+'||peek().t==='-')){ var op=nx().t, r=term(); v = (op==='+') ? v+r : v-r; }
+    return v;
+  }
+  function term(){
+    var v=unary();
+    while(peek() && (peek().t==='*'||peek().t==='/')){
+      var op=nx().t, r=unary();
+      if(op==='/' && r===0) throw new Error('division by zero');
+      v = (op==='*') ? v*r : v/r;
+    }
+    return v;
+  }
+  function unary(){
+    var t0=peek();
+    if(t0 && (t0.t==='-'||t0.t==='+')){ nx(); var v=unary(); return t0.t==='-' ? -v : v; }
+    return power();
+  }
+  function power(){
+    var base=postfix();
+    if(peek() && peek().t==='^'){ nx(); var ex=unary(); return Math.pow(base,ex); }
+    return base;
+  }
+  function postfix(){
+    var v=atom();
+    while(peek() && peek().t==='%'){ nx(); v=v/100; }
+    return v;
+  }
+  function atom(){
+    var t0=nx();
+    if(!t0) throw new Error('the formula ends too early');
+    if(t0.t==='num') return t0.v;
+    if(t0.t==='('){
+      var v=expr();
+      var cl=nx(); if(!cl || cl.t!==')') throw new Error('a bracket is not closed');
+      return v;
+    }
+    if(t0.t==='id'){
+      if(peek() && peek().t==='('){
+        nx();
+        var args=[];
+        if(peek() && peek().t===')'){ nx(); }
+        else{
+          for(;;){
+            args.push(expr());
+            var s2=nx();
+            if(!s2) throw new Error('a bracket is not closed');
+            if(s2.t===')') break;
+            if(s2.t!==',') throw new Error('expected a comma or a closing bracket');
+          }
+        }
+        var fn=FORMULA_FNS[t0.v];
+        if(!fn) throw new Error('unknown function "'+t0.v+'"');
+        return fn.apply(null,args);
+      }
+      if(FORMULA_CONSTS.hasOwnProperty(t0.v)) return FORMULA_CONSTS[t0.v];
+      throw new Error('unknown name "'+t0.v+'"');
+    }
+    throw new Error('unexpected "'+t0.t+'"');
+  }
+  var out=expr();
+  if(p<tk.length) throw new Error('could not read the whole formula');
+  return out;
+}
+function looksLikeFormula(raw){
+  var s=String(raw).trim();
+  if(s.charAt(0)==='=') return true;
+  var body=s.replace(/^[+-]/,'');
+  return /[+\-*\/^()%a-zA-Z]/.test(body);
+}
+function evalFormula(raw){
+  var s = (raw===null||raw===undefined) ? '' : String(raw).trim();
+  var isF = s!=='' && looksLikeFormula(s);
+  if(s===''){ return {ok:false, isFormula:false, err:'nothing entered'}; }
+  if(s.charAt(0)==='=') s=s.slice(1).trim();
+  if(s===''){ return {ok:false, isFormula:true, err:'nothing after the = sign'}; }
+  s=s.replace(/\*\*/g,'^');
+  s=s.replace(/[−–—]/g,'-').replace(/[×]/g,'*').replace(/[÷]/g,'/');
+  if(!/[a-zA-Z]/.test(s)) s=s.replace(/,/g,'');
+  if(!isF){
+    var plain=parseFloat(s);
+    if(isNaN(plain)) return {ok:false, isFormula:false, err:'not a number'};
+    return {ok:true, isFormula:false, value:plain};
+  }
+  try{
+    var v=parseTokens(tokenize(s));
+    if(typeof v!=='number' || isNaN(v)) return {ok:false, isFormula:true, err:'the result is not a number'};
+    if(!isFinite(v)) return {ok:false, isFormula:true, err:'the result is infinite'};
+    return {ok:true, isFormula:true, value:v};
+  }catch(err){
+    return {ok:false, isFormula:true, err:(err && err.message) ? err.message : 'could not read the formula'};
+  }
+}
+function fPreview(id){
+  var el=$('in-'+id), out=$('calc-'+id);
+  if(!el||!out||el.disabled) return;
+  var raw=el.value;
+  if(!raw || !raw.trim()){ out.className='calc'; out.textContent=''; return; }
+  var r=evalFormula(raw);
+  if(!r.isFormula){ out.className='calc'; out.textContent=''; return; }
+  if(r.ok){ out.className='calc ok'; out.textContent='= '+fmtNum(r.value); }
+  else { out.className='calc err'; out.textContent='⚠ '+r.err; }
+}
+function fHint(id,on){
+  var el=$('in-'+id), out=$('calc-'+id);
+  if(!el||!out||el.disabled) return;
+  if(on && !el.value.trim()){ out.className='calc hint'; out.textContent='type a number, or a formula after = , e.g. =100/(1+.02)^2'; }
+  else if(!on && !el.value.trim()){ out.className='calc'; out.textContent=''; }
+}
+function formulaHelpHTML(){
+  return '<div class="fhelp"><b>You can type a formula.</b> Put an <code>=</code> in front and the app works it out as you type, '+
+    'so <code>=100/(1+.02)^2</code> shows <code>= 96.116878</code> before you submit. '+
+    'Operators <code>+ - * / ^</code> and brackets work; <code>%</code> divides by 100; '+
+    'available functions are <code>'+FN_HELP+'</code>. A plain number is still fine.</div>';
+}
+
+/* ============ WIDGETS: numeric field ============ */
+function fieldHTML(f){
+  return '<div class="fld" id="fld-'+f.id+'"><label for="in-'+f.id+'">'+f.label+'</label>'+
+    '<div class="inrow">'+(f.prefix?'<span class="pre">'+f.prefix+'</span>':'')+
+    '<input type="text" id="in-'+f.id+'" placeholder="number or =formula" autocomplete="off" spellcheck="false"'+
+      ' title="Enter a number, or a formula after = . Example: =100/(1+.02)^2">'+
+    (f.suffix?'<span class="pre">'+f.suffix+'</span>':'')+'</div>'+
+    '<div class="calc" id="calc-'+f.id+'"></div>'+
+    '<div class="fb" id="fb-'+f.id+'"></div></div>';
+}
+function fInput(id){
+  var el=$('in-'+id); if(!el) return;
+  var it=item(id); if(it.checked) return;
+  it.raw=el.value; it.at=nowISO();
+  save(); fPreview(id); clearMissing(id); updateRegCount();
+}
+function paintField(f){
+  var el=$('in-'+f.id); if(!el) return;
+  var it=R.items[f.id]||{};
+  el.value = it.raw||'';
+  var box=$('fld-'+f.id), fb=$('fb-'+f.id), calc=$('calc-'+f.id);
+  if(!it.checked){
+    el.disabled=false; box.className='fld'; fb.className='fb'; fb.textContent='';
+    calc.className='calc'; calc.textContent=''; fPreview(f.id); return;
+  }
+  el.disabled=true;
+  var raw=String(it.raw||'').trim(), res=evalFormula(raw), ok=!!it.ok, v=it.value;
+  if(res.isFormula && res.ok){ calc.className='calc '+(ok?'ok':'err'); calc.textContent=raw+'  =  '+fmtNum(v); }
+  else if(res.isFormula){ calc.className='calc err'; calc.textContent='⚠ '+res.err; }
+  else { calc.className='calc'; calc.textContent=''; }
+  box.className='fld '+(ok?'ok':'bad');
+  fb.className='fb '+(ok?'ok':'bad');
+  if(ok){ fb.textContent='✓ correct ('+r2(f.target)+')'; }
+  else if(typeof v==='number'){ fb.textContent='✗ you entered '+r2(v)+' · should be '+r2(f.target); }
+  else { fb.textContent='✗ '+(raw?'could not read your entry':'left blank')+' · should be '+r2(f.target); }
+}
+function checkField(f){
+  var el=$('in-'+f.id), it=item(f.id);
+  if(el) it.raw=el.value;
+  var res=evalFormula(it.raw||'');
+  var v=res.ok? res.value : null;
+  var tol = f.tol!==undefined? f.tol : Math.max(0.5, Math.abs(f.target)*0.012);
+  var ok = (v!==null) && Math.abs(v-f.target)<=tol;
+  it.value=v; it.isFormula=!!res.isFormula; it.ok=ok; it.credit=ok?1:0; it.checked=true; it.at=nowISO();
+  paintField(f);
+  return ok;
+}
+
+/* ============ WIDGETS: multiple choice ============ */
+function choiceHTML(c){
+  var optsHtml='';
+  for(var i=0;i<c.opts.length;i++){
+    optsHtml+='<button type="button" aria-pressed="false" data-i="'+i+'">'+esc(c.opts[i])+'</button>';
+  }
+  return '<div class="choice" id="ch-'+c.id+'"><div class="qtext">'+c.q+'</div>'+
+    '<div class="opts" id="opts-'+c.id+'">'+optsHtml+'</div>'+
+    '<div class="why" id="why-'+c.id+'"></div></div>';
+}
+function selectChoice(id,i){
+  var it=item(id);
+  if(it.checked) return;
+  it.sel=i; it.at=nowISO();
+  save();
+  if(DEF[id]) paintChoice(DEF[id].obj);
+  clearMissing(id); updateRegCount();
+}
+function paintChoice(c){
+  var it=R.items[c.id]||{};
+  var opts=document.querySelectorAll('#opts-'+c.id+' button');
+  if(!opts.length) return;
+  for(var k=0;k<opts.length;k++){
+    var b=opts[k], idx=parseInt(b.getAttribute('data-i'),10);
+    if(it.checked){
+      var cls='';
+      if(idx===c.correct) cls='reveal-ok';
+      if(idx===it.sel && idx!==c.correct) cls='sel-bad';
+      if(idx===it.sel && idx===c.correct) cls='sel-ok';
+      b.className=cls; b.disabled=true; b.setAttribute('aria-disabled','true');
+      b.setAttribute('aria-pressed', idx===it.sel?'true':'false');
+    }else{
+      var on = idx===it.sel;
+      b.className = on? 'sel' : ''; b.disabled=false; b.removeAttribute('aria-disabled');
+      b.setAttribute('aria-pressed', on?'true':'false');
+    }
+  }
+  var why=$('why-'+c.id);
+  if(it.checked){ why.className='why show'; why.innerHTML=(it.ok?'✓ ':'✗ ')+(it.sel===undefined||it.sel===null?'(left blank) ':'')+c.why; }
+  else { why.className='why'; why.innerHTML=''; }
+}
+function checkChoice(c){
+  var it=item(c.id);
+  it.ok = (it.sel===c.correct); it.credit=it.ok?1:0; it.checked=true; it.at=nowISO();
+  paintChoice(c);
+  return it.ok;
+}
+
+/* ============ WIDGETS: checklist ============ */
+function checklistHTML(cl){
+  var h='';
+  for(var i=0;i<cl.items.length;i++){
+    h+='<label class="item" id="cki-'+cl.id+'-'+i+'"><input type="checkbox" id="ckb-'+cl.id+'-'+i+'">'+esc(cl.items[i].text)+'</label>';
+  }
+  return '<div class="checklist" id="ckl-'+cl.id+'">'+h+'</div>';
+}
+function ckChange(id){
+  var d=DEF[id]; if(!d) return;
+  var it=item(id); if(it.checked) return;
+  var cl=d.obj, sel=[];
+  for(var i=0;i<cl.items.length;i++){ var cb=$('ckb-'+id+'-'+i); sel.push(!!(cb && cb.checked)); }
+  it.sel=sel; it.at=nowISO();
+  save(); updateRegCount();
+}
+function paintChecklist(cl){
+  var it=R.items[cl.id]||{};
+  for(var i=0;i<cl.items.length;i++){
+    var cb=$('ckb-'+cl.id+'-'+i), row=$('cki-'+cl.id+'-'+i);
+    if(!cb) continue;
+    var s=!!(it.sel && it.sel[i]);
+    cb.checked=s;
+    if(it.checked){
+      var c=cl.items[i].correct;
+      row.className = s&&c ? 'item ck-ok' : (s&&!c ? 'item ck-bad' : (!s&&c ? 'item ck-missed' : 'item'));
+      cb.disabled=true;
+    }else{ row.className='item'; cb.disabled=false; }
+  }
+}
+function checkChecklist(cl){
+  var it=item(cl.id);
+  if(!it.sel) it.sel=cl.items.map(function(){ return false; });
+  var correctTotal=0, correctChecked=0, wrongChecked=0;
+  for(var i=0;i<cl.items.length;i++){
+    var c=cl.items[i].correct, s=!!it.sel[i];
+    if(c) correctTotal++;
+    if(s&&c) correctChecked++;
+    if(s&&!c) wrongChecked++;
+  }
+  var frac = correctTotal? Math.max(0,(correctChecked-wrongChecked*0.5)/correctTotal) : 0;
+  frac=Math.min(1,frac);
+  it.credit=frac; it.ok=frac>=0.8; it.checked=true; it.at=nowISO();
+  paintChecklist(cl);
+  return frac;
+}
+
+/* ============ POLLS ============ */
+function pollButtonsHTML(which){
+  return '<button class="btn btn-ghost" data-act="poll" data-which="'+which+'" data-v="fund">Fund it</button>'+
+         '<button class="btn btn-ghost" data-act="poll" data-which="'+which+'" data-v="no">Don’t fund it</button>';
+}
+function setPoll(which,v){
+  R.polls[which]=v; R.polls[which+'At']=nowISO();
+  save(); paintPoll(which); updateRegCount();
+  var box=$(which==='open'?'pollA':'pollB'); if(box) box.classList.remove('missing');
+}
+function paintPoll(which){
+  var box=$(which==='open'?'pollA':'pollB'); if(!box) return;
+  var btns=box.querySelectorAll('button');
+  for(var i=0;i<btns.length;i++){
+    btns[i].className = (btns[i].getAttribute('data-v')===R.polls[which]) ? 'btn btn-primary' : 'btn btn-ghost';
+  }
+}
+function pollTxt(v){ return v==='fund'?'Fund it':(v==='no'?'Don’t fund it':'—'); }
+
+/* ============ CHECK GUARD: nothing is submitted blank by accident ============ */
+function unanswered(list){
+  return list.filter(function(id){
+    var d=DEF[id], it=R.items[id]||{};
+    if(!d) return false;
+    if(d.kind==='field') return !(it.raw && String(it.raw).trim());
+    if(d.kind==='choice') return it.sel===undefined || it.sel===null;
+    return false;
+  });
+}
+function clearMissing(id){
+  var a=$('fld-'+id), b=$('ch-'+id);
+  if(a) a.classList.remove('missing');
+  if(b) b.classList.remove('missing');
+}
+function guardCheck(pid, list, fbId, label, extras){
+  var miss=unanswered(list), extra=(extras||[]).filter(function(x){ return x.miss; });
+  var p=pg(pid);
+  if((miss.length || extra.length) && !p.warned){
+    p.warned=true;
+    var first=null;
+    miss.forEach(function(id){ var e=$('fld-'+id)||$('ch-'+id); if(e){ e.classList.add('missing'); first=first||e; } });
+    extra.forEach(function(x){ var e=$(x.el); if(e){ e.classList.add('missing'); first=first||e; } });
+    var n=miss.length+extra.length;
+    var fb=$(fbId);
+    fb.className='feedback show warn';
+    fb.innerHTML='<b>'+n+' question'+(n>1?'s':'')+' not answered yet</b> (outlined in amber). Answer '+(n>1?'them':'it')+
+      ' so every response is registered &#8212; or press <b>'+esc(label)+'</b> again to submit with blanks.';
+    if(first && first.scrollIntoView){ try{ first.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){ first.scrollIntoView(); } }
+    return false;
+  }
+  p.warned=false; p.checked=true; p.attempts=(p.attempts||0)+1; p.at=nowISO();
+  var fb2=$(fbId); if(fb2 && fb2.className.indexOf('warn')>=0){ fb2.className='feedback'; fb2.innerHTML=''; }
+  return true;
+}
+function afterCheck(){ save(); renderMeters(); renderPager(); renderPills(); updateRegCount(); }
+
+/* ============ STAGE 1 : COMMITTED BASIS ============ */
+var STAGE1_FIELDS=[
+ {id:'q1_ecf1', label:'Expected net cash inflow, year one (0.5×400 + 0.5×200)', target:300, prefix:'Rs'},
+ {id:'q1_ecf2', label:'Expected net cash inflow, year two, unconditional', target:300, prefix:'Rs'},
+ {id:'q1_net1', label:'Net cash flow at t=1, after the certain Rs 200m second tranche', target:100, prefix:'Rs'},
+ {id:'q1_pv1', label:'Present value of the t=1 net flow at 20%', target:83.33, prefix:'Rs'},
+ {id:'q1_pv2', label:'Present value of the t=2 expected flow at 20% (two years)', target:208.33, prefix:'Rs'},
+ {id:'q1_npv', label:'Net present value, committed basis (include the Rs 300m spent at t=0)', target:-8.33, prefix:'Rs', tol:0.6}
+];
+var STAGE1_MCQ={id:'q1_mcq', q:'Given this NPV, what does the committed-basis analysis imply?',
+ opts:['Reject — at the 20% hurdle rate the committed project has a negative NPV (IRR about 18.05%)',
+       'Accept — Rs 8 million is immaterial against a Rs 500 million programme',
+       'Defer — gather more data before deciding either way'],
+ correct:0,
+ why:'The committed-basis IRR works out to 18.05%, below the 20% hurdle. Taken on its own terms — a single, irreversible Rs 500 million commitment — Iyer’s arithmetic is correct and the project should be rejected.'};
+
+function renderS1(){
+  var html = formulaHelpHTML() + '<div class="fieldgrid">';
+  STAGE1_FIELDS.forEach(function(f){ html+=fieldHTML(f); });
+  html+='</div>'+choiceHTML(STAGE1_MCQ);
+  $('s1-body').innerHTML=html;
+  STAGE1_FIELDS.forEach(paintField);
+  paintChoice(STAGE1_MCQ);
+  fbS1();
+}
+function checkS1(){
+  if(!guardCheck('s1', ids(STAGE1_FIELDS).concat([STAGE1_MCQ.id]), 's1-fb', 'Check my numbers')) return;
+  STAGE1_FIELDS.forEach(checkField);
+  checkChoice(STAGE1_MCQ);
+  fbS1(); afterCheck();
+}
+function fbS1(){
+  var fb=$('s1-fb'), p=R.pages.s1;
+  if(!p || !p.checked){ fb.className='feedback'; fb.innerHTML=''; return; }
+  var allOk = STAGE1_FIELDS.concat([STAGE1_MCQ]).every(function(o){ return (R.items[o.id]||{}).ok; });
+  fb.className='feedback show '+(allOk?'good':'bad');
+  fb.innerHTML = allOk
+    ? 'All correct. Evaluated as one committed outlay, Project S fails STL’s hurdle. Now build the tree and see whether that is the right way to evaluate it.'
+    : 'Some entries missed — correct values are shown above each field. The committed-basis NPV is <b>Rs (8.33) million</b>. Use <b>↺ Reset this page</b> to try again.';
+}
+
+/* ============ STAGE 2 : THE DECISION TREE ============ */
+var STAGE2 = [
+ { id:'s2a', title:'Step 1 of 5 — conditional expectations',
+   narr:'At t=1, Mehta will know which scenario STL is in. Within each, year two moves again. Compute the <b>conditional</b> expected year-two inflow inside each scenario.',
+   ref:'<table class="ref"><tr><th>Branch</th><th>Cond. prob.</th><th>Year-2 net inflow</th></tr>'+
+       '<tr><td>O, up (+30%)</td><td>0.60</td><td>520</td></tr><tr><td>O, down (−30%)</td><td>0.40</td><td>280</td></tr>'+
+       '<tr><td>P, up (+20%)</td><td>0.20</td><td>240</td></tr><tr><td>P, down (−20%)</td><td>0.80</td><td>160</td></tr></table>',
+   fields:[
+     {id:'q2_ecfO', label:'Expected year-2 inflow, conditional on Scenario O (0.6×520 + 0.4×280)', target:424, prefix:'Rs'},
+     {id:'q2_ecfP', label:'Expected year-2 inflow, conditional on Scenario P (0.2×240 + 0.8×160)', target:176, prefix:'Rs'}
+   ], choices:[] },
+ { id:'s2b', title:'Step 2 of 5 — continuation values at t=1',
+   narr:'Discount each of those figures back one year at 20% — that is what the year-two asset is worth <i>at the moment STL decides</i> whether to spend the further Rs 200 million.',
+   ref:'', fields:[
+     {id:'q2_contO', label:'Continuation value at node O (424 ÷ 1.20)', target:353.33, prefix:'Rs'},
+     {id:'q2_contP', label:'Continuation value at node P (176 ÷ 1.20)', target:146.67, prefix:'Rs'}
+   ], choices:[] },
+ { id:'s2c', title:'Step 3 of 5 — continue or stop?',
+   narr:'Compare each continuation value to the Rs 200 million cost of the second tranche. (After Stage 2 you will get to play with exactly this decision in the walk-away lab.)',
+   ref:'', fields:[], choices:[
+     {id:'q2_decO', q:'At node O, continuation value is Rs 353.33m against a Rs 200m cost. STL should:',
+      opts:['Continue — the asset is worth more than it costs','Stop — preserve the cash'], correct:0,
+      why:'353.33 > 200: continuing adds Rs 153.33 million in present-value terms at t=1.'},
+     {id:'q2_decP', q:'At node P, continuation value is Rs 146.67m against a Rs 200m cost. STL should:',
+      opts:['Continue — the team is already in place','Stop — the asset is worth less than it costs'], correct:1,
+      why:'146.67 < 200 (in fact 176 is already below 200 before any discounting): continuing would destroy Rs 53.33 million in present-value terms.'},
+     {id:'q2_mcq_why', q:'Why does STL abandon at the P node but not at the O node?',
+      opts:['The P branch is less probable, so it matters less','The year-two asset is worth less than the Rs 200m it costs to acquire, only in the P branch','Abandoning is always the financially safer choice'], correct:1,
+      why:'It is a pure comparison of value to cost at that node. Probability plays no role in the stop/continue test itself — only in weighting the two nodes together afterward.'}
+   ] },
+ { id:'s2d', title:'Step 4 of 5 — value at each node',
+   narr:'Combine the certain year-one cash flow with the continuation payoff you just decided on.',
+   ref:'', fields:[
+     {id:'q2_valO', label:'Total value at node O = 400 + (353.33 − 200)', target:553.33, prefix:'Rs'},
+     {id:'q2_valP', label:'Total value at node P = 200 + 0 (stopped)', target:200.00, prefix:'Rs'}
+   ], choices:[] },
+ { id:'s2e', title:'Step 5 of 5 — roll back to today',
+   narr:'Blend the two nodes at their 0.5 / 0.5 probability, discount one more year, then net off the Rs 300 million already spent at t=0.',
+   ref:'', fields:[
+     {id:'q2_ev1', label:'Expected value at t=1 (0.5×553.33 + 0.5×200)', target:376.67, prefix:'Rs'},
+     {id:'q2_npv', label:'Net present value, staged basis (376.67 ÷ 1.20, less 300)', target:13.89, prefix:'Rs', tol:0.6}
+   ], choices:[] }
+];
+var RECON={id:'q2_recon', label:'Reconciliation: your staged NPV − your committed NPV (value of the flexibility)', target:22.22, dim:'acc'};
+
+function s2Items(k){
+  var st=STAGE2[k], a=ids(st.fields).concat(ids(st.choices));
+  if(st.id==='s2e') a.push(RECON.id);
+  return a;
+}
+function renderS2(k){
+  var st=STAGE2[k];
+  $('s2-title').innerHTML=st.title;
+  $('s2-narr').innerHTML=st.narr+(st.ref||'');
+  var html='';
+  if(st.fields.length){ html+=formulaHelpHTML()+'<div class="fieldgrid">'; st.fields.forEach(function(f){ html+=fieldHTML(f); }); html+='</div>'; }
+  st.choices.forEach(function(c){ html+=choiceHTML(c); });
+  $('s2-body').innerHTML=html;
+  st.fields.forEach(paintField);
+  st.choices.forEach(paintChoice);
+  fbS2(k);
+  renderTreeSummary();
+}
+function checkS2(k){
+  var st=STAGE2[k];
+  if(!guardCheck(st.id, ids(st.fields).concat(ids(st.choices)), 's2-fb', 'Check this step')) return;
+  st.fields.forEach(checkField);
+  st.choices.forEach(checkChoice);
+  if(st.id==='s2e'){
+    var a=val('q2_npv'), b=val('q1_npv');
+    var flex=(a!==null && b!==null)? a-b : null;
+    var ok = flex!==null && Math.abs(flex-22.22)<=1.2;
+    R.items[RECON.id]={checked:true, value:flex, ok:ok, credit:ok?1:0, at:nowISO()};
+  }
+  fbS2(k); renderTreeSummary(); afterCheck();
+}
+function fbS2(k){
+  var st=STAGE2[k], p=R.pages[st.id], fb=$('s2-fb');
+  if(!p || !p.checked){ fb.className='feedback'; fb.innerHTML=''; return; }
+  var allOk = st.fields.concat(st.choices).every(function(o){ return (R.items[o.id]||{}).ok; });
+  var extra='';
+  if(st.id==='s2e'){
+    var rc=R.items[RECON.id]||{}, a=val('q2_npv'), b=val('q1_npv');
+    extra='<div class="jr">Reconciliation, using your own numbers:<br>'+
+      'your staged NPV ('+(a!==null?r2(a):'—')+') − your committed NPV ('+(b!==null?r2(b):'—')+') = <b>'+(typeof rc.value==='number'?r2(rc.value):'—')+'</b><br>'+
+      'This is the value of the flexibility to stop. The verified figure is Rs 22.22 million.'+
+      (rc.ok? ' Yours reconciles.' : ' Yours does not quite reconcile — revisit any field marked ✗ above (or in Stage 1).')+
+      '</div>';
+  }
+  fb.className='feedback show '+(allOk?'good':'bad');
+  fb.innerHTML=(allOk?'Correct.':'Some entries missed — correct values are shown above.')+extra;
+}
+function renderTreeSummary(){
+  var L=[['q2_ecfO','E[CF2|O]'],['q2_ecfP','E[CF2|P]'],['q2_contO','Cont. value O'],['q2_contP','Cont. value P'],
+         ['q2_valO','Node O total'],['q2_valP','Node P total'],['q2_npv','Staged NPV']];
+  var lines=[];
+  L.forEach(function(x){ var v=val(x[0]); if(v!==null) lines.push(x[1]+' = '+r2(v)); });
+  var dO=R.items.q2_decO, dP=R.items.q2_decP;
+  if(dO && dO.checked) lines.push('Decision at O: '+(dO.sel===0?'continue':(dO.sel===1?'stop':'—')));
+  if(dP && dP.checked) lines.push('Decision at P: '+(dP.sel===1?'stop':(dP.sel===0?'continue':'—')));
+  $('treeSummary').innerHTML = lines.length? lines.join('<br>') : 'Nothing solved yet.';
+}
+
+/* ============ STAGE 2½ : WALK-AWAY LAB ============ */
+var WK={ contO:424/1.2, contP:176/1.2, K:200, cf1O:400, cf1P:200, I0:300, r:0.2 };
+function nodeVal(node, choice, c){
+  var cf1 = node==='O'? WK.cf1O : WK.cf1P, cont = node==='O'? WK.contO : WK.contP;
+  return choice==='cont' ? cf1 + (cont-WK.K) : cf1 - c;
+}
+function policyNPV(O,P,c){
+  var ev=0.5*nodeVal('O',O,c)+0.5*nodeVal('P',P,c);
+  return {ev:ev, npv:ev/(1+WK.r)-WK.I0};
+}
+var COMMITTED = policyNPV('cont','cont',0).npv;      /* −8.33 */
+var P_LOSS = WK.K - WK.contP;                          /* 53.33: loss avoided by stopping at P */
+function optPolicy(c){ return {O:'cont', P:(c < P_LOSS ? 'walk' : 'cont')}; }
+function flexOf(pol,c){ return policyNPV(pol.O,pol.P,c).npv - COMMITTED; }
+function policyTxt(w){
+  return (w.O==='cont'?'Continue':'Walk away')+' at O · '+(w.P==='cont'?'Continue':'Walk away')+' at P · exit cost Rs '+w.c+'m';
+}
+
+var WK_FIELDS=[
+ {id:'wk_npv40', label:'Staged NPV when walking away at P costs Rs 40m (continue at O, walk at P): (0.5×553.33 + 0.5×(200 − 40)) ÷ 1.20 − 300', target:-2.78, prefix:'Rs', tol:0.6}
+];
+var WK_CHOICES=[
+ {id:'wk_be', dim:'jud', q:'At roughly what exit cost does the staged NPV fall to zero — so Project S stops clearing the 20% hurdle even with the option to stop?',
+  opts:['Rs 22.22m','Rs 33.33m','Rs 40.00m','Rs 53.33m'], correct:1,
+  why:'Staged NPV = (0.5×553.33 + 0.5×(200 − c)) ÷ 1.20 − 300 = 0 gives c = 33.33. At that exit cost the flexibility is still worth 8.33 — but 8.33 is exactly what is needed to lift the committed −8.33 to zero.'},
+ {id:'wk_dead', dim:'opt', q:'Above what exit cost is the option to walk away worth nothing at all?',
+  opts:['Rs 22.22m — the option value itself','Rs 33.33m — where the staged NPV hits zero','Rs 53.33m — the loss STL avoids by stopping at P','Rs 200m — the full second tranche'], correct:2,
+  why:'Walking away at P avoids a 53.33 loss but costs c. Once c > 53.33, continuing at P is the lesser evil, the best policy is the committed one, and the flexibility is worth zero — the kink in the curve.'},
+ {id:'wk_gov', dim:'gov', q:'In the language of this lab, Krishnan’s worry is that:',
+  opts:['The probability of Scenario O is really below 0.5',
+        'The organisational cost of stopping — a hired team, a briefed customer, nobody wanting to be the one who stops it — acts like a very large exit cost, which kills the option',
+        'The 20% discount rate is too low',
+        'The year-two cash flows are too optimistic'], correct:1,
+  why:'Escalation of commitment is an exit cost that never appears in the spreadsheet. Push the slider past 53.33 and the Rs 22.22m disappears. Stage 4’s safeguards are ways of keeping that cost low.'}
+];
+var WK_POLICY={id:'walk_policy', label:'Your walk-away policy at the t = 1 nodes', dim:'jud'};
+
+function nodeCard(node){
+  var isO=node==='O', c=R.walk.c, ch=R.walk[node];
+  var cf1=isO?WK.cf1O:WK.cf1P, cont=isO?WK.contO:WK.contP, gain=cont-WK.K;
+  var v=nodeVal(node,ch,c);
+  var parts = ch==='cont'
+    ? cf1+' '+(gain>=0?'+ ':'− ')+r2(Math.abs(gain))
+    : cf1+' − '+r2(c)+' exit cost';
+  return '<div class="branch-card '+(ch==='walk'?'is-walk':'is-cont')+'">'+
+    '<div class="bt">Node '+node+' &#8212; '+(isO?'meets defence spec':'civil survey accuracy only')+'</div>'+
+    '<div class="p">probability 0.50 · year-1 inflow Rs '+cf1+'m (earned either way)</div>'+
+    '<div class="net">Continue: year-2 asset worth '+r2(cont)+' − 200 tranche = <b>'+sg(gain)+'</b><br>'+
+    'Walk away: give up the year-2 asset, pay exit cost = <b>'+(c? '−'+r2(c) : '0.00')+'</b></div>'+
+    '<div class="toggle-row">'+
+      '<button type="button" class="toggle-btn '+(ch==='cont'?'on proceed':'')+'"'+(walkLocked()?' disabled':'')+' data-act="walk" data-node="'+node+'" data-v="cont" aria-pressed="'+(ch==='cont')+'">Continue (pay 200)</button>'+
+      '<button type="button" class="toggle-btn '+(ch==='walk'?'on walk':'')+'"'+(walkLocked()?' disabled':'')+' data-act="walk" data-node="'+node+'" data-v="walk" aria-pressed="'+(ch==='walk')+'">Walk away</button>'+
+    '</div>'+
+    '<div class="nodeval">Node value at t = 1: '+parts+' = <b>'+r2(v)+'</b></div></div>';
+}
+function renderWalkLab(){
+  var w=R.walk, c=w.c;
+  $('wkNodes').innerHTML = nodeCard('O') + nodeCard('P');
+  var pr=policyNPV(w.O,w.P,c), flex=pr.npv-COMMITTED;
+  $('wkReadout').innerHTML =
+    '<div class="tile"><div class="lbl">Expected value at t = 1 (½ O + ½ P)</div><div class="val">'+r2(pr.ev)+'</div></div>'+
+    '<div class="tile"><div class="lbl">Staged NPV (÷ 1.20, less 300)</div><div class="val">'+sg(pr.npv)+'</div></div>'+
+    '<div class="tile"><div class="lbl">Flexibility value vs committed (−8.33)</div><div class="val">'+sg(flex)+'</div></div>';
+  var opt=optPolicy(c), best=policyNPV(opt.O,opt.P,c).npv, isOpt=(w.O===opt.O && w.P===opt.P);
+  var s=$('wkStatus'), pre=(w.O==='cont'&&w.P==='cont')?'This is Iyer’s committed basis — continue whatever happens. ':'';
+  if(isOpt){
+    s.className='status-msg optimal';
+    if(opt.P==='walk'){
+      s.innerHTML=pre+'Value-maximising at this exit cost: continue at O (the year-two asset is worth more than its Rs 200m cost), walk away at P (it is not).'+
+        (c===0 ? ' Staged NPV +13.89, flexibility +22.22 — exactly your Stage 2 answer.' : ' Staged NPV '+sg(best)+', flexibility '+sg(best-COMMITTED)+'.');
+    }else{
+      s.innerHTML=pre+'At an exit cost of Rs '+c+'m, walking away at P (losing '+c+') is worse than continuing (losing 53.33). The best policy is the committed one — the option to walk away is worth nothing here.';
+    }
+  }else{
+    var hints=[];
+    if(w.O==='walk') hints.push('walking away at O throws away the +153.33 continuation gain'+(c?' and pays the exit cost':''));
+    if(w.P==='cont' && opt.P==='walk') hints.push('continuing at P pays 200 for an asset worth 146.67');
+    if(w.P==='walk' && opt.P==='cont') hints.push('walking at P now costs more ('+c+') than the 53.33 loss it avoids');
+    s.className='status-msg suboptimal';
+    s.innerHTML=pre+'Not optimal — this policy leaves <b>'+r2(best-pr.npv)+'</b> of NPV on the table: '+hints.join('; ')+'.';
+  }
+  $('wkCval').textContent='Rs '+c+'m';
+  var sl=$('wkSlider'); if(sl){ if(String(sl.value)!==String(c)) sl.value=c; sl.disabled=walkLocked(); }
+  $('wkChart').innerHTML=walkChartSVG(!!(R.pages.walk && R.pages.walk.checked));
+}
+function walkChartSVG(reveal){
+  var W=760,H=260,L=52,RP=18,T=22,B=46,xMax=80, pw=W-L-RP, ph=H-T-B;
+  var u={O:R.walk.O,P:R.walk.P}, optV=[], usrV=[], lo=0, hi=25;
+  for(var c=0;c<=xMax;c++){
+    var a=flexOf(optPolicy(c),c), b=flexOf(u,c);
+    optV.push(a); usrV.push(b); lo=Math.min(lo,a,b); hi=Math.max(hi,a,b);
+  }
+  var step=(hi-lo)>90?20:10;
+  lo=Math.floor((lo-2)/step)*step; if(lo>-10) lo=-10; hi=Math.ceil(hi/step)*step;
+  function X(v){ return L+v/xMax*pw; }
+  function Y(v){ return T+(hi-v)/(hi-lo)*ph; }
+  function path(arr){ return arr.map(function(v,i){ return (i?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1); }).join(' '); }
+  var same=optV.every(function(v,i){ return Math.abs(v-usrV[i])<1e-6; });
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" style="max-width:760px;display:block;margin:0 auto" role="img" aria-label="Flexibility value against exit cost">';
+  for(var y=lo;y<=hi;y+=step){
+    s+='<line x1="'+L+'" y1="'+Y(y)+'" x2="'+(W-RP)+'" y2="'+Y(y)+'" stroke="#eef1f3"/>'+
+       '<text x="'+(L-7)+'" y="'+(Y(y)+4)+'" font-size="10" fill="#8a94a1" text-anchor="end">'+y+'</text>';
+  }
+  for(var xc=0;xc<=xMax;xc+=10){
+    s+='<text x="'+X(xc)+'" y="'+(H-B+15)+'" font-size="10" fill="#8a94a1" text-anchor="middle">'+xc+'</text>';
+  }
+  s+='<line x1="'+L+'" y1="'+Y(0)+'" x2="'+(W-RP)+'" y2="'+Y(0)+'" stroke="#8a94a1" stroke-width="1.3"/>';
+  var y8=Y(-COMMITTED);
+  s+='<line x1="'+L+'" y1="'+y8+'" x2="'+(W-RP)+'" y2="'+y8+'" stroke="#2b6cb0" stroke-width="1.2" stroke-dasharray="4,4"/>'+
+     '<text x="'+(W-RP)+'" y="'+(y8-5)+'" font-size="10.5" fill="#2b6cb0" text-anchor="end">flexibility 8.33 → staged NPV exactly zero</text>';
+  if(reveal){
+    [[100/3,'33.33 · NPV = 0','#2b6cb0'],[P_LOSS,'53.33 · option dies','#c62828']].forEach(function(m){
+      s+='<line x1="'+X(m[0])+'" y1="'+T+'" x2="'+X(m[0])+'" y2="'+(H-B)+'" stroke="'+m[2]+'" stroke-width="1" stroke-dasharray="2,3"/>'+
+         '<text x="'+(X(m[0])+4)+'" y="'+(T+10)+'" font-size="10" fill="'+m[2]+'">'+m[1]+'</text>';
+    });
+  }
+  s+='<path d="'+path(optV)+'" fill="none" stroke="#1d3f72" stroke-width="2.8"/>';
+  if(!same) s+='<path d="'+path(usrV)+'" fill="none" stroke="#c17f2c" stroke-width="2" stroke-dasharray="7,4"/>';
+  var c0=R.walk.c, cv=flexOf(u,c0), isBest=Math.abs(cv-flexOf(optPolicy(c0),c0))<1e-6, col=isBest?'#2e7d32':'#c62828';
+  var tx=Math.min(Math.max(X(c0),L+30),W-RP-30);
+  s+='<line x1="'+X(c0)+'" y1="'+T+'" x2="'+X(c0)+'" y2="'+(H-B)+'" stroke="'+col+'" stroke-width="1.4" stroke-dasharray="3,2"/>'+
+     '<circle cx="'+X(c0)+'" cy="'+Y(cv)+'" r="6" fill="'+col+'" stroke="#fff" stroke-width="2"/>'+
+     '<text x="'+tx+'" y="'+(Y(cv)-11)+'" font-size="11" font-weight="700" fill="'+col+'" text-anchor="middle">'+sg(cv)+'</text>';
+  s+='<line x1="'+(L+8)+'" y1="'+(H-9)+'" x2="'+(L+30)+'" y2="'+(H-9)+'" stroke="#1d3f72" stroke-width="2.8"/>'+
+     '<text x="'+(L+35)+'" y="'+(H-5)+'" font-size="10.5" fill="#41525f">best policy at each exit cost</text>';
+  if(!same){
+    s+='<line x1="'+(L+210)+'" y1="'+(H-9)+'" x2="'+(L+232)+'" y2="'+(H-9)+'" stroke="#c17f2c" stroke-width="2" stroke-dasharray="7,4"/>'+
+       '<text x="'+(L+237)+'" y="'+(H-5)+'" font-size="10.5" fill="#41525f">your current policy</text>';
+  }
+  s+='<text x="'+(W-RP)+'" y="'+(H-5)+'" font-size="11" fill="#5b6672" text-anchor="end" font-weight="600">exit cost of walking away (Rs million) →</text>'+
+     '<text x="13" y="'+(T+ph/2)+'" font-size="11" fill="#5b6672" text-anchor="middle" font-weight="600" transform="rotate(-90 13 '+(T+ph/2)+')">flexibility value vs committed</text>';
+  return s+'</svg>';
+}
+function walkLocked(){ return !!(R.pages.walk && R.pages.walk.checked); }
+function setWalk(node,v){ if(walkLocked()) return; R.walk[node]=v; save(); renderWalkLab(); }
+function setExit(c){ if(walkLocked()) return; R.walk.c=Math.max(0,Math.min(80,Math.round(Number(c)||0))); save(); renderWalkLab(); }
+
+function walkQ(){ return ids(WK_FIELDS).concat(ids(WK_CHOICES)); }
+function renderWalk(){
+  var html=formulaHelpHTML()+'<div class="fieldgrid">'; WK_FIELDS.forEach(function(f){ html+=fieldHTML(f); }); html+='</div>';
+  WK_CHOICES.forEach(function(c){ html+=choiceHTML(c); });
+  $('wkQ').innerHTML=html;
+  WK_FIELDS.forEach(paintField);
+  WK_CHOICES.forEach(paintChoice);
+  renderWalkLab();
+  fbWalk();
+}
+function checkWalk(){
+  if(!guardCheck('walk', walkQ(), 'walk-fb', 'Register & check')) return;
+  WK_FIELDS.forEach(checkField);
+  WK_CHOICES.forEach(checkChoice);
+  var w=R.walk, o=optPolicy(w.c), ok=(w.O===o.O && w.P===o.P);
+  R.items[WK_POLICY.id]={checked:true, sel:{O:w.O,P:w.P,c:w.c}, ok:ok, credit:ok?1:0,
+    value:policyNPV(w.O,w.P,w.c).npv, at:nowISO()};
+  renderWalkLab(); fbWalk(); afterCheck();
+}
+function fbWalk(){
+  var fb=$('walk-fb'), p=R.pages.walk, hint=$('wkHint');
+  if(!p || !p.checked){
+    fb.className='feedback'; fb.innerHTML='';
+    hint.innerHTML='Look for two points on the curve: the exit cost at which the staged NPV falls to zero, and the exit cost beyond which the flexibility is worth nothing at all. Then register your reading below.';
+    return;
+  }
+  var pol=R.items[WK_POLICY.id]||{}, s=pol.sel||R.walk;
+  var allOk = WK_FIELDS.concat(WK_CHOICES).every(function(o){ return (R.items[o.id]||{}).ok; });
+  fb.className='feedback show '+(allOk&&pol.ok?'good':'bad');
+  fb.innerHTML=(allOk?'All three readings correct.':'Some readings missed — correct answers are highlighted above.')+
+    '<div class="jr">Registered policy: '+esc(policyTxt(s))+'<br>Staged NPV under that policy: '+(typeof pol.value==='number'?sg(pol.value):'—')+
+    ' · '+(pol.ok?'optimal at that exit cost ✓':'not optimal at that exit cost ✗')+'</div>';
+  hint.innerHTML='Read the curve like a call option’s payoff: a straight line falling as exit cost rises, then a kink where the decision flips. '+
+    'At <b>0</b> you are back at Stage 2 (+22.22). At <b>33.33</b> the flexibility is still worth 8.33 — just enough to lift the staged NPV to zero. '+
+    'Past <b>53.33</b> walking costs more than the loss it avoids: the option is dead, and the staged project is the committed project.';
+}
+
+/* ============ STAGE 3 : REAL OPTIONS ============ */
+var S3_MAP=[
+ {id:'map_S', q:'The underlying asset, S, is:',
+  opts:['The present value of the year-two cash flow STL can acquire','The Rs 300 million already spent at t=0','STL’s entire market capitalisation','The Rs 500 million total programme budget'], correct:0,
+  why:'S is whatever the option gives you the right to buy — here, the year-two cash flow stream, valued at t=1 as the continuation value.'},
+ {id:'map_K', q:'The strike price, K, is:',
+  opts:['The Rs 200 million second tranche','The Rs 300 million first tranche','The Rs 500 million total investment','The Rs 400 million Scenario O cash flow'], correct:0,
+  why:'K is what you pay to exercise — the Rs 200 million qualification and tooling spend due at t=1.'},
+ {id:'map_T', q:'Time to expiration, T, is:',
+  opts:['One year — to the June 2027 continuation decision','Two years — to the end of the project','Indefinite','Five years'], correct:0,
+  why:'The right to invest the second tranche lapses (in effect, is decided) at the end of year one.'},
+ {id:'map_ex', q:'Exercising the option means:',
+  opts:['Paying the Rs 200 million to continue into year two','Selling STL shares to raise capital','Walking away from the whole project','Signing the airframe customer to a fixed contract'], correct:0,
+  why:'Exercise = paying the strike to receive the underlying. Here, that is committing the second tranche.'}
+];
+S3_MAP.forEach(function(c){ c.dim='opt'; });
+var S3_PAYOFF=[
+ {id:'pay_O', label:'Option payoff if Scenario O occurs: max(353.33 − 200, 0)', target:153.33, prefix:'Rs', dim:'opt'},
+ {id:'pay_P', label:'Option payoff if Scenario P occurs: max(146.67 − 200, 0)', target:0, prefix:'Rs', dim:'opt', tol:0.6}
+];
+var S3_AVOID=[
+ {id:'al_loss', label:'Loss STL avoids at the P node by not being forced to invest: 200 − 146.67', target:53.33, prefix:'Rs', dim:'opt'},
+ {id:'al_pv', label:'Present value of that avoided loss, weighted by its 0.5 probability: 0.5 × (53.33 ÷ 1.20)', target:22.22, prefix:'Rs', dim:'opt', tol:0.6}
+];
+var S3_UNDERSTAND={id:'s3u', q:'Which best describes what you have just shown?',
+ opts:['The option value is a residual left over from subtracting two NPVs, and nothing more',
+       'The option value equals the present value of a loss STL avoids by having the right, not the obligation, to invest',
+       'The option value only exists because the discount rate happens to be 20%'],
+ correct:1, dim:'opt',
+ why:'The teaching note is explicit: seeing option value as a leftover subtraction means you have not yet understood it; seeing it as an avoided loss means you have.'};
+var S3_ADV=[
+ {id:'adv_u', label:'Up factor, u = S↑ ÷ S0 = 353.33 ÷ 208.33', target:1.696, tol:0.02, dim:'opt'},
+ {id:'adv_d', label:'Down factor, d = S↓ ÷ S0 = 146.67 ÷ 208.33', target:0.704, tol:0.02, dim:'opt'},
+ {id:'adv_pstar', label:'Risk-neutral probability, p* = (1.068 − d) ÷ (u − d)', target:0.367, tol:0.02, dim:'opt'},
+ {id:'adv_optval', label:'Risk-neutral option value = [p*×153.33 + (1−p*)×0] ÷ 1.068', target:52.68, prefix:'Rs', tol:1.2, dim:'opt'},
+ {id:'adv_fwd', label:'Risk-neutral forward value (obligated purchase) = S0 − 200 ÷ 1.068', target:21.07, prefix:'Rs', tol:1.2, dim:'opt'},
+ {id:'adv_flex', label:'Risk-neutral flexibility value = option value − forward value', target:31.61, prefix:'Rs', tol:1.5, dim:'opt'}
+];
+function s3Main(){ return ids(S3_MAP).concat(ids(S3_PAYOFF), ids(S3_AVOID), [S3_UNDERSTAND.id]); }
+
+function renderS3(){
+  $('s3-map').innerHTML=S3_MAP.map(function(c){ return choiceHTML(c); }).join('');
+  $('s3-payoff').innerHTML=formulaHelpHTML()+'<div class="fieldgrid">'+S3_PAYOFF.map(function(f){ return fieldHTML(f); }).join('')+'</div>';
+  $('s3-avoid').innerHTML='<div class="fieldgrid">'+S3_AVOID.map(function(f){ return fieldHTML(f); }).join('')+'</div>';
+  $('s3-understand').innerHTML=choiceHTML(S3_UNDERSTAND);
+  $('s3-adv').innerHTML=formulaHelpHTML()+'<div class="fieldgrid">'+S3_ADV.map(function(f){ return fieldHTML(f); }).join('')+'</div>';
+  S3_MAP.forEach(paintChoice); S3_PAYOFF.forEach(paintField); S3_AVOID.forEach(paintField);
+  paintChoice(S3_UNDERSTAND); S3_ADV.forEach(paintField);
+  var advTouched = (R.pages.s3adv && R.pages.s3adv.checked) || S3_ADV.some(function(f){ var it=R.items[f.id]; return it && it.raw; });
+  if(advTouched) $('advDetails').open=true;
+  $('s3-fb').className='feedback'; $('s3-fb').innerHTML='';
+  fbS3(); fbAdv();
+}
+function checkS3(){
+  if(!guardCheck('s3', s3Main(), 's3-fb', 'Check Stage 3')) return;
+  S3_MAP.forEach(checkChoice); S3_PAYOFF.forEach(checkField); S3_AVOID.forEach(checkField); checkChoice(S3_UNDERSTAND);
+  fbS3(); afterCheck();
+}
+function grpOk(list){ return list.every(function(o){ return (R.items[o.id]||{}).ok; }); }
+function fbS3(){
+  var p=R.pages.s3, F=['s3-map-fb','s3-payoff-fb','s3-avoid-fb','s3-understand-fb'];
+  if(!p || !p.checked){ F.forEach(function(id){ $(id).className='feedback'; $(id).innerHTML=''; }); return; }
+  var a=grpOk(S3_MAP), b=grpOk(S3_PAYOFF), c=grpOk(S3_AVOID), d=grpOk([S3_UNDERSTAND]);
+  $('s3-map-fb').className='feedback show '+(a?'good':'bad');
+  $('s3-map-fb').innerHTML = a? 'Correct mapping.' : 'Correct pairings are highlighted above.';
+  $('s3-payoff-fb').className='feedback show '+(b?'good':'bad');
+  $('s3-payoff-fb').innerHTML = b? 'These are exactly the continuation gains you found in Stage 2 — the option payoff and the decision-tree payoff are the same number, seen twice.' : 'Correct values are shown above — they match your Stage 2 continuation gains.';
+  $('s3-avoid-fb').className='feedback show '+(c?'good':'bad');
+  $('s3-avoid-fb').innerHTML = c? 'Rs 22.22 million — the same figure as Stage 2’s reconciliation and the walk-away lab at zero exit cost, now derived directly as an avoided loss.' : 'Correct values are shown above.';
+  $('s3-understand-fb').className='feedback show '+(d?'good':'bad');
+  $('s3-understand-fb').innerHTML = d? 'Yes — that is the distinction the teaching note insists on.' : 'See the highlighted answer above.';
+}
+function checkAdv(){
+  if(!guardCheck('s3adv', ids(S3_ADV), 's3-adv-fb', 'Check the advanced round')) return;
+  S3_ADV.forEach(checkField);
+  fbAdv(); afterCheck();
+}
+function fbAdv(){
+  var p=R.pages.s3adv, fb=$('s3-adv-fb');
+  $('adv-check').style.display = (p && p.checked) ? 'none' : 'inline-block';
+  if(!p || !p.checked){ if(fb.className.indexOf('warn')<0){ fb.className='feedback'; fb.innerHTML=''; } return; }
+  fb.className='feedback show info';
+  fb.innerHTML = 'Under risk-neutral pricing, flexibility is worth about <b>Rs 31.6 million</b> — roughly 40% more than the '+
+    'Rs 22.2 million the decision-tree shortcut gave you. The gap is exactly Question 5’s double-counting problem: '+
+    'the tree discounted an asymmetric, convex option payoff at the same 20% rate used for the underlying’s ordinary operating risk. '+
+    'A call option is never as risky, near the strike, as the underlying itself — discounting it at the underlying’s risk-adjusted '+
+    'rate systematically <i>understates</i> what the flexibility is worth. The Rs 22.22 million from your decision tree is a reasonable '+
+    'floor, not the full answer.';
+}
+
+/* ============ STAGE 4 : KRISHNAN'S CHALLENGE ============ */
+var S4_ITEMS=[
+ {text:'A pre-committed stopping rule: the continuation criterion, in measurable terms, written into the approval minute before any money is spent', correct:true},
+ {text:'Separation of the decision from the advocate: the continuation call is made by the finance committee, not by the R&D department that owns the programme', correct:true},
+ {text:'Formal approval of Rs 300 million only — the minute records that the further Rs 200 million is not approved and needs a fresh proposal', correct:true},
+ {text:'Contracting that preserves the exit: fixed-term contracts for the fusion team, staged tooling commitments, no long-lead procurement in year one', correct:true},
+ {text:'A named person whose job is to argue for stopping', correct:true},
+ {text:'Written sign-off from the R&D team promising they will recommend stopping if asked', correct:false},
+ {text:'Raising the discount rate to 25% to be extra conservative', correct:false},
+ {text:'Promising the customer a firm delivery date now, to build confidence in the programme', correct:false}
+];
+var S4_CHECKLIST={id:'gov1', items:S4_ITEMS, dim:'gov', label:'Safeguards that make the option real'};
+var S4_MCQ={id:'s4mcq', q:'Is the second tranche genuinely discretionary?',
+ opts:['Yes — it is written as optional in the model, so it is optional in fact',
+       'No — discretionary in the model and close to mandatory in practice, unless STL deliberately builds in the safeguards above',
+       'No — once STL starts a programme, company policy requires it to be finished'],
+ correct:1, dim:'gov',
+ why:'By June 2027 the team will be hired, the demonstrator built, and the customer briefed. Escalation of commitment is the organisational default — the option is real only if STL has deliberately engineered the ability to say no.'};
+
+function renderS4(){
+  $('s4-checklist').innerHTML='<p class="muted" style="font-size:.85rem">Check every safeguard that would make the option real:</p>'+checklistHTML(S4_CHECKLIST);
+  $('s4-mcq').innerHTML=choiceHTML(S4_MCQ);
+  $('pollB').innerHTML=pollButtonsHTML('close');
+  paintChecklist(S4_CHECKLIST); paintChoice(S4_MCQ); paintPoll('close');
+  $('s4-fb').className='feedback'; $('s4-fb').innerHTML='';
+  fbS4();
+}
+function checkS4(){
+  if(!guardCheck('s4', [S4_MCQ.id], 's4-fb', 'Check my answers', [{el:'pollB', miss:!R.polls.close}])) return;
+  checkChecklist(S4_CHECKLIST);
+  checkChoice(S4_MCQ);
+  fbS4(); afterCheck();
+}
+function fbS4(){
+  var p=R.pages.s4, f1=$('s4-checklist-fb'), f2=$('s4-mcq-fb');
+  if(!p || !p.checked){ f1.className='feedback'; f1.innerHTML=''; f2.className='feedback'; f2.innerHTML=''; return; }
+  var frac=(R.items[S4_CHECKLIST.id]||{}).credit||0, mcqOk=!!(R.items[S4_MCQ.id]||{}).ok;
+  f1.className='feedback show '+(frac>=0.8?'good':'bad');
+  f1.innerHTML='You identified the correct safeguards at a score of '+Math.round(frac*100)+'%. '+
+    'Rows outlined in amber were safeguards you missed; rows outlined in red were checked but do not actually protect the option '+
+    '(a promise from the team that owns the project is not independent; raising the rate is a different argument entirely, per Iyer; '+
+    'and a firm delivery date only deepens the escalation problem).';
+  f2.className='feedback show '+(mcqOk?'good':'bad');
+  f2.innerHTML=(mcqOk?'Yes.':'See the highlighted answer.')+' The Rs 22.22 million is not created by the analysis — it is created by the '+
+    'stopping rule, the contracting, and somebody being willing to be the person who stops it. In the walk-away lab’s terms, every safeguard '+
+    'keeps the exit cost low. The analysis only tells STL what those things are worth.';
+}
+
+/* ============ RESULTS & ANSWER SHEET ============ */
+function renderResults(){
+  var S=tally();
+  var map=[['acc','dAcc','pAcc'],['jud','dJud','pJud'],['opt','dOpt','pOpt'],['gov','dGov','pGov']], pv={};
+  map.forEach(function(m){
+    var d=S[m[0]], p=pct(d); pv[m[0]]=p;
+    $(m[1]).textContent=d.tot?band(p):'—'; $(m[1]).className='lv '+(d.tot?band(p):'');
+    $(m[2]).textContent=d.tot? p+'% · '+d.tot+' items' : 'nothing checked';
+  });
+  var a=pv.acc, j=pv.jud, o=pv.opt, g=pv.gov, avg=Math.round((a+j+o+g)/4), title, sub;
+  if(avg>=85){title='Finance Committee Ready';sub='You built the tree, priced the flexibility twice, and answered Krishnan without dodging him.';}
+  else if(avg>=65){title='Competent Analyst';sub='Solid mechanics; revisit whichever dimension scored lowest above.';}
+  else if(avg>=45){title='Developing Analyst';sub='Re-work the backward induction at the P node, and Krishnan’s governance checklist — those carry the case.';}
+  else{title='Start with the committed basis';sub='Rebuild Stage 1 and Stage 2 carefully before trusting any option-value number.';}
+  $('resTitle').textContent=title; $('resSub').textContent=sub;
+  var pairs=[['Accuracy',a],['Judgment',j],['Options',o],['Governance',g]];
+  pairs.sort(function(x,y){ return y[1]-x[1]; });
+  $('resNote').innerHTML='Your strongest dimension was <b>'+pairs[0][0]+'</b>; your weakest was <b>'+pairs[3][0]+'</b>. '+
+   'Committed basis: reject (NPV −Rs 8.33m). Staged basis: accept (NPV +Rs 13.89m). The Rs 22.22 million between them is a real '+
+   'option — and it is worth exactly that only to an organisation that will actually exercise it, at an exit cost it can bear. '+
+   'Mehta’s question stands: what exactly are we committing to today?';
+  var pc='<div class="kv"><span>Opening poll</span><b>'+pollTxt(R.polls.open)+'</b></div>'+
+         '<div class="kv"><span>Closing poll</span><b>'+pollTxt(R.polls.close)+'</b></div>';
+  if(R.polls.open && R.polls.close){
+    pc+='<div class="kv"><span>Moved?</span><b>'+(R.polls.open===R.polls.close?'No — same call, hopefully for sharper reasons':'Yes — the analysis changed your recommendation')+'</b></div>';
+  }
+  $('pollCompare').innerHTML=pc;
+  $('modelAns').innerHTML =
+   '<table class="keyfacts">'+
+   '<tr><th>Quantity</th><th>Value</th></tr>'+
+   '<tr><td>NPV, committed basis, at 20%</td><td>Rs (8.33) million</td></tr>'+
+   '<tr><td>NPV, staged basis, at 20%</td><td>Rs +13.89 million</td></tr>'+
+   '<tr><td>Value of the option to abandon</td><td>Rs 22.22 million</td></tr>'+
+   '<tr><td>Continuation gain, Scenario O</td><td>+Rs 153.33 million (continue)</td></tr>'+
+   '<tr><td>Continuation gain, Scenario P</td><td>−Rs 53.33 million (stop)</td></tr>'+
+   '<tr><td>IRR, committed</td><td>18.05%</td></tr>'+
+   '<tr><td>IRR, staged</td><td>23.76%</td></tr>'+
+   '<tr><td>Break-even probability of O, committed</td><td>52.5%</td></tr>'+
+   '<tr><td>Break-even probability of O, staged</td><td>45.3%</td></tr>'+
+   '<tr><td>Staged NPV with Rs 40m abandonment cost</td><td>Rs (2.78) million</td></tr>'+
+   '<tr><td>Exit cost at which staged NPV = 0</td><td>Rs 33.33 million</td></tr>'+
+   '<tr><td>Exit cost above which the option is worthless</td><td>Rs 53.33 million</td></tr>'+
+   '<tr class="tot"><td>Risk-neutral option value (advanced)</td><td>Rs 52.68 million</td></tr>'+
+   '<tr class="tot"><td>Risk-neutral flexibility value (advanced)</td><td>Rs 31.61 million</td></tr>'+
+   '</table>';
+  var rows=sheetRows(), h='<tr><th>Page</th><th>Question</th><th>Your answer</th><th>Correct answer</th><th>Result</th></tr>';
+  rows.forEach(function(r){
+    var cls = r.result==='✓'?'ok':(r.result==='✗'?'bad':'na');
+    h+='<tr><td class="pg">'+esc(r.page)+'</td><td>'+esc(r.q)+'</td><td>'+esc(r.yours)+'</td><td>'+esc(r.correct)+'</td><td class="res '+cls+'">'+esc(r.result)+'</td></tr>';
+  });
+  $('ansSheet').innerHTML=h;
+  var c=regCounts();
+  $('sheetNote').textContent='Every response registered in this session — '+c.n+' of '+c.k+' answered. Download it as a spreadsheet file, or print this page.';
+}
+function fieldAnswerTxt(it){
+  var raw=String(it.raw||'').trim();
+  if(!raw) return '—';
+  var r=evalFormula(raw);
+  if(r.isFormula) return raw+(r.ok?'  =  '+r2(r.value):'  (cannot be read)');
+  return r.ok? r2(r.value) : raw;
+}
+function sheetRows(){
+  var rows=[];
+  rows.push({page:'Briefing', q:'Opening poll — should Mehta recommend funding Project S?', yours:pollTxt(R.polls.open), correct:'(opinion)', result:R.polls.open?'registered':'blank'});
+  PAGES.forEach(function(P){
+    if(!P.items) return;
+    P.items().forEach(function(id){
+      var d=DEF[id]; if(!d) return;
+      var it=R.items[id]||{}, res=it.checked?(it.ok?'✓':'✗'):'not checked', o=d.obj;
+      if(d.kind==='field') rows.push({page:P.pill, q:o.label, yours:fieldAnswerTxt(it), correct:r2(o.target), result:res});
+      else if(d.kind==='choice') rows.push({page:P.pill, q:o.q, yours:(it.sel!==undefined&&it.sel!==null)?o.opts[it.sel]:'—', correct:o.opts[o.correct], result:res});
+      else if(d.kind==='check'){
+        o.items.forEach(function(x,i){
+          var s=!!(it.sel&&it.sel[i]);
+          rows.push({page:P.pill, q:x.text, yours:s?'Selected':'Not selected', correct:x.correct?'Select':'Leave unselected',
+                     result:it.checked?((s===x.correct)?'✓':'✗'):'not checked'});
+        });
+      }
+      else if(d.kind==='calc') rows.push({page:P.pill, q:o.label, yours:typeof it.value==='number'?r2(it.value):'—', correct:r2(o.target), result:res});
+      else if(d.kind==='policy'){
+        var w=it.sel||R.walk, op=optPolicy(w.c);
+        rows.push({page:P.pill, q:o.label, yours:policyTxt(w), correct:policyTxt({O:op.O,P:op.P,c:w.c}), result:res});
+      }
+    });
+    if(P.id==='s4') rows.push({page:P.pill, q:'Closing poll — should Mehta recommend funding Project S?', yours:pollTxt(R.polls.close), correct:'(opinion)', result:R.polls.close?'registered':'blank'});
+  });
+  return rows;
+}
+function downloadCSV(){
+  var S=tally(), q=function(s){ return '"'+String(s===undefined||s===null?'':s).replace(/"/g,'""')+'"'; };
+  var lines=[['Sigma Tech simulation — answer sheet'].map(q).join(','),
+             [q('Exported'), q(nowISO())].join(',')];
+  DIMS.forEach(function(x){ var d=S[x[0]]; lines.push([q(x[1]+' score'), q(d.tot?pct(d)+'%':'—'), q(d.tot?band(pct(d)):'')].join(',')); });
+  lines.push('');
+  lines.push(['Page','Question','Your answer','Correct answer','Result'].map(q).join(','));
+  sheetRows().forEach(function(r){ lines.push([r.page,r.q,r.yours,r.correct,r.result].map(q).join(',')); });
+  var csv='﻿'+lines.join('\r\n');
+  try{
+    var blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(blob); a.download='SigmaTech_answer_sheet.csv';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  }catch(e){ alert('Download is blocked here — use Print instead.'); }
+}
+
+/* ============ PAGES, NAVIGATION, BACK & RESET ============ */
+reg('field', STAGE1_FIELDS, 'acc'); reg('choice', [STAGE1_MCQ], 'jud');
+STAGE2.forEach(function(st){ reg('field', st.fields, 'acc'); reg('choice', st.choices, 'jud'); });
+reg('calc', [RECON], 'acc');
+reg('field', WK_FIELDS, 'acc'); reg('choice', WK_CHOICES, 'jud'); reg('policy', [WK_POLICY], 'jud');
+reg('choice', S3_MAP, 'opt'); reg('field', S3_PAYOFF, 'opt'); reg('field', S3_AVOID, 'opt'); reg('choice', [S3_UNDERSTAND], 'opt');
+reg('field', S3_ADV, 'opt');
+reg('check', [S4_CHECKLIST], 'gov'); reg('choice', [S4_MCQ], 'gov');
+
+var PAGES=[
+ {id:'intro', scr:'scr-intro', pill:'Briefing', render:function(){ paintPoll('open'); }, nextLabel:'Open the folder →'},
+ {id:'s1', scr:'scr-s1', pill:'Stage 1', render:renderS1, check:checkS1, checkLabel:'Check my numbers',
+  items:function(){ return ids(STAGE1_FIELDS).concat([STAGE1_MCQ.id]); }, nextLabel:'Next →'},
+ {id:'gate', scr:'scr-gate', pill:'Pause', nextLabel:'Build the tree — Stage 2 →'}
+];
+STAGE2.forEach(function(st,k){
+  PAGES.push({id:st.id, scr:'scr-s2', pill:'Tree '+(k+1), render:function(){ renderS2(k); }, check:function(){ checkS2(k); },
+    checkLabel:'Check this step', items:function(){ return s2Items(k); },
+    nextLabel: k<STAGE2.length-1 ? 'Next step →' : 'Walk-away lab →'});
+});
+PAGES.push({id:'walk', scr:'scr-walk', pill:'Walk-away lab', render:renderWalk, check:checkWalk, checkLabel:'Register & check',
+  items:function(){ return walkQ().concat([WK_POLICY.id]); }, nextLabel:'Real options — Stage 3 →'});
+PAGES.push({id:'s3', scr:'scr-s3', pill:'Stage 3', render:renderS3, check:checkS3, checkLabel:'Check Stage 3',
+  items:function(){ return s3Main().concat(ids(S3_ADV)); }, nextLabel:'Krishnan’s challenge — Stage 4 →'});
+PAGES.push({id:'s4', scr:'scr-s4', pill:'Stage 4', render:renderS4, check:checkS4, checkLabel:'Check my answers',
+  items:function(){ return [S4_CHECKLIST.id, S4_MCQ.id]; }, nextLabel:'See your results →'});
+PAGES.push({id:'res', scr:'scr-res', pill:'Results', render:renderResults});
+
+var SCREENS=['scr-intro','scr-s1','scr-gate','scr-s2','scr-walk','scr-s3','scr-s4','scr-res'];
+function showPage(){
+  var P=PAGES[R.cur];
+  SCREENS.forEach(function(x){
+    var el=$(x); if(!el) return;
+    el.style.display = (x===P.scr) ? ((x==='scr-s1'||x==='scr-s2')?'grid':'block') : 'none';
+  });
+  var p=pg(P.id); if(!p.checked) p.warned=false;
+  if(P.id==='s3' && R.pages.s3adv && !R.pages.s3adv.checked) R.pages.s3adv.warned=false;
+  if(P.render) P.render();
+  renderPager(); renderPills(); renderMeters(); updateRegCount();
+  window.scrollTo(0,0);
+}
+function go(i){
+  if(i<0 || i>=PAGES.length || i>R.maxSeen+1) return;
+  R.cur=i; if(i>R.maxSeen) R.maxSeen=i;
+  save(); showPage();
+}
+function canNext(){ var P=PAGES[R.cur]; return R.cur<PAGES.length-1 && (!P.check || pg(P.id).checked); }
+function renderPager(){
+  var P=PAGES[R.cur], host=$('pager-'+P.scr.slice(4)); if(!host) return;
+  var p=pg(P.id), h='';
+  h+='<button class="btn btn-ghost btn-sm" data-act="back"'+(R.cur===0?' disabled':'')+'>&#8592; Back</button>';
+  if(P.id==='res') h+='<button class="btn btn-ghost btn-sm" data-act="resetall" data-label="&#8635; Start over (clear all answers)">&#8635; Start over (clear all answers)</button>';
+  else h+='<button class="btn btn-ghost btn-sm" data-act="reset" data-label="&#8635; Reset this page">&#8635; Reset this page</button>';
+  h+='<span class="progress">Page '+(R.cur+1)+' of '+PAGES.length+((p.attempts||0)>1?' · attempt '+p.attempts:'')+'</span><div class="spacer"></div>';
+  if(P.id==='res'){
+    h+='<button class="btn btn-ghost btn-sm" data-act="print">Print</button>'+
+       '<button class="btn btn-primary" data-act="csv">Download answer sheet (.csv)</button>';
+  }
+  if(P.check && !p.checked) h+='<button class="btn btn-primary" data-act="check">'+P.checkLabel+'</button>';
+  if(canNext()) h+='<button class="btn btn-primary" data-act="next">'+(P.nextLabel||'Next →')+'</button>';
+  host.innerHTML=h;
+}
+function renderPills(){
+  var h='';
+  PAGES.forEach(function(P,i){
+    var done=!!(R.pages[P.id] && R.pages[P.id].checked);
+    h+='<button class="pill'+(i===R.cur?' on':'')+(done?' done':'')+'" data-act="pill" data-i="'+i+'"'+(i>R.maxSeen?' disabled':'')+
+       ' title="'+(i>R.maxSeen?'Not reached yet':'Go to this page')+'">'+(done?'✓ ':'')+P.pill+'</button>';
+  });
+  $('pills').innerHTML=h;
+}
+function armed(btn, fn){
+  if(btn.getAttribute('data-armed')==='1'){ btn.removeAttribute('data-armed'); fn(); return; }
+  btn.setAttribute('data-armed','1');
+  btn.textContent='Click again to confirm — answers on '+(btn.getAttribute('data-act')==='reset'?'this page':'every page')+' will be cleared';
+  btn.classList.add('armed');
+  setTimeout(function(){
+    if(btn && document.body.contains(btn) && btn.getAttribute('data-armed')==='1'){
+      btn.removeAttribute('data-armed'); btn.innerHTML=btn.getAttribute('data-label')||'Reset'; btn.classList.remove('armed');
+    }
+  }, 4000);
+}
+function doResetPage(){
+  var P=PAGES[R.cur];
+  if(P.items) P.items().forEach(function(id){ delete R.items[id]; });
+  var att=(R.pages[P.id]||{}).attempts||0;
+  R.pages[P.id]={checked:false, warned:false, attempts:att};
+  if(P.id==='intro') R.polls.open=null;
+  if(P.id==='s4') R.polls.close=null;
+  if(P.id==='walk') R.walk={O:'cont', P:'cont', c:0};
+  if(P.id==='s3'){ var a2=(R.pages.s3adv||{}).attempts||0; R.pages.s3adv={checked:false, warned:false, attempts:a2}; $('advDetails').open=false; }
+  save(); showPage();
+}
+function doResetAll(){
+  R=freshState(); save();
+  $('restoreNote').style.display='none';
+  showPage();
+}
+
+/* ============ EVENT DELEGATION (one path for every control) ============
+   All controls are wired here rather than with inline onclick handlers,
+   so they keep working in hosts (LMS wrappers, intranet viewers) that
+   strip inline handlers.                                              */
+(function(){
+  function optButton(el){
+    while(el && el!==document){
+      if(el.tagName==='BUTTON' && el.parentNode && el.parentNode.id && el.parentNode.id.indexOf('opts-')===0) return el;
+      el=el.parentNode;
+    }
+    return null;
+  }
+  function actEl(el){
+    while(el && el!==document){ if(el.getAttribute && el.getAttribute('data-act')) return el; el=el.parentNode; }
+    return null;
+  }
+  document.addEventListener('click', function(ev){
+    var b=optButton(ev.target);
+    if(b){ if(!b.disabled){ var idx=parseInt(b.getAttribute('data-i'),10); if(!isNaN(idx)) selectChoice(b.parentNode.id.slice(5), idx); } return; }
+    var a=actEl(ev.target);
+    if(!a || a.disabled) return;
+    switch(a.getAttribute('data-act')){
+      case 'back': go(R.cur-1); break;
+      case 'next': if(canNext()) go(R.cur+1); break;
+      case 'check': if(PAGES[R.cur].check) PAGES[R.cur].check(); break;
+      case 'reset': armed(a, doResetPage); break;
+      case 'resetall': armed(a, doResetAll); break;
+      case 'pill': go(parseInt(a.getAttribute('data-i'),10)); break;
+      case 'poll': setPoll(a.getAttribute('data-which'), a.getAttribute('data-v')); break;
+      case 'walk': setWalk(a.getAttribute('data-node'), a.getAttribute('data-v')); break;
+      case 'advcheck': checkAdv(); break;
+      case 'csv': downloadCSV(); break;
+      case 'print': window.print(); break;
+    }
+  }, false);
+  function fieldId(el){ return (el && el.id && el.id.indexOf('in-')===0) ? el.id.slice(3) : null; }
+  document.addEventListener('input', function(ev){
+    if(ev.target && ev.target.id==='wkSlider'){ setExit(ev.target.value); return; }
+    var id=fieldId(ev.target); if(id) fInput(id);
+  }, false);
+  document.addEventListener('change', function(ev){
+    var t=ev.target;
+    if(t && t.id && t.id.indexOf('ckb-')===0){ var rest=t.id.slice(4); ckChange(rest.slice(0, rest.lastIndexOf('-'))); }
+  }, false);
+  document.addEventListener('focusin', function(ev){ var id=fieldId(ev.target); if(id) fHint(id,true); }, false);
+  document.addEventListener('focusout', function(ev){ var id=fieldId(ev.target); if(id) fHint(id,false); }, false);
+  document.addEventListener('keydown', function(e){
+    if($('accessGate').style.display!=='none') return;
+    if(e.altKey||e.ctrlKey||e.metaKey) return;
+    var tag=((document.activeElement||{}).tagName||'').toUpperCase();
+    if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT') return;
+    if(e.key==='ArrowLeft' && R.cur>0){ e.preventDefault(); go(R.cur-1); }
+    else if(e.key==='ArrowRight' && canNext()){ e.preventDefault(); go(R.cur+1); }
+  });
+})();
+
+/* ============ BOOT ============ */
+function boot(){
+  var saved=loadSaved();
+  if(saved && (saved.cur>0 || Object.keys(saved.items).length || saved.polls.open)){
+    R=saved;
+    if(!R.walk) R.walk={O:'cont',P:'cont',c:0};
+    if(R.cur>=PAGES.length) R.cur=PAGES.length-1;
+    $('restoreNote').style.display='flex';
+  }
+  showPage();
+}
+</script>
+</body>
+</html>
