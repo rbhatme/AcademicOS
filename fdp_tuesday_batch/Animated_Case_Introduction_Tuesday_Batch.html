@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" data-t="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="copyright" content="© 2026 Ramesh Bhat AcademicOS">
+<title>The Tuesday Batch — the case, animated · KK Wagh FDP</title>
+<style>
+:root{
+  --paper:#FAF6EC; --card:#FFFFFF; --ink:#2B2B26; --mid:#6E6A5E; --line:#E5DFD0;
+  --acc:#B5471F; --gold:#8A6A14; --navy:#1F3864; --goldbg:#FBF3E4;
+  --shadow:0 8px 24px rgba(80,70,40,.12);
+}
+html[data-t="dark"]{
+  --paper:#12151E; --card:#1A2231; --ink:#EDE9DE; --mid:#A9A698; --line:#2A3244;
+  --acc:#E2703F; --gold:#E8C86A; --navy:#9DB8E4; --goldbg:#26251C;
+  --shadow:0 10px 30px rgba(0,0,0,.5);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family:'Segoe UI',Calibri,Arial,sans-serif;background:var(--paper);color:var(--ink);
+  display:flex;flex-direction:column;overflow:hidden}
+header{display:flex;align-items:center;gap:12px;padding:9px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+header .ht{flex:1;min-width:200px}
+header .kick{font-size:9.5px;letter-spacing:2.2px;font-weight:700;color:var(--mid)}
+header h1{font-size:16px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;
+  padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn:hover{border-color:var(--acc);color:var(--acc)}
+#stagewrap{flex:1;position:relative;min-height:0;cursor:pointer}
+.scene{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;
+  padding:26px 70px;max-width:1080px;width:100%;margin:0 auto}
+.scene.active{display:flex}
+.aw{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;
+  transition-delay:calc(var(--i,1)*.35s)}
+.scene.active .aw{opacity:1;transform:none}
+.sk{font-size:10.5px;letter-spacing:2.4px;font-weight:800;color:var(--acc);margin-bottom:9px}
+.st{font-family:Georgia,serif;font-size:29px;font-weight:700;line-height:1.2;margin-bottom:14px}
+.sp{font-family:Georgia,serif;font-size:17.5px;line-height:1.62;max-width:860px;margin-bottom:8px}
+.sp em{color:var(--acc)}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.fchip{font-size:13.5px;font-weight:700;color:var(--navy);background:var(--card);border:1px solid var(--line);
+  border-radius:20px;padding:6px 15px;box-shadow:var(--shadow)}
+.hook{font-family:Georgia,serif;font-style:italic;font-size:15.5px;color:var(--mid);margin-top:14px;max-width:820px}
+.qcard{margin-top:18px;max-width:840px;background:var(--goldbg);border-left:5px solid var(--gold);
+  border-radius:0 12px 12px 0;padding:13px 18px;position:relative}
+.qcard .qk{font-size:9.5px;letter-spacing:2.2px;font-weight:800;color:var(--gold);margin-bottom:4px}
+.qcard p{font-family:Georgia,serif;font-size:17px;font-style:italic;line-height:1.5}
+.qcard .qm{position:absolute;right:16px;top:6px;font-family:Georgia,serif;font-size:40px;font-weight:700;
+  color:var(--gold);opacity:.3}
+.tl{margin-top:16px;max-width:820px}
+.tl .row{display:flex;gap:16px;align-items:flex-start;padding:9px 0;border-bottom:1px dashed var(--line)}
+.tl .row:last-child{border-bottom:none}
+.tl .tt{flex:0 0 150px;font-size:10.5px;letter-spacing:1.6px;font-weight:800;color:var(--acc);padding-top:3px}
+.tl p{font-family:Georgia,serif;font-size:16px;line-height:1.5}
+.t0{text-align:center;align-items:center}
+.t0 h1{font-family:Georgia,serif;font-size:54px;font-weight:700;line-height:1.05}
+.t0 .sub{font-family:Georgia,serif;font-size:21px;font-style:italic;color:var(--acc);margin-top:8px}
+.t0 .note{font-size:13.5px;color:var(--mid);margin-top:22px;max-width:600px;line-height:1.6}
+.t0 .go{margin-top:24px;font-size:12.5px;font-weight:700;color:var(--acc);letter-spacing:1px}
+.qw{margin-top:10px;max-width:860px}
+.qw li{display:flex;gap:13px;padding:8px 2px;border-bottom:1px dashed var(--line);list-style:none}
+.qw li:last-child{border-bottom:none}
+.qw .n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;font-size:13px;
+  font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.qw p{font-family:Georgia,serif;font-size:15.5px;line-height:1.45}
+.qw p b{color:var(--acc)}
+.endline{margin-top:14px;font-family:Georgia,serif;font-size:19px;font-weight:700;color:var(--acc)}
+#nav{display:flex;align-items:center;gap:5px;padding:8px 18px;border-top:1px solid var(--line)}
+#dots{display:flex;gap:6px}
+.pill{width:10px;height:10px;border-radius:50%;border:none;padding:0;background:var(--line);cursor:pointer;
+  transition:transform .15s,background .2s}
+.pill.cur{background:var(--acc);transform:scale(1.4)}
+#scount{margin-left:auto;font-size:11px;font-weight:700;color:var(--mid)}
+footer{display:flex;gap:10px;align-items:center;padding:6px 18px;border-top:1px solid var(--line);
+  font-size:10.5px;color:var(--mid)}
+footer .fx{margin-left:auto;white-space:nowrap}
+</style>
+</head>
+<body>
+<header>
+  <div class="ht">
+    <div class="kick">FDP · KK WAGH · CASE INTRODUCTION — FOR THE ROOM THAT HAS NOT READ IT</div>
+    <h1>The Tuesday Batch · the case in motion</h1>
+  </div>
+  <button id="b-theme" class="btn">Day ⇄ Night</button>
+  <button id="b-full" class="btn">Fullscreen</button>
+</header>
+<div id="stagewrap">
+
+<section class="scene t0">
+  <div class="sk aw" style="--i:0">A MINI CASE · 90-MINUTE FDP SESSION · CASE-BASED AND EXPERIENTIAL TEACHING</div>
+  <h1 class="aw" style="--i:1">The Tuesday Batch</h1>
+  <div class="sub aw" style="--i:2">Twenty-two years of perfect notes — and what the room learned</div>
+  <div class="note aw" style="--i:3">Case prepared by Ramesh Bhat for faculty discussion (November 2026). The case in motion, for those who have not read it. This walkthrough shows the
+    facts and stops exactly where the case stops: <b>no concepts named, no answers inside — only the situation and
+    the questions it leaves behind.</b></div>
+  <div class="go aw" style="--i:4">click anywhere, or press →, to begin</div>
+</section>
+
+<section class="scene">
+  <div class="sk aw" style="--i:0">ROOM 11 · MONDAY TO SATURDAY · 9:40 TO 10:35</div>
+  <div class="st aw" style="--i:1">Dr. Savita Deshmukh has taught this course for twenty-two years</div>
+  <p class="sp aw" style="--i:2">Sixty-five students. One notebook of lecture notes so refined that
+    <em>juniors borrow it before she has finished writing it</em>. Her unit-test averages have sat
+    <em>within two marks of the same number for a decade</em>.</p>
+  <div class="chips">
+    <span class="fchip aw" style="--i:3">22 years</span>
+    <span class="fchip aw" style="--i:4">65 students</span>
+    <span class="fchip aw" style="--i:5">averages flat, ten years</span>
+  </div>
+  <div class="hook aw" style="--i:6">The feedback forms say it, "sometimes twice in the same batch":
+    "Madam's notes are perfect."</div>
+</section>
+
+<section class="scene">
+  <div class="sk aw" style="--i:0">THE FEEDBACK FORM</div>
+  <div class="st aw" style="--i:1">"We remember everything till the exam"</div>
+  <p class="sp aw" style="--i:2">Read the sentence twice. The first half is praise. <em>The second half is a
+    timestamp</em> — the remembering has a shelf life, and the exam is its expiry date.</p>
+  <p class="sp aw" style="--i:3">Nobody wrote "we can apply this". Nobody wrote "we argued about it". The form was
+    never asked — but what the students chose to praise <em>is the class they received</em>.</p>
+  <div class="qcard aw" style="--i:4">
+    <div class="qk">AN OPEN QUESTION · NO ANSWERS INSIDE</div>
+    <p>If the notes are perfect and the scores are flat for ten years, what exactly is Room 11 producing?</p>
+    <div class="qm">?</div>
+  </div>
+</section>
+
+<section class="scene">
+  <div class="sk aw" style="--i:0">DOWN THE CORRIDOR · THREE YEARS INTO THE JOB</div>
+  <div class="st aw" style="--i:1">Prateek lets them argue</div>
+  <p class="sp aw" style="--i:2">Three years into the job, boards always half-erased, syllabus always half-behind. He calls it
+    "letting them argue": one real situation, <em>two teams defending opposite decisions</em>. Some feedback: "his class is noisy".
+    Other feedback: <em>"the only class I don't bunk"</em>.</p>
+  <p class="sp aw" style="--i:3">His test averages are <em>no better than Savita's</em>. But at the department
+    seminar, his students are the only ones asking questions.</p>
+  <div class="qcard aw" style="--i:4">
+    <div class="qk">AN OPEN QUESTION</div>
+    <p>Same syllabus, same averages. What is different in the room — and is it teaching?</p>
+    <div class="qm">?</div>
+  </div>
+</section>
+
+<section class="scene">
+  <div class="sk aw" style="--i:0">THE SAME WEEK · SIX WEEKS BEFORE THE NAAC REPORT IS DUE</div>
+  <div class="st aw" style="--i:1">Two things happen in one week</div>
+  <div class="tl">
+    <div class="row aw" style="--i:2"><div class="tt">THE CIRCULAR</div>
+      <p>The principal asks every department to <em>"document learner-centric pedagogical practices and their
+        measurable outcomes"</em> for the NAAC self-study report.</p></div>
+    <div class="row aw" style="--i:3"><div class="tt">THE HOD</div>
+      <p>"Your notes are famous, Savita tai. But the committee will ask what the <em>student</em> does in your
+        class. Show me something for the report."</p></div>
+    <div class="row aw" style="--i:4"><div class="tt">SAVITA</div>
+      <p>Twenty-two years of practice — and, for the first time, <em>a request for evidence</em> instead of
+        admiration.</p></div>
+  </div>
+  <div class="qcard aw" style="--i:5">
+    <div class="qk">AN OPEN QUESTION</div>
+    <p>What does the circular actually want — new methods, or proof of outcomes? Would it be satisfied by the same
+      syllabus and the same test, if something else changed?</p>
+    <div class="qm">?</div>
+  </div>
+</section>
+
+<section class="scene">
+  <div class="sk aw" style="--i:0">THAT NIGHT — TUESDAY’S PLAN, AND THE DECISION SHE CANNOT DUCK</div>
+  <div class="st aw" style="--i:1">Unit 4, delivered twenty-one times</div>
+  <p class="sp aw" style="--i:2">Tuesday's plan: Unit 4, a chapter she had delivered twenty-one times, fifty-five minutes, comfortably ahead of the syllabus
+    calendar. She could teach it in her sleep. <em>The students, she suspects, could hear it in hers.</em></p>
+  <p class="sp aw" style="--i:3">Deliver it for the twenty-second time — or redesign one class, one chapter,
+    and find out what her room can produce besides notes. <em>What does the committee want to see? What does she
+    want to see?</em></p>
+  <div class="qcard aw" style="--i:4">
+    <div class="qk">THE DILEMMA, STATED</div>
+    <p>If she redesigns only Tuesday — one class, one chapter — what single change buys the most learning per
+      minute, and what will it cost her in coverage?</p>
+    <div class="qm">?</div>
+  </div>
+</section>
+
+<section class="scene">
+  <div class="sk aw" style="--i:0">THE WHOLE STORY IN ONE LINE</div>
+  <div class="st aw" style="--i:1">The notes were never the problem</div>
+  <p class="sp aw" style="--i:2">The question is <em>what the fifty-five minutes are for</em> — and <em>who is working in them</em>.</p>
+  <p class="hook aw" style="--i:3">All characters and institutions are fictional. The accreditation references are to the NAAC self-study process in general terms: check the current NAAC framework and criteria before you cite them.</p>
+</section>
+
+<section class="scene">
+  <div class="sk aw" style="--i:0">NOW THE CASE IS YOURS</div>
+  <div class="st aw" style="--i:1">Seven questions (one optional). Zero answers.</div>
+  <ol class="qw">
+    <li class="aw" style="--i:2"><span class="n">1</span><p>What is Savita's class actually producing, term after term? <b>Name it precisely</b> — is it learning?</p></li>
+    <li class="aw" style="--i:3"><span class="n">2</span><p>Prateek's test averages are no better than Savita's. <b>Is he a better teacher or a more popular one?</b> What evidence would decide it?</p></li>
+    <li class="aw" style="--i:4"><span class="n">3</span><p>What does the circular want — <b>new methods, or evidence of outcomes?</b> Would the same syllabus and the same test satisfy it if something else changed?</p></li>
+    <li class="aw" style="--i:5"><span class="n">4</span><p>If Savita redesigns <b>only Tuesday</b>, what single change buys the most learning per minute — and what does it cost in coverage?</p></li>
+    <li class="aw" style="--i:6"><span class="n">5</span><p><b>What should she NOT change?</b></p></li>
+    <li class="aw" style="--i:7"><span class="n">6</span><p>You are her head of department. <b>Sketch the fifty-five minutes</b> — and state what you would need to see by Friday to know it worked.</p></li>
+    <li class="aw" style="--i:8"><span class="n">7</span><p><b>Optional:</b> the committee asks for "measurable outcomes". What would you measure — and what had her decade of flat scores <b>already been measuring</b>?</p></li>
+  </ol>
+  <div class="endline aw" style="--i:9">The story ends here. The discussion begins cold.</div>
+</section>
+
+</div>
+<nav id="nav"><div id="dots"></div><span id="scount"></span></nav>
+<footer>
+  <span>Runs offline · nothing is stored or transmitted · all characters and institutions fictional.</span>
+  <span class="fx">keys: <b>←</b>/<b>→</b> or <b>Space</b> scene · <b>Home</b>/<b>End</b> · <b>D</b> theme · <b>F</b> fullscreen · <b>R</b> restart &nbsp;·&nbsp; © 2026 Ramesh Bhat AcademicOS &nbsp;·&nbsp; Build 2026-11-08a</span>
+</footer>
+<script>
+(function(){
+'use strict';
+var scenes=[].slice.call(document.querySelectorAll('.scene'));
+var dotsBox=document.getElementById('dots');
+var cur=0;
+scenes.forEach(function(s,i){
+  var b=document.createElement('button');b.className='pill';b.title='scene '+(i+1);
+  b.addEventListener('click',function(e){e.stopPropagation();go(i);});
+  dotsBox.appendChild(b);
+});
+var dots=[].slice.call(dotsBox.children);
+function go(n){cur=Math.max(0,Math.min(scenes.length-1,n));
+  scenes.forEach(function(s,i){s.classList.toggle('active',i===cur);});
+  dots.forEach(function(d,i){d.classList.toggle('cur',i===cur);});
+  document.getElementById('scount').textContent='scene '+(cur+1)+' / '+scenes.length;}
+function next(){go(cur+1);}function prev(){go(cur-1);}
+function toggleTheme(){var h=document.documentElement;
+  h.setAttribute('data-t',h.getAttribute('data-t')==='dark'?'light':'dark');}
+function goFull(){try{var p;
+  if(!document.fullscreenElement){p=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();}
+  else{p=document.exitFullscreen&&document.exitFullscreen();}
+  if(p&&p.catch)p.catch(function(){});}catch(e){}}
+document.getElementById('b-theme').addEventListener('click',toggleTheme);
+document.getElementById('b-full').addEventListener('click',goFull);
+document.getElementById('stagewrap').addEventListener('click',function(){next();});
+document.addEventListener('keydown',function(e){
+  var a=document.activeElement,t=a&&a.tagName;
+  if(t==='TEXTAREA'||t==='INPUT'||t==='SELECT')return;
+  if(e.key===' '&&t==='BUTTON')return;
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();next();}
+  else if(e.key==='ArrowLeft'){prev();}
+  else if(e.key==='d'||e.key==='D'){toggleTheme();}
+  else if(e.key==='f'||e.key==='F'){goFull();}
+  else if(e.key==='r'||e.key==='R'){go(0);}
+  else if(e.key==='Home'){go(0);}else if(e.key==='End'){go(scenes.length-1);}
+});
+window.__go=go;window.__scenes=scenes;
+go(0);
+})();
+</script>
+</body>
+</html>

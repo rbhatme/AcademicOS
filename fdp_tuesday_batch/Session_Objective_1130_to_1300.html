@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="copyright" content="© 2026 Ramesh Bhat AcademicOS">
+<title>Pedagogy Session Objective — The Tuesday Batch</title>
+<style>
+/* Layout: colour header band, then a single column of coloured sections; a 4-step problem-first flow, a 90-minute run of show and three outcome cards carry the content. */
+:root{
+  --bg:#f6f7fc; --surface:#ffffff; --fg:#1b1d3a; --muted:#5a5f82; --line:#dfe2f2;
+  --indigo:#2f2a8c; --indigo-soft:#e6e5fa;
+  --teal:#00867f;   --teal-soft:#d9f2ef;
+  --saffron:#f29a00; --saffron-soft:#fff0cf;
+  --magenta:#c2185b; --magenta-soft:#fbdfeb;
+  --on-color:#ffffff;
+  --hero-a:#2f2a8c; --hero-b:#00867f;
+  --font-display:'Bricolage Grotesque','Trebuchet MS',system-ui,sans-serif;
+  --font-body:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12132a; --surface:#1c1e3d; --fg:#eceefc; --muted:#a6abd0; --line:#32356a;
+  --indigo:#a9a5ff; --indigo-soft:#2a2866;
+  --teal:#4fd4cb;   --teal-soft:#10413f;
+  --saffron:#ffc247; --saffron-soft:#4a3508;
+  --magenta:#ff8fba; --magenta-soft:#4d1630;
+  --on-color:#ffffff;
+  --hero-a:#2a2670; --hero-b:#0b5f5b;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12132a; --surface:#1c1e3d; --fg:#eceefc; --muted:#a6abd0; --line:#32356a;
+  --indigo:#a9a5ff; --indigo-soft:#2a2866;
+  --teal:#4fd4cb;   --teal-soft:#10413f;
+  --saffron:#ffc247; --saffron-soft:#4a3508;
+  --magenta:#ff8fba; --magenta-soft:#4d1630;
+  --on-color:#ffffff;
+  --hero-a:#2a2670; --hero-b:#0b5f5b;
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.6;margin:0}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0;line-height:1.15}
+p{margin:0}
+.wrap{max-width:60rem;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* header */
+.hero{background:linear-gradient(120deg,var(--hero-a),var(--hero-b));color:var(--on-color);position:relative}
+.hero .wrap{padding-block:2.5rem 2.25rem;display:grid;gap:1.25rem}
+.tools{position:absolute;top:.75rem;right:max(16px,env(safe-area-inset-right,0px));display:flex;gap:.5rem}
+.tbtn{font:inherit;font-size:.85rem;font-weight:600;color:#fff;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:.5rem;padding:.3rem .8rem;cursor:pointer}
+.tbtn:hover{background:rgba(255,255,255,.28)}
+.eyebrow{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:#ffd27a}
+.hero h1{font-size:clamp(2rem,6vw,3.4rem);font-weight:800;max-width:20ch}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:.3rem .85rem;font-size:.9rem;font-weight:500}
+.chip b{font-weight:600;color:#ffd27a;margin-right:.35rem}
+.hero .who{font-size:1rem;opacity:.95}
+.hero .who b{font-family:var(--font-display);font-size:1.15rem}
+
+main{display:grid;gap:1.75rem;padding-block:2rem 2.5rem}
+
+/* case strip */
+.case{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.case>div{background:var(--surface);border:1px solid var(--line);border-radius:.9rem;padding:1rem 1.15rem;min-width:0}
+.label{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--muted);display:block;margin-bottom:.3rem}
+.case .c1{border-top:6px solid var(--saffron)}
+.case .c2{border-top:6px solid var(--magenta)}
+.case strong{font-family:var(--font-display);font-size:1.2rem;font-weight:700}
+
+/* section head */
+.sec-head{display:flex;align-items:center;gap:.75rem;margin-bottom:.9rem}
+.sec-head h2{font-size:1.6rem;font-weight:700}
+.dot{width:.9rem;height:.9rem;border-radius:50%;flex:none}
+
+/* purpose */
+.purpose{background:var(--indigo-soft);border-radius:1rem;padding:1.4rem 1.5rem}
+.purpose p{max-width:65ch}
+.purpose p+p{margin-top:.6rem}
+
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;list-style:none;margin:0 0 1.1rem;padding:0}
+.flow li{position:relative;border-radius:.8rem;padding:.85rem 1rem;min-width:0;font-weight:600;font-family:var(--font-display);font-size:1.05rem}
+.flow li small{display:block;font-family:var(--font-body);font-weight:400;font-size:.85rem;margin-top:.15rem;opacity:.92}
+.flow li:not(:last-child)::after{content:"\2192";position:absolute;right:-.7rem;top:50%;transform:translateY(-50%);font-size:1.2rem;color:var(--muted);z-index:1}
+.f1{background:var(--saffron);color:#2b1c00}
+.f2{background:var(--magenta);color:#fff}
+.f3{background:var(--teal);color:#fff}
+.f4{background:var(--indigo);color:var(--bg)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .f1{color:#2b1c00}:root:not([data-theme="light"]) .f2,:root:not([data-theme="light"]) .f3{color:#10132a}}
+:root[data-theme="dark"] .f1{color:#2b1c00}
+:root[data-theme="dark"] .f2,:root[data-theme="dark"] .f3{color:#10132a}
+.core{background:var(--surface);border:1px solid var(--line);border-radius:1rem;padding:1.4rem 1.5rem}
+.core p{max-width:65ch}
+.core p+p{margin-top:.6rem}
+.core .q{font-family:var(--font-display);font-weight:700;font-size:1.15rem;margin-bottom:.6rem}
+.tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1rem}
+.tag{border-radius:.5rem;padding:.25rem .7rem;font-size:.9rem;font-weight:500}
+.t-a{background:var(--saffron-soft)}.t-b{background:var(--magenta-soft)}.t-c{background:var(--teal-soft)}.t-d{background:var(--indigo-soft)}
+
+/* run of show */
+.ros{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.ros li{display:grid;grid-template-columns:7.5rem 1fr;gap:.9rem;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c,var(--indigo));border-radius:.7rem;padding:.65rem .95rem;min-width:0}
+.ros .mins{font-family:var(--font-display);font-weight:700;color:var(--c,var(--indigo))}
+.ros b{font-weight:600}
+.ros small{display:block;color:var(--muted);font-size:.85rem}
+.note{color:var(--muted);font-size:.85rem;margin-top:.6rem}
+
+/* outcomes */
+.outs{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.out{background:var(--surface);border:1px solid var(--line);border-radius:1rem;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.out header{padding:.9rem 1.1rem;font-family:var(--font-display);font-weight:700;font-size:1.25rem}
+.out .body{padding:1rem 1.1rem 1.2rem;display:grid;gap:.8rem;align-content:start}
+.o1 header{background:var(--saffron);color:#2b1c00}
+.o2 header{background:var(--teal);color:#fff}
+.o3 header{background:var(--magenta);color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .o2 header,:root:not([data-theme="light"]) .o3 header{color:#10132a}}
+:root[data-theme="dark"] .o2 header,:root[data-theme="dark"] .o3 header{color:#10132a}
+
+/* takeaway */
+.take{background:linear-gradient(120deg,var(--hero-a),var(--hero-b));color:var(--on-color);border-radius:1rem;padding:1.4rem 1.5rem;display:grid;gap:.35rem}
+.take .label{color:#ffd27a}
+.take p{font-family:var(--font-display);font-size:1.35rem;font-weight:700;line-height:1.3;max-width:34ch}
+
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:.8rem}
+footer .wrap{padding-block:1.1rem 1.5rem;display:grid;gap:.4rem}
+footer b{color:var(--fg);font-weight:600}
+kbd{border:1px solid var(--line);border-radius:4px;padding:0 .35rem;font-size:.75rem;background:var(--surface)}
+
+@media (max-width:760px){
+  .case,.outs{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr 1fr}
+  .flow li:not(:last-child)::after{display:none}
+  .ros li{grid-template-columns:1fr;gap:.2rem}
+}
+@media (max-width:420px){.flow{grid-template-columns:1fr}}
+@media print{.tools{display:none}.hero,.take,.flow li,.out header{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="tools">
+    <button class="tbtn" id="b-theme" type="button" title="Light / dark (D)">Day ⇄ Night</button>
+    <button class="tbtn" id="b-full" type="button" title="Full screen (F)">Fullscreen</button>
+  </div>
+  <div class="wrap">
+    <span class="eyebrow">Session Objective</span>
+    <h1>Teaching that Sticks: Pedagogy through a Mini Case</h1>
+    <div class="meta">
+      <span class="chip"><b>Audience</b>KK Wagh faculty across departments</span>
+      <span class="chip"><b>Session</b>FDP · Pedagogy — case-based &amp; experiential teaching</span>
+      <span class="chip"><b>Time</b>11.30 to 1.00 pm</span>
+    </div>
+    <p class="who">Facilitator: <b>Ramesh Bhat</b></p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="case" aria-label="Session details">
+    <div class="c1"><span class="label">Topic and mini case</span><strong>Pedagogy: teaching that sticks</strong><p>Mini case: The Tuesday Batch — twenty-two years of perfect notes</p></div>
+    <div class="c2"><span class="label">Pre-reading</span><strong>None — the case arrives cold</strong><p>The vignette is read in silence, on paper, in the first eight minutes</p></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="dot" style="background:var(--indigo)"></span><h2>Purpose</h2></div>
+    <div class="purpose">
+      <p>This session does not lecture about pedagogy. It runs a mini case about a classroom — cold — and lets the method be the message.</p>
+      <p>Faculty first sit inside the case as learners, then step outside it as teachers to examine why each move worked: the cold read, the critical questions, the synthesis, the formative check. The same lens is then turned on artificial intelligence: how to keep the productive struggle when AI is in the room, and how to use it as a thinking partner rather than an answer engine.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="dot" style="background:var(--saffron)"></span><h2>Core idea: define the problem first</h2></div>
+    <ol class="flow">
+      <li class="f1">Meet the problem<small>Twenty-two years of perfect notes, and scores flat for a decade</small></li>
+      <li class="f2">Work it out<small>Who is doing the cognitive work in the 55 minutes?</small></li>
+      <li class="f3">Discover the concepts<small>Tools the dilemma demands</small></li>
+      <li class="f4">Synthesise<small>Name what was learnt — and what to show for it</small></li>
+    </ol>
+    <div class="core">
+      <p class="q">Savita's notes were perfect — and that was the problem.</p>
+      <p>Sixty-five students, a decade of test scores that never moved, and a feedback form that praises remembering "till the exam". When the NAAC circular asks what the student does in her class, the dilemma cannot be ducked: deliver the chapter for the twenty-second time, or redesign one class and produce evidence. Faculty work the dilemma cold; the concepts — Bloom's verbs, backward design, alignment, engagement at scale — arrive as the tools the problem demands, not as definitions to memorise. Because they build the answer themselves, it sticks.</p>
+      <p>Behind the dilemma sits a wider choice of pedagogies: ten families compared side by side in a Pedagogy Atlas, each with what it buys and what it costs. And one question that none of them can now avoid: when AI can write the answer, what exactly are we still assessing?</p>
+      <div class="tags" aria-label="Concepts learners discover">
+        <span class="tag t-a">Bloom's verbs</span>
+        <span class="tag t-b">Constructive alignment</span>
+        <span class="tag t-c">Backward design</span>
+        <span class="tag t-d">Formative assessment</span>
+        <span class="tag t-a">Think-pair-share at scale</span>
+        <span class="tag t-b">The coverage myth</span>
+        <span class="tag t-c">Outcome statements: condition · performance · criterion</span>
+        <span class="tag t-d">Rubrics</span>
+        <span class="tag t-a">Ten pedagogies compared</span>
+        <span class="tag t-b">Preserving cognitive friction</span>
+        <span class="tag t-c">AI as a thinking partner</span>
+        <span class="tag t-d">Grading reasoning, not polish</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="dot" style="background:var(--magenta)"></span><h2>Run of show: 90 minutes</h2></div>
+    <ol class="ros">
+      <li style="--c:var(--saffron)"><span class="mins">0 – 8 min</span><span><b>The case, read cold</b><small>In silence, on paper. No pre-reading, no slides.</small></span></li>
+      <li style="--c:var(--magenta)"><span class="mins">8 – 25 min</span><span><b>Work the dilemma</b><small>Critical questions first. Commit before the reveal.</small></span></li>
+      <li style="--c:var(--teal)"><span class="mins">25 – 45 min</span><span><b>The doors, the menu and the Pedagogy Atlas</b><small>Ten methods, ten families, what each buys and what it costs.</small></span></li>
+      <li style="--c:var(--indigo)"><span class="mins">45 – 60 min</span><span><b>AI in the room</b><small>Preserve the friction; AI as a thinking partner; boundaries and grading the struggle.</small></span></li>
+      <li style="--c:var(--saffron)"><span class="mins">60 – 75 min</span><span><b>Analysis</b><small>Bloom's verbs, backward design, three-part outcome statements, rubrics.</small></span></li>
+      <li style="--c:var(--magenta)"><span class="mins">75 – 85 min</span><span><b>Redesign ten minutes of your next class</b><small>Defend it to a partner. State the AI rule for those ten minutes.</small></span></li>
+      <li style="--c:var(--teal)"><span class="mins">85 – 90 min</span><span><b>Exit ticket</b><small>One sentence: the single thing you will change. The 14-item MCQ self-check can be done in the room or taken home.</small></span></li>
+    </ol>
+    <p class="note">Suggested pacing, to be adjusted to the room.</p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="dot" style="background:var(--teal)"></span><h2>Learning outcomes by the end of the session</h2></div>
+    <div class="outs">
+      <article class="out o1">
+        <header>Method</header>
+        <div class="body">
+          <p>Frame a classroom situation as a decision-forcing mini case, sequence critical questions that surface the concepts, and close with a synthesis that names them.</p>
+        </div>
+      </article>
+      <article class="out o2">
+        <header>Content</header>
+        <div class="body">
+          <p>Explain what learner-centric teaching actually requires — who performs the verbs, how evidence is designed backward from outcomes, and why engagement must scale to 65. Compare ten pedagogical families by what each buys and costs, and describe how to preserve cognitive friction when students use AI.</p>
+          <div class="tags" style="margin-top:0">
+            <span class="tag t-c">Bloom's taxonomy</span><span class="tag t-c">Backward design</span><span class="tag t-c">Alignment</span><span class="tag t-c">One-minute paper</span><span class="tag t-c">Pedagogy Atlas</span><span class="tag t-c">AI-free then AI-mediated</span>
+          </div>
+        </div>
+      </article>
+      <article class="out o3">
+        <header>Practice</header>
+        <div class="body">
+          <p>Redesign ten minutes of your own next class around one higher-order verb, state whether AI is prohibited, permitted, encouraged or required in it, defend the design to a partner, and take a fourteen-item formative MCQ self-check — the same instruments you carry back to your department.</p>
+          <div class="tags" style="margin-top:0">
+            <span class="tag t-b">Redesign task</span><span class="tag t-b">AI-use boundary</span><span class="tag t-b">Prompt log</span><span class="tag t-b">MCQ self-check</span><span class="tag t-b">Exit ticket</span><span class="tag t-b">Evidence by Friday</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="take">
+    <span class="label">Takeaway</span>
+    <p>Each faculty member leaves with ten redesigned minutes of their own next class — and the evidence it must produce by Friday.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b>Created, conceptualised and developed by Ramesh Bhat.</b> Copyright &copy; 2026 Ramesh Bhat AcademicOS. All rights reserved. No part of this material may be reproduced, distributed, transmitted, displayed or shared in any form or by any means, electronic or mechanical, without the prior written permission of the author.</div>
+    <div>All characters and institutions in the mini case are fictional. NAAC references are general: check the current framework before you cite it. Nothing on this page is stored or transmitted. Keys: <kbd>D</kbd> light / dark · <kbd>F</kbd> full screen. Build 2026-11-08a</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+function toggleTheme(){var h=document.documentElement,cur=h.getAttribute('data-theme');
+  if(!cur){cur=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}
+  h.setAttribute('data-theme',cur==='dark'?'light':'dark');}
+function goFull(){try{var p;
+  if(!document.fullscreenElement){p=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();}
+  else{p=document.exitFullscreen&&document.exitFullscreen();}
+  if(p&&p.catch)p.catch(function(){});}catch(e){}}
+document.getElementById('b-theme').addEventListener('click',toggleTheme);
+document.getElementById('b-full').addEventListener('click',goFull);
+document.addEventListener('keydown',function(e){
+  var a=document.activeElement,t=a&&a.tagName;
+  if(t==='TEXTAREA'||t==='SELECT'||(t==='INPUT'&&/^(text|search|email|number|password|url|tel)$/i.test(a.type||'text')))return;
+  if(e.ctrlKey||e.metaKey||e.altKey)return;
+  if(e.key==='d'||e.key==='D')toggleTheme();
+  else if(e.key==='f'||e.key==='F')goFull();
+});
+})();
+</script>
+</body>
+</html>

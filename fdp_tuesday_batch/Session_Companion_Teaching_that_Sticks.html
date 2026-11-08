@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en" data-t="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="copyright" content="© 2026 Ramesh Bhat AcademicOS">
+<title>Teaching that Sticks — FDP Session Companion · KK Wagh</title>
+<style>
+:root{
+  --paper:#FAF6EC; --card:#FFFFFF; --ink:#2B2B26; --mid:#6E6A5E; --line:#E5DFD0;
+  --acc:#B5471F; --gold:#8A6A14; --navy:#1F3864; --goldbg:#FBF3E4;
+  --ok:#2E7D52; --okbg:#EAF5EE; --bad:#B23A3A; --badbg:#FBEDED;
+  --shadow:0 8px 24px rgba(80,70,40,.12);
+}
+html[data-t="dark"]{
+  --paper:#12151E; --card:#1A2231; --ink:#EDE9DE; --mid:#A9A698; --line:#2A3244;
+  --acc:#E2703F; --gold:#E8C86A; --navy:#9DB8E4; --goldbg:#26251C;
+  --ok:#7FBF9C; --okbg:#16241B; --bad:#E08585; --badbg:#2B1A1A;
+  --shadow:0 10px 30px rgba(0,0,0,.5);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family:'Segoe UI',Calibri,Arial,sans-serif;background:var(--paper);color:var(--ink);
+  display:flex;flex-direction:column;overflow:hidden}
+header{display:flex;align-items:center;gap:12px;padding:9px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+header .ht{flex:1;min-width:200px}
+header .kick{font-size:9.5px;letter-spacing:2.2px;font-weight:700;color:var(--mid)}
+header h1{font-size:16px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;
+  padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn:hover{border-color:var(--acc);color:var(--acc)}
+.pills{display:flex;gap:5px;flex-wrap:wrap}
+.pill{border:1px solid var(--line);background:var(--card);color:var(--mid);border-radius:14px;
+  padding:3px 10px;font-size:10.5px;font-weight:800;cursor:pointer;font-family:inherit}
+.pill.cur{background:var(--acc);border-color:var(--acc);color:#fff}
+html[data-t="dark"] .pill.cur{color:#12151E}
+#stage{flex:1;position:relative;min-height:0;overflow:hidden}
+.pg{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;
+  padding:22px 78px;max-width:1120px;width:100%;margin:0 auto}
+.pg.active{display:flex}
+.aw{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;
+  transition-delay:calc(var(--i,1)*.3s)}
+.pg.active .aw{opacity:1;transform:none}
+.sk{font-size:10.5px;letter-spacing:2.4px;font-weight:800;color:var(--acc);margin-bottom:9px}
+.h2{font-family:Georgia,serif;font-size:27px;font-weight:700;margin-bottom:14px;line-height:1.2}
+.story{font-family:Georgia,serif;font-size:16.5px;line-height:1.6;max-width:880px;margin-bottom:8px}
+.story em{color:var(--acc)}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:940px;margin:8px 0}
+.fcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 16px;box-shadow:var(--shadow)}
+.fcard .fk{font-size:10px;letter-spacing:1.8px;font-weight:800;color:var(--acc)}
+.fcard p{font-family:Georgia,serif;font-size:14px;line-height:1.5;margin-top:5px}
+.qzone{margin-top:14px;max-width:920px}
+.qzhead{font-size:10px;letter-spacing:2.2px;font-weight:800;color:var(--gold);margin-bottom:8px}
+.qcard{background:var(--goldbg);border-left:4px solid var(--gold);border-radius:0 10px 10px 0;
+  padding:11px 16px;margin-bottom:8px;font-family:Georgia,serif;font-size:16px;font-style:italic;color:var(--ink)}
+.qcard .qk{display:block;font-size:9.5px;letter-spacing:1.8px;font-weight:800;font-style:normal;
+  font-family:'Segoe UI',Calibri,sans-serif;color:var(--gold);margin-bottom:3px}
+.cards3m{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:6px 0;max-width:960px}
+.cards3m .fcard{padding:10px 12px}
+.cards3m .fcard p{font-size:12px;line-height:1.42;margin-top:4px}
+.mcard{cursor:pointer;transition:transform .15s,border-color .15s}
+.cards3m .fcard.mcard:hover{border-color:var(--acc);transform:translateY(-3px)}
+.fk .opn{float:right;color:var(--acc);font-weight:800;font-size:12px}
+.pc{color:var(--ok);font-weight:800}
+.cc{color:var(--bad);font-weight:800}
+/* bloom pyramid + cpc (from the AoL workshop pattern) */
+:root{--b1:#8C9BB0;--b2:#6F87A8;--b3:#4E7BA8;--b4:#2E7D5B;--b5:#9A6B00;--b6:#B5471F}
+html[data-t="dark"]{--b1:#7D8CA3;--b2:#7F9AC0;--b3:#6FA3D8;--b4:#5FC08F;--b5:#E3B341;--b6:#E2703F}
+.p2grid{display:grid;grid-template-columns:1fr 1.25fr;gap:14px;max-width:940px;margin:4px 0 8px;align-items:start}
+.pyr{display:flex;flex-direction:column;align-items:center;gap:4px}
+.pl{font:inherit;font-size:13px;color:#fff;border:none;border-radius:7px;padding:7px 4px;font-weight:700;cursor:pointer;text-align:center;transition:transform .15s}
+.pl:hover{transform:scale(1.04)}
+.pl.active{transform:scale(1.06);box-shadow:0 4px 12px rgba(0,0,0,.22)}
+.vwrap{min-height:92px}
+.vchip{display:inline-block;margin:3px;padding:3px 10px;border-radius:99px;background:var(--goldbg);font-weight:600;font-size:13px;animation:pop .4s both}
+.tok2{display:inline-block;margin:3px;padding:3px 10px;border-radius:99px;background:var(--goldbg);font-size:13px;position:relative}
+.tok2::after{content:"";position:absolute;left:6px;right:6px;top:52%;height:2px;background:var(--bad);transform:scaleX(0);transform-origin:left;animation:strk .4s ease forwards;animation-delay:1.6s}
+@keyframes strk{to{transform:scaleX(1)}}
+@keyframes pop{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:none}}
+.cpc3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:920px;margin:4px 0 10px}
+.cpcard{background:var(--card);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:10px;padding:9px 12px;box-shadow:var(--shadow)}
+.cpcard b{display:block;font-size:12px;letter-spacing:1.5px;color:var(--acc)}
+.cpcard p{font-size:12.5px;color:var(--mid);margin-top:3px;line-height:1.4}
+.hlA{background:rgba(43,92,138,.12);color:#2B5C8A;font-weight:600;padding:0 3px;border-radius:3px}
+.hlB{background:rgba(46,125,91,.12);color:#2E7D5B;font-weight:600;padding:0 3px;border-radius:3px}
+.hlC{background:rgba(181,71,31,.10);color:var(--acc);font-weight:600;padding:0 3px;border-radius:3px}
+html[data-t="dark"] .hlA{color:#9DB8E4;background:rgba(111,163,216,.14)}
+html[data-t="dark"] .hlB{color:#7FBF9C;background:rgba(95,192,143,.12)}
+html[data-t="dark"] .hlC{background:rgba(226,112,63,.12)}
+.srow2{display:flex;gap:10px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:13.5px;line-height:1.45;align-items:flex-start}
+.srow2:last-child{border-bottom:none}
+.sn{flex:0 0 24px;height:24px;border-radius:50%;background:var(--acc);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:12px;margin-top:1px}
+.srow2 b{color:var(--acc)}
+.shead{font-size:10px;letter-spacing:2.2px;font-weight:800;color:var(--gold);margin:10px 0 4px}
+/* MCQ */
+#scorebar{font-size:13px;font-weight:800;color:var(--navy);margin-bottom:6px}
+.mcq{max-width:880px;display:flex;flex-direction:column;gap:8px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:7px 14px;box-shadow:var(--shadow)}
+.item .stem{font-family:Georgia,serif;font-size:15.5px;line-height:1.42;margin-bottom:7px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.opt{border:1.5px solid var(--line);background:var(--card);border-radius:9px;padding:6px 11px;
+  font-size:13px;text-align:left;cursor:pointer;font-family:inherit;color:var(--ink)}
+.opt:hover{border-color:var(--acc)}
+.opt.sel{border-color:var(--navy);background:var(--goldbg)}
+.opt.ok{border-color:var(--ok);background:var(--okbg);font-weight:700}
+.opt.bad{border-color:var(--bad);background:var(--badbg)}
+.item.locked .opt{cursor:default;opacity:.85}
+.item .why{display:none;margin-top:7px;font-size:12.5px;color:var(--mid)}
+.item.locked .why{display:block}
+.chk{font-size:11.5px;font-weight:800;padding:5px 12px;float:right}
+.verdict{font-size:12px;font-weight:800;margin-top:5px}
+.verdict.ok{color:var(--ok)}.verdict.bad{color:var(--bad)}
+footer{display:flex;gap:10px;align-items:center;padding:6px 18px;border-top:1px solid var(--line);
+  font-size:10.5px;color:var(--mid)}
+footer .fx{margin-left:auto;white-space:nowrap}
+/* revised build additions */
+.pg{justify-content:safe center;overflow-y:auto}
+.pg>*{flex-shrink:0}
+.pg{padding-top:16px;padding-bottom:16px}
+.item{padding:5px 14px}
+.mcq{gap:6px}
+.pairbox{font-size:12.5px}
+.apanel{max-height:none}
+#pg-rules .tblwrap{max-height:none}
+.small{font-size:12px;color:var(--mid)}
+.nextrow{display:flex;gap:12px;align-items:center;margin-top:12px}
+.btn.on{border-color:var(--navy);background:var(--goldbg);color:var(--navy)}
+.cards3m .fcard.pcard{cursor:pointer}
+.cards3m .fcard.pcard.on{border-color:var(--acc);background:var(--goldbg)}
+header .pills{order:9;flex:1 1 100%;gap:4px}
+header .pill{padding:2px 8px;font-size:10px}
+.atl{display:grid;grid-template-columns:300px 1fr;gap:14px;max-width:1000px;margin-top:2px}
+.alist{display:flex;flex-direction:column;gap:3px}
+.ai{font:inherit;text-align:left;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:5px 10px;font-size:12.5px;font-weight:600;cursor:pointer;display:flex;gap:8px;align-items:center}
+.ai .no{flex:0 0 18px;color:var(--acc);font-weight:800}
+.ai .mn{margin-left:auto;font-size:9.5px;letter-spacing:1px;color:var(--gold);font-weight:800}
+.ai:hover{border-color:var(--acc)}
+.ai.on{border-color:var(--navy);background:var(--goldbg)}
+.apanel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 16px;box-shadow:var(--shadow);max-height:340px;overflow-y:auto}
+.apanel h3{font-family:Georgia,serif;font-size:19px;margin-bottom:4px}
+.apanel .det{font-size:13.5px;line-height:1.5;margin:4px 0 8px}
+.apanel .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.apanel .two div{font-size:12.8px;line-height:1.45}
+.apanel .two .fk{margin-bottom:3px}
+.apanel ul{margin:0;padding-left:16px}
+.apanel .fit{margin-top:8px;font-size:12.8px;font-style:italic;border-left:3px solid var(--gold);padding-left:8px;color:var(--mid)}
+.spec{position:relative;height:34px;margin:10px 0 0;max-width:1000px;border-radius:17px;border:1px solid var(--line);background:linear-gradient(90deg,var(--goldbg),var(--okbg))}
+.spl{display:flex;justify-content:space-between;max-width:1000px;font-size:11px;color:var(--mid);margin-bottom:4px}
+.spdot{position:absolute;top:6px;width:20px;height:20px;margin-left:-10px;border-radius:50%;background:var(--navy);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid var(--card);padding:0;font-family:inherit}
+html[data-t="dark"] .spdot{color:#12151E}
+.spdot.on{background:var(--acc);transform:scale(1.3);z-index:2}
+.pairbox{max-width:1000px;font-size:13px;line-height:1.45;margin-top:4px}
+.pairbox .pb{background:var(--goldbg);border-left:4px solid var(--gold);border-radius:0 10px 10px 0;padding:7px 12px}
+.risks{display:flex;gap:8px;flex-wrap:wrap;max-width:980px;margin-bottom:6px}
+.risk{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:6px 12px;font-size:12.5px;text-align:left;flex:1 1 260px}
+.risk b{color:var(--bad);display:block;font-size:13px}
+.fr{max-width:1000px}
+.frhead{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.frsteps{display:flex;gap:6px}
+.frs{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:800;cursor:pointer}
+.frs.on{background:var(--acc);border-color:var(--acc);color:#fff}
+html[data-t="dark"] .frs.on{color:#12151E}
+.fpanel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;box-shadow:var(--shadow);font-size:13.5px;line-height:1.5}
+.fpanel h3{font-family:Georgia,serif;font-size:18px;margin-bottom:6px}
+.fpanel .lane{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fpanel .lane>div{padding:8px 12px;border-radius:9px;background:var(--goldbg)}
+.fpanel .lane .wo{background:var(--badbg)}
+.fpanel .lane .wi{background:var(--okbg)}
+.fpanel ul{margin:3px 0 0;padding-left:16px}
+.pdetail{max-width:960px;min-height:80px;background:var(--goldbg);border-left:4px solid var(--gold);border-radius:0 10px 10px 0;padding:9px 16px;font-size:14px;line-height:1.5;margin-top:8px}
+.pdetail code,.logform input::placeholder{font-style:italic}
+.pdetail .pr{font-family:Georgia,serif;font-style:italic;color:var(--acc);margin-top:5px}
+.logform{display:grid;grid-template-columns:1.3fr 1.3fr 110px 1.3fr auto;gap:6px;max-width:1000px}
+.logform input,.logform select{font:inherit;font-size:13px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);min-width:0}
+.logtools{display:flex;gap:8px;align-items:center;margin:8px 0;flex-wrap:wrap}
+.tblwrap{max-width:1000px;max-height:230px;overflow:auto;border:1px solid var(--line);border-radius:10px}
+.tbl{border-collapse:collapse;width:100%;font-size:12.5px;line-height:1.4;background:var(--card)}
+.tbl th,.tbl td{padding:6px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.tbl th{position:sticky;top:0;background:var(--goldbg);font-size:11px;letter-spacing:1px}
+.dec-A{color:var(--ok);font-weight:800}.dec-M{color:var(--gold);font-weight:800}.dec-R{color:var(--bad);font-weight:800}
+.rgrid{display:grid;grid-template-columns:1fr 1.2fr;gap:16px;max-width:1040px}
+@media(max-width:900px){.rgrid,.atl,.fpanel .lane,.apanel .two{grid-template-columns:1fr}.logform{grid-template-columns:1fr 1fr}}
+.rc{display:flex;gap:8px;align-items:center;border:1px solid var(--line);background:var(--card);border-radius:9px;padding:6px 10px;margin-bottom:5px;cursor:pointer;font-size:13px;width:100%;text-align:left;color:var(--ink);font-family:inherit}
+.rc:hover{border-color:var(--acc)}
+.rc .st{margin-left:auto;font-size:10.5px;font-weight:800;letter-spacing:.8px;padding:2px 8px;border-radius:99px;background:var(--line);color:var(--mid);white-space:nowrap}
+.rc.s1 .st{background:var(--badbg);color:var(--bad)}
+.rc.s2 .st{background:var(--goldbg);color:var(--gold)}
+.rc.s3 .st{background:var(--okbg);color:var(--ok)}
+.rc.s4 .st{background:var(--navy);color:var(--card)}
+.rc .sg{font-size:11px;color:var(--mid);display:block}
+.rc.match{border-color:var(--ok)}
+.rc.diff{border-color:var(--gold)}
+</style>
+</head>
+<body>
+<header>
+  <div class="ht">
+    <div class="kick">FDP · KK WAGH · SESSION COMPANION — TEACHING THAT STICKS</div>
+    <h1>The Tuesday Batch · case-based &amp; experiential teaching</h1>
+  </div>
+  <div class="pills" id="pills"></div>
+  <button id="b-prev" class="btn">◀</button>
+  <button id="b-next" class="btn">▶</button>
+  <button id="b-theme" class="btn">Day ⇄ Night</button>
+  <button id="b-full" class="btn">Fullscreen</button>
+</header>
+<div id="stage">
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">FACULTY DEVELOPMENT PROGRAMME · 90 MINUTES · MIXED FACULTY · OFFLINE</div>
+  <div class="h2 aw" style="--i:1" style2="">Teaching that sticks</div>
+  <p class="story aw" style="--i:2">This session is taught by the method it teaches: a case read cold, questions asked
+    before answers, concepts arriving only after you have committed your own words, and a quiz that measures nothing
+    but your next class.</p>
+  <p class="story aw" style="--i:3">Use ← → to move. <b>D</b> switches the light, <b>F</b> fills the screen, <b>R</b> (twice) resets the quiz and the exercises.
+    The questions on each page are for arguing over — they are deliberately left unanswered.</p>
+  <p class="small aw" style="--i:4">Case: <i>The Tuesday Batch — twenty-two years of perfect notes</i>, prepared by Ramesh Bhat for faculty discussion (November 2026).
+    All characters and institutions are fictional. NAAC references are general; check the current NAAC framework before you cite it.</p>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">1 · THE PROBLEM (SCENE)</div>
+  <div class="h2 aw" style="--i:1">Room 11, 9:40, Unit 4 on the plan</div>
+  <p class="story aw" style="--i:2">Dr. Savita Deshmukh has taught the course for <em>twenty-two years</em>.
+    Monday to Saturday, 9:40 to 10:35, Room 11: 65 students, one notebook of lecture notes so refined juniors borrow it before she has finished writing it.
+    Unit-test averages: within <em>two marks of the same number for a decade</em>. The feedback forms say
+    "Madam's notes are perfect," sometimes twice in one batch. "We remember everything till the exam."</p>
+  <p class="story aw" style="--i:3">Down the corridor, Prateek — three years in, boards always half-erased, syllabus
+    always half-behind — has started "letting them argue": one real situation, two teams defending opposite decisions.
+    "His class is noisy," say some forms; "the only class I don't bunk," say others. Same test averages. But his students
+    are the only ones asking questions at the department seminar.</p>
+  <div class="qzone aw" style="--i:4"><div class="qzhead">CARRY THESE IN — UNANSWERED</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>What is Room 11 producing, term after term — learning, or something else? Name it precisely.</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>Who is doing the cognitive work in the 55 minutes — Savita, or the 65?</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>Perfect notes, flat scores, ten years. What does that pairing tell you?</div>
+  </div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">2 · THE DILEMMA</div>
+  <div class="h2 aw" style="--i:1">Lecture #22 — or something else</div>
+  <p class="story aw" style="--i:2">The NAAC self-study report is due in six weeks. The principal's circular asks every
+    department to <em>"document learner-centric pedagogical practices and their measurable outcomes."</em> The HOD,
+    in the corridor: <em>"The committee will ask what the student does in your class. Show me something."</em></p>
+  <p class="story aw" style="--i:3">Tuesday's plan is Unit 4: fifty-five minutes on a chapter she has delivered twenty-one times, comfortably ahead of the syllabus calendar.
+    She could teach it in her sleep — the students, she suspects, could hear it in hers.</p>
+  <div class="qzone aw" style="--i:4"><div class="qzhead">CARRY THESE IN — UNANSWERED</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>Prateek's test averages are no better than Savita's. Is he a better teacher, or a more popular one? What evidence would decide it?</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>What does the circular actually want — new methods, or evidence of outcomes?</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>What should Savita NOT change?</div>
+  </div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">3 · THE OPTIONS</div>
+  <div class="h2 aw" style="--i:1">Savita's four doors</div>
+  <div class="cards">
+    <div class="fcard aw" style="--i:2"><div class="fk">DOOR A · THE TRUSTED LECTURE</div><p>Perfect notes, syllabus comfort, twenty-two years of proof it finishes on time.</p></div>
+    <div class="fcard aw" style="--i:3"><div class="fk">DOOR B · ARGUE EVERY CLASS</div><p>Prateek's way. Engagement, noise, a syllabus that falls behind — and behind it, a whole menu of methods (next page).</p></div>
+    <div class="fcard aw" style="--i:4"><div class="fk">DOOR C · ONE REDESIGNED SESSION A WEEK</div><p>Keep the skeleton; make one class learner-centric and measure it.</p></div>
+    <div class="fcard aw" style="--i:5"><div class="fk">DOOR D · LECTURE + ACTIVE BREAKS</div><p>Low-cost insertions: pair-shares, one-minute papers, exit questions.</p></div>
+  </div>
+  <div class="qzone aw" style="--i:6"><div class="qzhead">CARRY THESE IN — UNANSWERED</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>Which door would you point her to — and what does it cost in coverage?</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>Is "no time" an excuse or a diagnosis?</div>
+  </div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">4 · BEHIND DOOR B — THE MENU OF ENGAGING PEDAGOGIES</div>
+  <div class="h2 aw" style="--i:1">Ten ways to put the verbs in the students' hands</div>
+  <p class="story aw" style="--i:2">Door B is not one method but a family of ten. Each buys engagement at a
+    price — the honest way to choose is to price the pros and cons against your own course, cohort and room.
+    <em>Click any card to open its page.</em> Door A — the trusted lecture — is the behaviourist wing of the
+    same family: efficient for technique, risky for thinking. Constructivism is not on this menu because
+    it is the engine underneath all of it. After the ten cards, the <b>Pedagogy Atlas</b> sets ten pedagogical families side by side, and a three-page AI section follows.
+    <button class="btn" data-go="15">Jump to the Atlas ▸</button></p>
+  <div class="cards3m">
+    <div class="fcard mcard aw" data-m="0" style="--i:3"><div class="fk">CASE METHOD<span class="opn">▸</span></div><p>Judgment under ambiguity — commit before the reveal.</p></div>
+    <div class="fcard mcard aw" data-m="1" style="--i:3"><div class="fk">ROLE PLAY<span class="opn">▸</span></div><p>Argue from the other side of the table.</p></div>
+    <div class="fcard mcard aw" data-m="2" style="--i:3"><div class="fk">SIMULATION<span class="opn">▸</span></div><p>A semester of consequences in one hour.</p></div>
+    <div class="fcard mcard aw" data-m="3" style="--i:3"><div class="fk">PROJECTS &amp; SERVICE LEARNING<span class="opn">▸</span></div><p>The artifact is the evidence.</p></div>
+    <div class="fcard mcard aw" data-m="4" style="--i:3"><div class="fk">FLIPPED CLASSROOM<span class="opn">▸</span></div><p>First exposure at home; the verbs in class.</p></div>
+    <div class="fcard mcard aw" data-m="5" style="--i:3"><div class="fk">PEER INSTRUCTION<span class="opn">▸</span></div><p>Everyone thinks, not just the front row.</p></div>
+    <div class="fcard mcard aw" data-m="6" style="--i:3"><div class="fk">DESIGN THINKING<span class="opn">▸</span></div><p>Empathise → define → ideate → prototype → test.</p></div>
+    <div class="fcard mcard aw" data-m="7" style="--i:3"><div class="fk">STUDIO &amp; CRITIQUE<span class="opn">▸</span></div><p>Make, display, critique — talk is scarce.</p></div>
+    <div class="fcard mcard aw" data-m="8" style="--i:3"><div class="fk">DESIRABLE DIFFICULTIES<span class="opn">▸</span></div><p>Interleave, space, generate — harder is better.</p></div>
+    <div class="fcard mcard aw" data-m="9" style="--i:3"><div class="fk">AI-ASSISTED LEARNING<span class="opn">▸</span></div><p>AI-free zones first; AI-mediated after.</p></div>
+  </div>
+  <div class="qzone aw" style="--i:9"><div class="qzhead">CARRY THESE IN — UNANSWERED</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>Which of these ten could Savita actually run in a 65-seat hall, with no new infrastructure?</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>One thing is constant across the menu: who performs the verbs. What does that prove about Door A?</div>
+  </div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">4 · BEHIND DOOR B — CASE METHOD</div>
+  <div class="h2 aw" style="--i:1">Case method: judgment under ambiguity</div>
+  <p class="story aw" style="--i:2">A decision-forcing story: real stakes, incomplete information, a protagonist
+    whose shoes the student must occupy — and a commitment extracted <em>before</em> the reveal. Fits Apply,
+    Analyse and Evaluate; it is the method this very session is running on you.</p>
+  <div class="cards">
+    <div class="fcard aw" style="--i:3"><div class="fk pc">PROS</div><p>Retention follows discovery; discussion
+      and defence skills; a safe rehearsal of real judgment; the class remembers the argument, not the slide.</p></div>
+    <div class="fcard aw" style="--i:4"><div class="fk cc">CONS</div><p>Heavy faculty prep and facilitation;
+      quality hinges on case selection; costs coverage; needs cold-read discipline and a strict clock.</p></div>
+  </div>
+  <div class="qcard aw" style="--i:5"><span class="qk">SAVITA FIT · 65 SEATS</span><p style="font-size:15px">One short case a week is feasible in Room 11 — this session is the proof of concept. Start with a ten-minute vignette, cold-read on paper, two questions, one commit.</p></div>
+  <div class="qzone aw" style="--i:6"><div class="qzhead">CARRY THIS IN</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>Which chapter of your course is really a decision wearing a definition's clothes?</div>
+  </div>
+  <div class="nextrow aw" style="--i:7"><button class="btn backmenu">◀ Back to the menu</button><span class="small">or press → for the next method</span></div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">4 · BEHIND DOOR B — ROLE PLAY</div>
+  <div class="h2 aw" style="--i:1">Role play: the other side of the table</div>
+  <p class="story aw" style="--i:2">Students take assigned positions — the client, the auditor, the regulator,
+    the sceptical buyer — and argue in role. It fits ethics, negotiation and anything with
+    <em>two defensible answers</em>; Bloom Understand through Evaluate.</p>
+  <div class="cards">
+    <div class="fcard aw" style="--i:3"><div class="fk pc">PROS</div><p>Almost free to run; high energy;
+      builds empathy and surfaces hidden assumptions; the argument is remembered because it was <em>your own</em>.</p></div>
+    <div class="fcard aw" style="--i:4"><div class="fk cc">CONS</div><p>Uneven participation and stage fright;
+      can slide into theatre without stakes; assessment is subjective — needs a rubric for observers as well as players.</p></div>
+  </div>
+  <div class="qcard aw" style="--i:5"><span class="qk">SAVITA FIT · 65 SEATS</span><p style="font-size:15px">Works if every single student has a job: eight in role, the rest as observers with a checklist that feeds the debrief. Nobody spectates.</p></div>
+  <div class="qzone aw" style="--i:6"><div class="qzhead">CARRY THIS IN</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>Which topic in your course has two defensible answers that students could be made to defend?</div>
+  </div>
+  <div class="nextrow aw" style="--i:7"><button class="btn backmenu">◀ Back to the menu</button><span class="small">or press → for the next method</span></div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">4 · BEHIND DOOR B — SIMULATION</div>
+  <div class="h2 aw" style="--i:1">Simulation: a semester of consequences in an hour</div>
+  <p class="story aw" style="--i:2">A model of a system with decision rounds and feedback — markets, runs,
+    negotiations, cash budgets. Students decide, the system answers, the debrief names what happened.
+    Fits systems thinking; Bloom Apply and Analyse.</p>
+  <div class="cards">
+    <div class="fcard aw" style="--i:3"><div class="fk pc">PROS</div><p>Compresses time; failure is safe and
+      reversible; feedback is immediate; the affect makes the lesson durable — the figure is remembered because it hurt.</p></div>
+    <div class="fcard aw" style="--i:4"><div class="fk cc">CONS</div><p>Fidelity gap: the model's simplifications
+      can teach themselves; setup and logistics are the heaviest on this menu; students may play the mechanics, not the concept.</p></div>
+  </div>
+  <div class="qcard aw" style="--i:5"><span class="qk">SAVITA FIT · 65 SEATS</span><p style="font-size:15px">The most setup-heavy door — borrow before you build. Ready-made simulations exist for most subjects; the debrief is where Savita earns her keep.</p></div>
+  <div class="qzone aw" style="--i:6"><div class="qzhead">CARRY THIS IN</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>What would a simulation compress that your lecture currently stretches over weeks?</div>
+  </div>
+  <div class="nextrow aw" style="--i:7"><button class="btn backmenu">◀ Back to the menu</button><span class="small">or press → for the next method</span></div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">4 · BEHIND DOOR B — PROJECTS</div>
+  <div class="h2 aw" style="--i:1">Projects: the artifact is the evidence</div>
+  <p class="story aw" style="--i:2">An authentic deliverable with milestones — a research report, a model, a
+    client memo. The assessment is the artifact itself. This is the only method that lives at
+    <em>Create</em>, and the one NAAC reviewers can hold in their hands.</p>
+  <div class="cards">
+    <div class="fcard aw" style="--i:3"><div class="fk pc">PROS</div><p>Authentic integration of skills;
+      ownership drives motivation; produces portfolio evidence — the "measurable outcomes" the circular asks
+      for, in physical form.</p></div>
+    <div class="fcard aw" style="--i:4"><div class="fk cc">CONS</div><p>Slow feedback loop; team free-riding;
+      demands rubrics, milestones and ruthless scope control; hard to fit more than one or two in a term.</p></div>
+  </div>
+  <div class="qcard aw" style="--i:5"><span class="qk">SAVITA FIT · 65 SEATS</span><p style="font-size:15px">One mini-project per semester beats none — start formative, mark it against a rubric, and let the best three become teaching exhibits for the next batch.</p></div>
+  <div class="qzone aw" style="--i:6"><div class="qzhead">CARRY THIS IN</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>What artifact would prove your course's outcome better than an exam question ever could?</div>
+  </div>
+  <div class="nextrow aw" style="--i:7"><button class="btn backmenu">◀ Back to the menu</button><span class="small">or press → for the next method</span></div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">4 · BEHIND DOOR B — FLIPPED CLASSROOM</div>
+  <div class="h2 aw" style="--i:1">Flipped classroom: first exposure at home, verbs in class</div>
+  <p class="story aw" style="--i:2">The reading or the video carries the first exposure; class time is spent on
+    the higher verbs with the expert present. It is a <em>resequencing</em>, not a gadget — and for Savita it
+    has a sweet twist.</p>
+  <div class="cards">
+    <div class="fcard aw" style="--i:3"><div class="fk pc">PROS</div><p>Scarce face-to-face minutes go to
+      application; students control the pace of first exposure; misconceptions surface in class where they can be fixed.</p></div>
+    <div class="fcard aw" style="--i:4"><div class="fk cc">CONS</div><p>Lives or dies on pre-work compliance;
+      watching a video is not learning; drifts back to lecture unless the class tasks are genuinely higher-order.</p></div>
+  </div>
+  <div class="qcard aw" style="--i:5"><span class="qk">SAVITA FIT · 65 SEATS</span><p style="font-size:15px">Her famous notes are the perfect pre-work. She does not retire them — she redeploys them: "the notes become the reading, not the class." Twenty-two years of craft, repurposed.</p></div>
+  <div class="qzone aw" style="--i:6"><div class="qzhead">CARRY THIS IN</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>What part of your lecturing is really just first exposure that students could do alone?</div>
+  </div>
+  <div class="nextrow aw" style="--i:7"><button class="btn backmenu">◀ Back to the menu</button><span class="small">or press → for the next method</span></div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">4 · BEHIND DOOR B — PEER INSTRUCTION</div>
+  <div class="h2 aw" style="--i:1">Peer instruction: everyone thinks, not just the front row</div>
+  <p class="story aw" style="--i:2">One well-designed question → every student commits alone → pairs defend
+    their answers → selected pairs share, the room votes. Ninety seconds to two minutes, no infrastructure,
+    any discipline. Bloom Understand through Analyse.</p>
+  <div class="cards">
+    <div class="fcard aw" style="--i:3"><div class="fk pc">PROS</div><p>Scales to any room with zero cost;
+      makes thinking visible in ninety seconds; the individual commit prevents the confident few from answering
+      for the silent many.</p></div>
+    <div class="fcard aw" style="--i:4"><div class="fk cc">CONS</div><p>Shallow without well-designed questions —
+      the question is the method; needs ruthless time-boxing and a tolerance for noise.</p></div>
+  </div>
+  <div class="qcard aw" style="--i:5"><span class="qk">SAVITA FIT · 65 SEATS</span><p style="font-size:15px">The lowest-cost insert into her existing fifty-five minutes — this is Door D in practice, and the natural first step for Tuesday.</p></div>
+  <div class="qzone aw" style="--i:6"><div class="qzhead">CARRY THIS IN</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>What is the smallest question you could ask on Tuesday that would make sixty-five students' thinking visible at once?</div>
+  </div>
+  <div class="nextrow aw" style="--i:7"><button class="btn backmenu">◀ Back to the menu</button><span class="small">or press → for the next method</span></div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">4 · BEHIND DOOR B — DESIGN THINKING</div>
+  <div class="h2 aw" style="--i:1">Design thinking: empathy before answers</div>
+  <p class="story aw" style="--i:2">A human-centred, iterative cycle — <em>empathise → define → ideate →
+    prototype → test</em> — for problems that have no single right answer to find, only a better one to design.
+    Fits interdisciplinary topics and wicked problems; Bloom Evaluate and Create.</p>
+  <div class="cards">
+    <div class="fcard aw" style="--i:3"><div class="fk pc">PROS</div><p>Anchors solutions in the user's reality;
+      failure becomes cheap, fast and informative — prototype, learn, redesign; builds tolerance for iteration.</p></div>
+    <div class="fcard aw" style="--i:4"><div class="fk cc">CONS</div><p>The ambiguity disorients students trained
+      on right-answer assessments; iterations eat time that fixed periods rarely hold.</p></div>
+  </div>
+  <div class="qcard aw" style="--i:5"><span class="qk">SAVITA FIT · 65 SEATS</span><p style="font-size:15px">One period can run a micro-cycle: empathise with one real student profile, sketch two interventions, prototype Tuesday's ten minutes, and let a partner test it.</p></div>
+  <div class="qzone aw" style="--i:6"><div class="qzhead">CARRY THIS IN</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>Which topic in your course has no single right answer to find — only a better one to design?</div>
+  </div>
+  <div class="nextrow aw" style="--i:7"><button class="btn backmenu">◀ Back to the menu</button><span class="small">or press → for the next method</span></div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">4 · BEHIND DOOR B — STUDIO &amp; CRITIQUE</div>
+  <div class="h2 aw" style="--i:1">Studio &amp; critique: the apprenticeship pattern</div>
+  <p class="story aw" style="--i:2">The atelier model: demonstration, sustained making, public display, and
+    continuous verbal critique — with teacher talk kept <em>scarce and precious</em>. It teaches what words
+    cannot: tacit mastery acquired by watching experts and handling real materials.</p>
+  <div class="cards">
+    <div class="fcard aw" style="--i:3"><div class="fk pc">PROS</div><p>Tacit learning and authentic mastery;
+      the room becomes a haven where failure is a step, not a verdict; builds observation, persistence and reflection.</p></div>
+    <div class="fcard aw" style="--i:4"><div class="fk cc">CONS</div><p>Master–apprentice hierarchy can become
+      servitude unless critique runs both ways; demands space and long incubation blocks that timetables rarely allow.</p></div>
+  </div>
+  <div class="qcard aw" style="--i:5"><span class="qk">SAVITA FIT · 65 SEATS</span><p style="font-size:15px">It does not need an art room. "Display working drafts, not final answers": pin three partial solutions to the wall of the board, and let the class critique them.</p></div>
+  <div class="qzone aw" style="--i:6"><div class="qzhead">CARRY THIS IN</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>What could your students make, display, and have critiqued — instead of submit and forget?</div>
+  </div>
+  <div class="nextrow aw" style="--i:7"><button class="btn backmenu">◀ Back to the menu</button><span class="small">or press → for the next method</span></div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">4 · BEHIND DOOR B — DESIRABLE DIFFICULTIES</div>
+  <div class="h2 aw" style="--i:1">Desirable difficulties: harder is better</div>
+  <p class="story aw" style="--i:2">The learning-science wing of the menu: <em>interleave</em> the practice
+    (ABCABC, not AAABBB), <em>space</em> the retrieval, and make students <em>generate</em> before you tell.
+    Difficulty is not the enemy of learning — fluent ease is.</p>
+  <div class="cards">
+    <div class="fcard aw" style="--i:3"><div class="fk pc">PROS</div><p>Durable retention and transfer across
+      contexts; defeats the illusion of competence — Savita's students felt they had learned till the exam;
+      the exam disagreed.</p></div>
+    <div class="fcard aw" style="--i:4"><div class="fk cc">CONS</div><p>It feels worse in the short run: students
+      mistake productive struggle for poor teaching, and the teacher must resist optimising for smooth lessons.</p></div>
+  </div>
+  <div class="qcard aw" style="--i:5"><span class="qk">SAVITA FIT · 65 SEATS</span><p style="font-size:15px">The cheapest redesign on this menu: reorder her practice questions, space her quizzes, make the class generate before she explains — and tell them WHY it feels harder.</p></div>
+  <div class="qzone aw" style="--i:6"><div class="qzhead">CARRY THIS IN</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>Where does your course optimise for smoothness — fluent lessons, easy practice — at the cost of durability?</div>
+  </div>
+  <div class="nextrow aw" style="--i:7"><button class="btn backmenu">◀ Back to the menu</button><span class="small">or press → for the next method</span></div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">4 · BEHIND DOOR B — AI-ENABLED TEACHING</div>
+  <div class="h2 aw" style="--i:1">AI-enabled teaching: orchestrate the friction</div>
+  <p class="story aw" style="--i:2">Used without pedagogical design, AI invites three risks:
+    <span class="vchip">cognitive offloading</span><span class="vchip">the fluency heuristic</span><span class="vchip">epistemic narrowing</span>
+    — bypassing effortful thinking, mistaking linguistic polish for factual accuracy, and converging on
+    single-perspective answers. The faculty role in an AI-enabled course: <em>cognitive orchestrator,
+    not a passive observer of technology.</em></p>
+  <div class="aw" style="--i:3;max-width:900px">
+    <div class="shead">FOUR PAGES FOLLOW THE ATLAS</div>
+    <div class="srow2"><span class="sn">1</span><span><b>Preserve the friction.</b> Five strategies that keep the productive struggle when AI is in the room — with a side-by-side of the same task done with and without orchestration.</span></div>
+    <div class="srow2"><span class="sn">2</span><span><b>AI as a thinking partner.</b> Six teacher moves with example prompts, then a prompt-log builder that documents the dialogue.</span></div>
+    <div class="srow2"><span class="sn">3</span><span><b>Boundaries and grading the struggle.</b> What is prohibited, permitted, encouraged and required in an assignment, and a starter rubric that rewards reasoning over polish.</span></div>
+    <div class="nextrow"><button class="btn" data-go="16">Open the AI section ▸</button></div>
+  </div>
+  <div class="qcard aw" style="--i:4"><span class="qk">SAVITA FIT · 65 SEATS</span><p style="font-size:15px">Her exam stays AI-free; her revision hour becomes AI-mediated; and her rubric now grades the reasoning journey — prompt log attached — not the prose.</p></div>
+  <div class="qzone aw" style="--i:5"><div class="qzhead">CARRY THIS IN</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>Which rubric of yours still rewards polish that a machine can now fake in seconds — and what would grading the struggle instead look like?</div>
+  </div>
+  <div class="nextrow aw" style="--i:6"><button class="btn backmenu">◀ Back to the menu</button><span class="small">or press → for the Pedagogy Atlas</span></div>
+</section>
+
+<section class="pg" id="pg-atlas">
+  <div class="sk aw" style="--i:0">5 · THE PEDAGOGY ATLAS</div>
+  <div class="h2 aw" style="--i:1">Ten pedagogical families, side by side</div>
+  <p class="story aw" style="--i:2;font-size:14px;margin-bottom:4px">Pick one for how it works, what it buys and what it costs. The strip is indicative: made to be argued with.</p>
+  <div class="atl aw" style="--i:3">
+    <div class="alist" id="alist"></div>
+    <div class="apanel" id="apanel"></div>
+  </div>
+  <div class="spec aw" id="aspec" style="--i:4"></div>
+  <div class="spl aw" style="--i:4"><span>◀ teacher-controlled</span><span>learner agency ▶</span></div>
+  <div class="pairbox aw" id="apair" style="--i:5"></div>
+</section>
+
+<section class="pg" id="pg-friction">
+  <div class="sk aw" style="--i:0">6 · AI IN THE ROOM — PRESERVE THE COGNITIVE FRICTION</div>
+  <div class="h2 aw" style="--i:1">Same task, two designs</div>
+  <p class="story aw" style="--i:2;font-size:15px;margin-bottom:6px">Without pedagogical design, AI invites three risks. The faculty role is <em>cognitive orchestrator, not a passive observer of technology</em>. Task: students analyse a short Unit 4 problem and recommend a decision.</p>
+  <div class="risks aw" id="frisks" style="--i:3"></div>
+  <div class="fr aw" style="--i:4">
+    <div class="frhead">
+      <div class="frsteps" id="frsteps"></div>
+      <button class="btn" id="frmode" type="button">Showing: WITH orchestration — click to see WITHOUT</button>
+    </div>
+    <div class="fpanel" id="frpanel"></div>
+  </div>
+  <div class="qzone aw" style="--i:5"><div class="qzhead">CARRY THIS IN</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>Pick the step in your own course where a student could most easily skip the struggle with AI. What would orchestrating it cost you?</div>
+  </div>
+</section>
+
+<section class="pg" id="pg-partner">
+  <div class="sk aw" style="--i:0">7 · AI AS A THINKING PARTNER</div>
+  <div class="h2 aw" style="--i:1">Interview the AI; do not obey it</div>
+  <p class="story aw" style="--i:2;font-size:15px;margin-bottom:6px">A thinking partner is a dialogic tool and an object of inquiry: students interrogate, evaluate and push against it. Click a move to see an <em>example</em> prompt (adapt to your discipline).</p>
+  <div class="cards3m aw" id="pmoves" style="--i:3"></div>
+  <div class="pdetail aw" id="pdetail" style="--i:4"></div>
+  <div class="qzone aw" style="--i:5"><div class="qzhead">CARRY THIS IN</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>If your students must commit to a position before they open the tool, what would you ask them to commit to in your next class?</div>
+  </div>
+</section>
+
+<section class="pg" id="pg-log">
+  <div class="sk aw" style="--i:0">7 · AI AS A THINKING PARTNER — DOCUMENT THE DIALOGUE</div>
+  <div class="h2 aw" style="--i:1">The prompt log: make the thinking visible</div>
+  <p class="story aw" style="--i:2;font-size:15px;margin-bottom:6px">Students track the iterative conversation: the prompt, the AI's suggestion, whether they accepted, modified or rejected it, why, and what they asked next. Try a row, or load Savita's example.</p>
+  <div class="logform aw" style="--i:3">
+    <input type="text" id="lg-p" placeholder="My prompt">
+    <input type="text" id="lg-a" placeholder="What the AI suggested">
+    <select id="lg-d"><option>Accepted</option><option>Modified</option><option>Rejected</option></select>
+    <input type="text" id="lg-w" placeholder="Why I decided that">
+    <button class="btn" id="lg-add" type="button">Add row</button>
+  </div>
+  <div class="logtools aw" style="--i:3"><button class="btn" id="lg-ex" type="button">Load Savita's example</button><button class="btn" id="lg-copy" type="button">Copy log</button><button class="btn" id="lg-clr" type="button">Clear</button><span class="small" id="lg-n"></span></div>
+  <div class="tblwrap aw" style="--i:4"><table class="tbl" id="lg-t"><thead><tr><th>#</th><th>Prompt</th><th>AI suggested</th><th>Decision</th><th>Why</th></tr></thead><tbody></tbody></table></div>
+  <div class="qzone aw" style="--i:5"><div class="qzhead">CARRY THIS IN</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>Which rows of a student's log would convince you that the student, not the model, did the reasoning?</div>
+  </div>
+</section>
+
+<section class="pg" id="pg-rules">
+  <div class="sk aw" style="--i:0">8 · AI IN THE ASSIGNMENT — BOUNDARIES AND GRADING THE STRUGGLE</div>
+  <div class="h2 aw" style="--i:1">Say what is allowed; grade the reasoning</div>
+  <div class="rgrid aw" style="--i:2">
+    <div>
+      <div class="shead">1 · CLICK EACH USE TO PLACE IT — THEN REVEAL</div>
+      <div id="rcards"></div>
+      <div class="logtools"><button class="btn" id="r-rev" type="button">Reveal suggested placement</button><button class="btn" id="r-clr" type="button">Clear</button></div>
+      <div class="small" id="r-note">Your institution's policy decides. No score here: compare and argue.</div>
+    </div>
+    <div>
+      <div class="shead">2 · STARTER RUBRIC: REASONING OVER POLISH (ADAPT IT)</div>
+      <div class="tblwrap"><table class="tbl" id="rub"></table></div>
+    </div>
+  </div>
+  <div class="qzone aw" style="--i:3"><div class="qzhead">CARRY THESE IN — UNANSWERED</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>Which line of your own rubric would an AI satisfy in ten seconds?</div>
+  </div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">9 · ANALYSIS I — WHO DOES THE VERBS</div>
+  <div class="h2 aw" style="--i:1">Bloom's ladder &amp; constructive alignment</div>
+  <p class="story aw" style="--i:2">Learning is not what the teacher delivers; it is what the <em>student
+    performs</em>. The revised taxonomy (Anderson &amp; Krathwohl, 2001) offers about fifty verbs.
+    Click a level of the ladder to see its verbs: <em>"identify", "argue", "construct" can be assessed;
+    "appreciate" and "be aware" cannot.</em></p>
+  <div class="p2grid aw" style="--i:3">
+    <div>
+      <div class="pyr" id="bpyr"></div>
+      <div class="small" style="text-align:center;margin-top:8px">Objectives are the instructor's questions;
+        <b>outcomes are the learner's demonstrable answers.</b></div>
+    </div>
+    <div>
+      <div class="fcard" style="margin-bottom:8px">
+        <div class="fk" id="bvhead" style="margin-bottom:6px">APPLY</div>
+        <div id="bverbs" class="vwrap"></div>
+      </div>
+      <div class="small" style="margin:6px 0 2px"><b style="color:var(--bad)">Verbs to avoid</b> — states of mind, not observable acts:</div>
+      <div id="avoidtoks"></div>
+    </div>
+  </div>
+  <div class="qzone aw" style="--i:4"><div class="qzhead">CARRY THESE IN — UNANSWERED</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>In your own course, where does the assessment quietly contradict the stated objective?</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>Whose verbs are on your syllabus — the teacher's or the student's?</div>
+  </div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">10 · ANALYSIS II — DESIGNING BACKWARD, SCALING UP</div>
+  <div class="h2 aw" style="--i:1">Backward design &amp; the 65-seat classroom</div>
+  <p class="story aw" style="--i:2">Backward design reverses the habit: decide the <em>outcome</em>, then the
+    <em>acceptable evidence</em>, and only then the activities. It prices Door C and Door D honestly — you cannot
+    claim a learner-centric session without saying what evidence it will produce.</p>
+  <p class="story aw" style="--i:3">And scale is an excuse, not a barrier: think-pair-share runs in a 65-seat hall
+    with structure and a timer; the one-minute paper gives you formative evidence in sixty seconds with zero marking.
+    Beware the famous "retention pyramid" percentages — <em>widely cited, evidence-weak</em>; a room of faculty
+    should model source hygiene.</p>
+  <p class="story aw" style="--i:4">Know your instruments when the evidence arrives: <em>assessment</em> gathers the
+    data; <em>evaluation</em> interprets it and closes the loop. Direct measures — marks against stated targets —
+    and indirect ones — student, employer and alumni voice — triangulate. Savita's decade never ran the loop:
+    that, more than the lecture, is the failure.</p>
+  <div class="qzone aw" style="--i:5"><div class="qzhead">CARRY THESE IN — UNANSWERED</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>What would Friday's evidence of Tuesday's redesign look like?</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>What is the smallest change that moves the verbs from you to them?</div>
+  </div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">11 · ANALYSIS III — WRITING WHAT EXCELLENCE LOOKS LIKE</div>
+  <div class="h2 aw" style="--i:1">The three-part outcome statement</div>
+  <div class="cpc3 aw" style="--i:2">
+    <div class="cpcard" style="--c:#2B5C8A"><b>CONDITION</b><p>Given what situation, data or case?</p></div>
+    <div class="cpcard" style="--c:#2E7D5B"><b>PERFORMANCE</b><p>What will the student do? An observable action verb.</p></div>
+    <div class="cpcard" style="--c:var(--acc)"><b>MEASURABLE CRITERION</b><p>How well must they do it?</p></div>
+  </div>
+  <p class="story aw" style="--i:3">"Understanding ratios" is a hope; this is a writable outcome: <em>"<span class="hlA">Given
+    financial statements</span>, <span class="hlB">students will compute the ratios and identify the company's
+    problems</span>, <span class="hlC">with 80% of students doing so at a stated standard</span>."</em> Three parts,
+    one sentence — Savita's "show me something" becomes writable the moment it becomes a three-part sentence.</p>
+  <p class="story aw" style="--i:4">Avoid the traps: <em>"case discussion" is an activity, not an outcome</em>; vague
+    verbs — understand, appreciate, familiarise — cannot be assessed; showing, knowing or describing without a
+    measurement standard is not an outcome. And when the evidence arrives, grade it with a <em>rubric</em> — task,
+    scale, dimensions, and a description of each performance level — so grading is consistent and students see what
+    excellence looks like <em>before</em> submission.</p>
+  <div class="qzone aw" style="--i:5"><div class="qzhead">CARRY THESE IN — UNANSWERED</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>Take one stated outcome from your own course outline: does it name a condition, a performance and a measurable criterion — or a hope?</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>Which entries in your outline are activities in disguise?</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>Savita must show "measurable outcomes" by Friday. Write her one three-part outcome statement for Tuesday's class.</div>
+  </div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">12 · APPLICATION — YOUR OWN CLASSROOM</div>
+  <div class="h2 aw" style="--i:1">Redesign ten minutes of your next class</div>
+  <p class="story aw" style="--i:2">Take the next class you will teach, any subject. Choose ten minutes you currently
+    lecture. Redesign them so the students perform one higher-order verb — apply, analyse or evaluate — on the spot.
+    Then defend it to a partner: what will you be able to SEE that you cannot see today?</p>
+  <p class="story aw" style="--i:3">Then add one line your students will see: <em>in this ten minutes, AI is
+    prohibited / permitted / encouraged / required for ______, and I will grade ______</em>. If you cannot finish that sentence, you do not yet know
+    what the redesign is for.</p>
+  <div class="qzone aw" style="--i:4"><div class="qzhead">CARRY THESE IN — UNANSWERED</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>What will you NOT cover to make room for the ten minutes?</div>
+    <div class="qcard"><span class="qk">CRITICAL QUESTION</span>Which pedagogy from the Atlas are you borrowing, and which of its costs have you accepted?</div>
+  </div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">13 · MCQ SELF-CHECK (1–5) — COMMIT BEFORE YOU SEE</div>
+  <div id="scorebar-a" class="aw" style="--i:1">Answer, commit, and only then the key appears. Scored for feedback, never for grades.</div>
+  <div class="mcq aw" style="--i:2" id="mcqbox-a"></div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">13 · MCQ SELF-CHECK (6–10) — COMMIT BEFORE YOU SEE</div>
+  <div id="scorebar-b" class="aw" style="--i:1">Continue with items 6 to 10.</div>
+  <div class="mcq aw" style="--i:2" id="mcqbox-b"></div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">13 · MCQ SELF-CHECK (11–14) — THE ATLAS AND AI</div>
+  <div id="scorebar-c" class="aw" style="--i:1">Items 11 to 14 test the Pedagogy Atlas and the AI section.</div>
+  <div class="mcq aw" style="--i:2" id="mcqbox-c"></div>
+</section>
+
+<section class="pg">
+  <div class="sk aw" style="--i:0">14 · QUESTIONS LEFT</div>
+  <div class="h2 aw" style="--i:1">The closer</div>
+  <p class="story aw" style="--i:2">Savita's notes were perfect — and that was the problem. The question is never
+    "how well do I explain?" It is <em>"what does the student do in my fifty-five minutes?"</em> — the NAAC form is
+    only asking what the learning sciences asked first.</p>
+  <div class="qzone aw" style="--i:3"><div class="qzhead">LEFT OPEN, DELIBERATELY</div>
+    <div class="qcard"><span class="qk">PARKED</span>How does pedagogy change when assessment changes — and who resists, and why?</div>
+    <div class="qcard"><span class="qk">PARKED</span>What does your institution's accreditation evidence actually ask of your department?</div>
+    <div class="qcard"><span class="qk">PARKED</span>When AI can write the answer, what exactly are we still assessing?</div>
+    <div class="qcard"><span class="qk">EXIT TICKET</span>One sentence: the single thing you will change in your next class. Say it before you leave.</div>
+  </div>
+</section>
+
+</div>
+<footer>
+  <span>Runs offline · nothing is stored or transmitted · all characters fictional.</span>
+  <span class="fx">keys: <b>←</b>/<b>→</b> page · <b>Home</b>/<b>End</b> · <b>D</b> theme · <b>F</b> fullscreen · <b>R</b>&times;2 reset &nbsp;·&nbsp; © 2026 Ramesh Bhat AcademicOS &nbsp;·&nbsp; Build 2026-11-08a</span>
+</footer>
+<script>
+(function(){
+'use strict';
+var MCQ=[
+ {s:'"Remember everything till the exam" — in Bloom\u2019s terms, Savita\u2019s class operates at:',
+  o:['Apply','Understand','Remember','Evaluate'],k:2,
+  w:'The bottom rung. The redesign\u2019s job is moving the higher verbs into the students\u2019 hands.'},
+ {s:'The correct backward-design sequence is:',
+  o:['Content \u2192 activities \u2192 test','Outcomes \u2192 acceptable evidence \u2192 learning experiences','Syllabus \u2192 lectures \u2192 exam','Activities \u2192 assessment \u2192 objectives'],k:1,
+  w:'Design from the evidence backward; content is the last decision, not the first.'},
+ {s:'Flat test scores for a decade despite perfect notes signal:',
+  o:['A weak student cohort','Harder exams each year','Constructive misalignment','Outdated notes'],k:2,
+  w:'Objectives, activities and assessment pulling apart \u2014 alignment is the diagnosis, effort is not the cure.'},
+ {s:'Think-pair-share in a 65-student hall is:',
+  o:['Workable with structure and timing','Impractical beyond a hundred students','Only for seminar rooms','Only for senior students'],k:0,
+  w:'Scale is an excuse; structure substitutes for intimacy.'},
+ {s:'An outcome statement is complete only when it contains:',
+  o:['A condition, a performance and a measurable criterion','A topic, a textbook and a week number',
+   'An activity, a group and a presentation','An objective, a syllabus and an exam'],k:0,
+  w:'Condition \u2013 performance \u2013 measurable criterion: the three-part discipline that turns a hope into evidence.'},
+ {s:'The "students retain 5% of lectures" pyramid is:',
+  o:['Established research','Valid for STEM only','Widely cited, evidence-weak','An NAAC requirement'],k:2,
+  w:'Source hygiene: if we teach it, we should know how weak its provenance is.'},
+ {s:'A course outline lists "case discussion" as a course learning outcome. The trap is:',
+  o:['It is an activity, not a demonstrable learning','Cases are too long for outcomes',
+   'Outcomes must name a textbook','Discussions cannot be graded'],k:0,
+  w:'Activities are how students engage; outcomes are what they demonstrably learn. Confusing the two invalidates assessment.'},
+ {s:'A case is "decision-forcing" when:',
+  o:['The narrative is long and real','Students must commit before the reveal','The teacher withholds the answer','It is about a company'],k:1,
+  w:'Commitment before certainty is what makes experience, not story.'},
+ {s:'"Assessment for learning" means:',
+  o:['The evidence feeds the next class','Marks feed the transcript','More frequent exams','Peer marking'],k:0,
+  w:'Savita\u2019s decade of flat scores was never fed back \u2014 that is the loop being closed.'},
+ {s:'On coverage versus learning, the research says:',
+  o:['More content predicts more learning','Deeper processing beats volume','Pace is evidence of rigour','The syllabus is a ceiling'],k:1,
+  w:'Coverage is a pacing comfort; processing depth is the outcome.'},
+ {s:'Which sequence best preserves cognitive friction when students use AI?',
+  o:['AI drafts first, the student polishes','The student commits to a hypothesis AI-free, then asks AI to attack it','AI and the student write in parallel and merge','AI is banned from every phase'],k:1,
+  w:'AI-free formulation first, AI-mediated challenge second: the model extends a position the student already holds.'},
+ {s:'Mistaking a fluent, polished answer for an accurate one is called:',
+  o:['Epistemic narrowing','Cognitive offloading','The fluency heuristic','Constructive misalignment'],k:2,
+  w:'Polish is not accuracy. Cross-referencing against primary sources is the routine that breaks the heuristic.'},
+ {s:'A student submits flawless AI-assisted prose. Which change best targets the reasoning?',
+  o:['Reward eloquence more heavily','Ask for a prompt log with the reason each suggestion was accepted, modified or rejected, and grade that trail','Set a longer word limit','Ban AI and mark by hand'],k:1,
+  w:'When fluent text is free, assess the navigation of complexity: the decisions, the ambiguity handled, the depth of critique.'},
+ {s:'Savita’s lecture-only class sits closest to which family in the Atlas, and what is its main risk if it is the only mode?',
+  o:['Behaviourist / direct instruction: students stay passive recipients','Critical pedagogy: emotional strain','Studio: hierarchy','Design thinking: ambiguity'],k:0,
+  w:'Direct instruction is efficient for technique and safety; used alone it positions students as compliant recipients.'}];
+var score={ok:0,n:0};
+var boxA=document.getElementById('mcqbox-a'),boxB=document.getElementById('mcqbox-b'),boxC=document.getElementById('mcqbox-c');
+var sel={};
+function renderMCQ(){
+  boxA.innerHTML='';boxB.innerHTML='';boxC.innerHTML='';sel={};score={ok:0,n:0};
+  MCQ.forEach(function(it,qi){
+    var d=document.createElement('div');d.className='item';
+    var h='<div class="stem">'+(qi+1)+'. '+it.s+'</div><div class="opts">';
+    it.o.forEach(function(op,oi){h+='<button class="opt" data-q="'+qi+'" data-o="'+oi+'">'+String.fromCharCode(65+oi)+'. '+op+'</button>';});
+    h+='</div><div class="verdict" id="vd-'+qi+'"></div><div class="why" id="wy-'+qi+'">'+it.w+'</div>';
+    d.innerHTML=h;(qi<5?boxA:(qi<10?boxB:boxC)).appendChild(d);
+  });
+  document.getElementById('scorebar-a').textContent='Answer, commit, and only then the key appears. Scored for feedback, never for grades.';
+  document.getElementById('scorebar-b').textContent='Continue with items 6 to 10.';
+  document.getElementById('scorebar-c').textContent='Items 11 to 14 test the Pedagogy Atlas and the AI section.';
+}
+renderMCQ();
+function mcqHandler(e){
+  var b=e.target.closest('button');if(!b)return;
+  var q=b.getAttribute('data-q'),o=parseInt(b.getAttribute('data-o'),10);
+  if(b.classList.contains('opt')&&!b.closest('.item').classList.contains('locked')){
+    [].forEach.call(b.parentNode.querySelectorAll('.opt'),function(x){x.classList.remove('sel');});
+    b.classList.add('sel');sel[q]=o;
+  }else if(b.classList.contains('chk')){
+    var item=b.closest('.item');
+    if(item.classList.contains('locked')||sel[q]===undefined)return;
+    item.classList.add('locked');
+    var it=MCQ[q],ok=sel[q]===it.k;
+    item.querySelectorAll('.opt').forEach(function(x){
+      if(parseInt(x.getAttribute('data-o'),10)===it.k)x.classList.add('ok');
+      else if(parseInt(x.getAttribute('data-o'),10)===sel[q])x.classList.add('bad');
+    });
+    document.getElementById('vd-'+q).textContent=ok?'\u2714 correct':'\u2716 not quite \u2014 the key is highlighted';
+    document.getElementById('vd-'+q).className='verdict '+(ok?'ok':'bad');
+    if(ok)score.ok++;score.n++;
+    var msg='Scored '+score.ok+' of '+score.n+' checked. '+(score.n===MCQ.length?'That number is for your next class, not your transcript.':'Answer, then commit \u2014 the key shows only after.');
+    document.getElementById('scorebar-a').textContent=msg;
+    document.getElementById('scorebar-b').textContent=msg;
+    document.getElementById('scorebar-c').textContent=msg;
+  }else{return;}
+  var item=b.closest('.item');
+  if(!item.classList.contains('locked')&&b.classList.contains('opt')){
+    var has=item.querySelector('.chk');
+    if(!has){var c=document.createElement('button');c.className='btn chk';c.setAttribute('data-q',q);c.textContent='Commit';
+      item.querySelector('.stem').appendChild(c);}
+  }
+}
+boxA.addEventListener('click',mcqHandler);
+boxB.addEventListener('click',mcqHandler);
+boxC.addEventListener('click',mcqHandler);
+/* ===== ATLAS: ten pedagogical families ===== */
+var ATLAS=[
+ {n:'Behaviourist / direct instruction',pos:6,
+  det:'Teacher control, structured progression, repetition, reinforcement and behavioural objectives. Whole-class explanation, teacher demonstration, clear behavioural constraints and immediate evaluation.',
+  pros:['Rapid acquisition of foundational procedures, craft technique, safety and workshop rules','Removes ambiguity for novices who need step-by-step guidance before they can work alone'],
+  cons:['Applied rigidly, it can stamp out creativity, joy and intrinsic motivation','Positions students as compliant, passive recipients'],
+  fit:'Savita’s lecture lives here. Right for technique and safety; the trouble is when it is the only mode.'},
+ {n:'Progressive & heuristic (discovery)',pos:96,
+  det:'Rooted in liberal, progressive education (Dewey, Neill’s Summerhill): learner independence, guided personal discovery, engaging when ready. The teacher is an encouraging facilitator who values the individual.',
+  pros:['Ownership and engagement; creative risk-taking in an affirming room','Lifelong curiosity, intrinsic motivation and self-directed problem-solving'],
+  cons:['Friction with rigid timetables, standardised tests and external accountability','Without timely demonstration or technical support, learners get frustrated and miss foundations'],
+  fit:'Unit 4 as pure discovery would collide with the syllabus calendar and the NAAC evidence request.'},
+ {n:'Social & cognitive constructivism',pos:68,
+  det:'Learning as active meaning-making through social interaction, dialogue, peer collaboration and shared inquiry. It changes KASH (Knowledge, Attitude, Skills, Habits) through active performance and co-creation.',
+  pros:['Moves beyond rote to higher-order, relational understanding','Peer discussion and student-led demonstration help learners articulate reasoning and build confidence'],
+  cons:['Group dynamics can turn volatile or counterproductive if not monitored','Demands high orchestration: listening, diagnosing misconceptions, facilitating without reverting to transmission'],
+  fit:'The engine under Doors C and D: pair-shares and exit questions are constructivism in small doses.'},
+ {n:'Studio / atelier (dialogic apprenticeship)',pos:30,menu:7,
+  det:'The artist’s studio and apprenticeship adapted across disciplines: teacher demonstration, sustained student making, display, continuous formative verbal critique, and an economy of teacher talk.',
+  pros:['Tacit learning and authentic mastery, acquired by watching experts and handling real materials','The room as an oasis where failure is a step; builds observation, persistence, envisioning and reflection'],
+  cons:['The master–apprentice hierarchy can turn into servitude unless critique runs both ways','Needs space and long incubation blocks that timetables rarely allow'],
+  fit:'Pin three working drafts of Unit 4 solutions to the board and critique them.'},
+ {n:'Experiential, project-based & service learning',pos:82,menu:3,
+  det:'Students immerse themselves in real-world challenges, field investigations or community service, applying theory to complex, unscripted problems.',
+  pros:['Real-world relevance, empathy, civic responsibility and humility','Forces synthesis of disparate skills into tangible deliverables'],
+  cons:['Faculty give up some control of the learning agenda; the outcome is less predictable','Heavy on planning, community partnerships and coordination outside the timetable'],
+  fit:'One mini-project a semester gives the NAAC file an artefact it can hold.'},
+ {n:'Case method & capstone simulation',pos:52,menu:0,
+  det:'The learner steps into a protagonist’s shoes facing an authentic dilemma: “what would I do?” Run through structured questioning (open, warm and cold calls, decision sheets) and simulations that synthesise prior coursework.',
+  pros:['Rigorous critical thinking: qualitative and quantitative trade-offs under real ambiguity','Active peer accountability: students test and defend arguments in debate'],
+  cons:['Heavy pre-class preparation; uncommitted students cannot easily take part','High facilitation threshold: guide without steering to an artificial single right answer'],
+  fit:'This session’s own method: you read Savita’s case cold and committed before the reveal.'},
+ {n:'Design thinking',pos:74,menu:6,
+  det:'A human-centred, iterative cycle: Empathise, Define, Ideate, Prototype, Test. Guided by the HART rule (Human, Ambiguity, Redesign, Tangibility) to reframe wicked problems.',
+  pros:['Anchors solutions in deep human understanding and diverse perspectives','Failure becomes cheap, tangible and immediately useful for redesign'],
+  cons:['Open-ended ambiguity disorients students trained on right-or-wrong assessment','Iteration needs studio or workshop time that fixed lecture periods rarely hold'],
+  fit:'A ten-minute micro-cycle: empathise with one student profile, sketch two interventions, test with a partner.'},
+ {n:'Desirable difficulties (interleaving & spacing)',pos:40,menu:8,
+  det:'Cognitive-science insight (Bjork, Simon, Ambrose): deliberately add difficulty to stimulate germane cognitive load. Interleave practice (ABCABC, not AAABBB), space retrieval and make students generate before they are told.',
+  pros:['Durable retention and transfer; better discrimination between concepts','Defeats the illusion of competence that fluent practice creates'],
+  cons:['Feels harder and more frustrating in the short run; students misread difficulty as poor learning','Teachers must resist optimising for lesson fluency, which meets resistance'],
+  fit:'Reorder Unit 4 practice questions and space the quizzes. Tell students why it feels harder.'},
+ {n:'Critical pedagogy (problem-posing)',pos:90,
+  det:'Rooted in Paulo Freire: education as democratic, emancipatory dialogue, not top-down transmission. Problem-posing replaces pre-packaged problem-solving, so learners surface social myths, power dynamics and inequalities through reflection and production.',
+  pros:['Agency and voice for marginalised students; their lived realities are validated','Critical consciousness and epistemic vigilance: examining structural assumptions'],
+  cons:['Clashes with conservative institutions, bureaucracy and sanitised curricula','Surfacing trauma, injustice or identity conflict can cause acute emotional strain if unmanaged'],
+  fit:'Ask who Unit 4’s textbook examples were written for, and whose problems are missing.'},
+ {n:'AI-integrated scaffolding',pos:60,menu:9,
+  det:'Generative AI used as a provisional, dialogic thinking partner, not an authoritative answer engine. AI-free zones come first for original reasoning and hypotheses; AI-mediated phases follow for counterarguments, counterfactuals and bias evaluation.',
+  pros:['Expands ideation and perspective-taking: edge cases, alternative viewpoints, quick scenario runs','Prompt logs and reflective journals build metacognitive self-regulation'],
+  cons:['Cognitive offloading: students bypass the productive struggle','Fluency heuristic and epistemic narrowing: fluent text mistaken for truth; convergent answers suppress nuance'],
+  fit:'See the next three pages: friction, partner and boundaries.'}];
+var aSel=0,aPair=[];
+function esc2(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function buildAtlas(){
+  var l='',sp='';
+  ATLAS.forEach(function(a,i){
+    l+='<button class="ai'+(i===aSel?' on':'')+'" type="button" data-ai="'+i+'"><span class="no">'+(i+1)+'</span>'+esc2(a.n)+(a.menu!==undefined?'<span class="mn">MENU</span>':'')+'</button>';
+    sp+='<button class="spdot'+(i===aSel?' on':'')+'" type="button" data-ai="'+i+'" title="'+esc2(a.n)+'" style="left:'+a.pos+'%">'+(i+1)+'</button>';});
+  document.getElementById('alist').innerHTML=l;
+  document.getElementById('aspec').innerHTML=sp;
+  var a=ATLAS[aSel],inPair=aPair.indexOf(aSel)>=0;
+  var li=function(arr){return '<ul>'+arr.map(function(x){return '<li>'+esc2(x)+'</li>';}).join('')+'</ul>';};
+  document.getElementById('apanel').innerHTML='<h3>'+(aSel+1)+'. '+esc2(a.n)+'</h3><div class="det">'+esc2(a.det)+'</div>'+
+   '<div class="two"><div><div class="fk pc">EFFECTIVENESS &amp; PROS</div>'+li(a.pros)+'</div><div><div class="fk cc">LIMITATIONS &amp; CONS</div>'+li(a.cons)+'</div></div>'+
+   '<div class="fit">Unit 4: '+esc2(a.fit)+'</div>'+
+   '<div class="nextrow"><button class="btn'+(inPair?' on':'')+'" type="button" data-pair="'+aSel+'">'+(inPair?'✓ In my pair (click to remove)':'Add to my pair')+'</button>'+
+   (a.menu!==undefined?'<button class="btn" type="button" data-go="'+(5+a.menu)+'">Open its menu page ▸</button>':'')+'</div>';
+  var pb=document.getElementById('apair');
+  if(aPair.length===0)pb.innerHTML='<div class="pb"><b>Critical question, unanswered:</b> which two of these ten would you combine for Unit 4, and what does each cover for the other’s weakness? Use “Add to my pair” to test your choice.</div>';
+  else if(aPair.length===1)pb.innerHTML='<div class="pb">Pair so far: <b>'+esc2(ATLAS[aPair[0]].n)+'</b>. Its weakness: '+esc2(ATLAS[aPair[0]].cons[0])+'. Which other family covers that?</div>';
+  else{var x=ATLAS[aPair[0]],y=ATLAS[aPair[1]];
+    pb.innerHTML='<div class="pb"><b>'+esc2(x.n)+'</b> + <b>'+esc2(y.n)+'</b><br>Weakness of the first: '+esc2(x.cons[0])+'. What the second offers: '+esc2(y.pros[0])+'.<br>Weakness of the second: '+esc2(y.cons[0])+'. What the first offers: '+esc2(x.pros[0])+'.<br><b>Does the pair really cover the gaps, or only look as if it does?</b></div>';}
+}
+/* ===== AI FRICTION: five strategies, with and without orchestration ===== */
+var RISKS=[
+ ['Cognitive offloading','Bypassing the effortful thinking that builds understanding.'],
+ ['The fluency heuristic','Mistaking linguistic polish for factual accuracy.'],
+ ['Epistemic narrowing','Converging on a single, AI-shaped perspective.']];
+var FR=[
+ {t:'Sequence AI-free and AI-mediated phases',
+  teach:['Require independent problem formulation, hypothesis generation or a structural outline before any tool is opened.','Introduce AI only after the student has committed to a perspective, as an extension.'],
+  does:'Writes a one-paragraph recommendation for the Unit 4 problem AI-free, then opens the tool.',
+  without:'Opens the tool first and adopts its framing; no independent position ever forms. That is cognitive offloading.',
+  keeps:'Independent judgement; the learner stays an active thinker.'},
+ {t:'Scaffold AI as a provisional, dialogic partner',
+  teach:['Frame the model as a partner to question and revise, not an answer engine.','Have students prompt it to attack their hypothesis, name omissions or simulate counterfactuals.'],
+  does:'Asks the AI for the strongest objection to the recommendation, then defends or revises their own stand.',
+  without:'Accepts the first answer as authoritative: one convergent viewpoint, and epistemic narrowing.',
+  keeps:'Productive cognitive conflict that forces defence and refinement.'},
+ {t:'Make evaluation and epistemic vigilance standard',
+  teach:['Mandatory critique of AI outputs against stated criteria.','Unpack the premises behind each answer: whose perspective is privileged?','Cross-reference against primary literature, every time.'],
+  does:'Checks every claim and source; names one assumption the answer rests on.',
+  without:'Mistakes polished prose for accuracy: the fluency heuristic at work.',
+  keeps:'Source critique and verification as a habit, not an occasion.'},
+ {t:'Activate metacognitive self-regulation',
+  teach:['Submit prompt logs, reflective journals and planning templates with the work.','Students explain why they accepted, rejected or modified each suggestion.'],
+  does:'Keeps a log: prompt, suggestion, decision, reason, next prompt.',
+  without:'No trace of the thinking; the teacher cannot tell reasoning from copy-paste.',
+  keeps:'Conscious control of the intellectual process.'},
+ {t:'Align assessment with cognitive effort, not polish',
+  teach:['Rubrics that reward neat prose become obsolete when AI writes fluent text on demand.','Assess how students navigated complexity, handled ambiguity and the depth of critical analysis.'],
+  does:'Is graded on reasoning, evidence of struggle and synthesis.',
+  without:'Eloquence is rewarded, so the effort is quietly optimised away.',
+  keeps:'An incentive to do the hard thinking.'}];
+var frI=0,frWith=true;
+function buildFriction(){
+  document.getElementById('frisks').innerHTML=RISKS.map(function(r){return '<div class="risk"><b>'+esc2(r[0])+'</b>'+esc2(r[1])+'</div>';}).join('');
+  var s='';FR.forEach(function(x,i){s+='<button class="frs'+(i===frI?' on':'')+'" type="button" data-fr="'+i+'" title="'+esc2(x.t)+'">'+(i+1)+'</button>';});
+  document.getElementById('frsteps').innerHTML=s;
+  document.getElementById('frmode').textContent=frWith?'Showing: WITH orchestration — click to see WITHOUT':'Showing: WITHOUT orchestration — click to see WITH';
+  var x=FR[frI],ul=function(a){return '<ul>'+a.map(function(t){return '<li>'+esc2(t)+'</li>';}).join('')+'</ul>';};
+  var body=frWith
+   ?'<div class="lane"><div class="wi"><div class="fk pc">TEACHER MOVE</div>'+ul(x.teach)+'</div><div class="wi"><div class="fk pc">STUDENT DOES</div><p>'+esc2(x.does)+'</p><div class="fk" style="margin-top:6px">FRICTION KEPT</div><p>'+esc2(x.keeps)+'</p></div></div>'
+   :'<div class="lane"><div class="wo"><div class="fk cc">WHAT HAPPENS WITHOUT IT</div><p>'+esc2(x.without)+'</p></div><div class="wi"><div class="fk pc">THE TEACHER MOVE THAT PREVENTS IT</div>'+ul(x.teach)+'</div></div>';
+  document.getElementById('frpanel').innerHTML='<h3>'+(frI+1)+'. '+esc2(x.t)+'</h3>'+body;
+}
+/* ===== PARTNER: six moves with example prompts ===== */
+var PM=[
+ {t:'Question, do not accept',b:'Treat outputs as provisional. Students question and revise what the AI produces. The teacher is a cognitive orchestrator, so learners work actively against model outputs and keep their interpretive autonomy.',p:'“Here is your answer. List every assumption it rests on and what would make it wrong.”'},
+ {t:'Ask for the counter-case',b:'Simulate devil’s advocacy: students enter their own claim or thesis and prompt the AI for flaws, weaknesses and counterarguments.',p:'“Here is my thesis: […]. Give me the three strongest objections.”'},
+ {t:'Explore counterfactuals and omissions',b:'Ask “what if?” and surface stakeholders or perspectives left out of the first analysis. This directly counters epistemic narrowing and convergent thinking.',p:'“What if [condition] changed? Which stakeholders did my analysis leave out?”'},
+ {t:'AI-free first, AI second',b:'Hypothesis formation, problem framing or the first draft happen AI-free. AI then comes in as a sounding board after students have committed, without taking over their struggle.',p:'“I have committed to this position: […]. Do not rewrite it. Challenge it.”'},
+ {t:'Check the premises and the sources',b:'Interrogate the assumptions and biases embedded in the answer: which dominant perspectives are privileged? Cross-reference against primary literature, routinely.',p:'“Which assumptions does this answer depend on? Give me sources I can verify.”'},
+ {t:'Document the dialogue',b:'Prompt logs and reflective journals: the initial prompt, the AI’s suggestion, why the student accepted, modified or rejected it, and what they prompted next to push the thinking further.',p:'Next page: build a log row.'}];
+var pmI=-1;
+function buildPM(){
+  document.getElementById('pmoves').innerHTML=PM.map(function(m,i){return '<div class="fcard pcard'+(i===pmI?' on':'')+'" data-pm="'+i+'"><div class="fk">MOVE '+(i+1)+'</div><p>'+esc2(m.t)+'</p></div>';}).join('');
+  var d=document.getElementById('pdetail');
+  d.innerHTML=pmI<0?'<span class="small">Click a move.</span>':'<b>'+esc2(PM[pmI].t)+'.</b> '+esc2(PM[pmI].b)+'<div class="pr">Example prompt: '+esc2(PM[pmI].p)+'</div>';
+}
+/* ===== PROMPT LOG ===== */
+var LOG=[];
+function buildLog(){
+  var tb=document.querySelector('#lg-t tbody');
+  tb.innerHTML=LOG.map(function(r,i){var c=r.d==='Accepted'?'dec-A':(r.d==='Modified'?'dec-M':'dec-R');
+    return '<tr><td>'+(i+1)+'</td><td>'+esc2(r.p)+'</td><td>'+esc2(r.a)+'</td><td class="'+c+'">'+r.d+'</td><td>'+esc2(r.w)+'</td></tr>';}).join('');
+  document.getElementById('lg-n').textContent=LOG.length?LOG.length+' row'+(LOG.length>1?'s':'')+' · modified or rejected: '+LOG.filter(function(r){return r.d!=='Accepted';}).length:'No rows yet.';
+}
+/* ===== BOUNDARIES + RUBRIC ===== */
+var RSTATES=['—','PROHIBITED','PERMITTED','ENCOURAGED','REQUIRED'];
+var RUSES=[
+ {u:'Have the AI draft the text you submit',s:1},
+ {u:'Brainstorm angles after writing your own hypothesis',s:2},
+ {u:'Ask the AI to attack your thesis and list what you omitted',s:3},
+ {u:'Submit a prompt log with the reason for each accept, modify or reject',s:4},
+ {u:'Paste an AI summary of a source you have not read',s:1},
+ {u:'Cross-check every AI claim against a primary source',s:4}];
+var rPlace=[0,0,0,0,0,0],rReveal=false;
+function buildRules(){
+  document.getElementById('rcards').innerHTML=RUSES.map(function(r,i){var p=rPlace[i];
+    var cls='rc'+(p?' s'+p:'')+(rReveal&&p?(p===r.s?' match':' diff'):'');
+    return '<button type="button" class="'+cls+'" data-rc="'+i+'"><span>'+esc2(r.u)+(rReveal?'<span class="sg">Suggested: '+RSTATES[r.s]+(p&&p!==r.s?' · you chose '+RSTATES[p]:'')+'</span>':'')+'</span><span class="st">'+RSTATES[p]+'</span></button>';}).join('');
+  document.getElementById('r-note').textContent=rReveal?'These are suggestions for argument. Where you differ, who is right depends on the learning outcome and your institution’s policy.':'Your institution’s policy decides. No score here: compare and argue.';
+}
+var RUB=[
+ ['Own position before AI','Starts from the AI’s framing','States a position before using AI','Position is specific, testable and revised by evidence'],
+ ['Challenging the AI','Accepts the first answer','Asks for objections and counter-cases','Probes omissions, counterfactuals and embedded assumptions'],
+ ['Verification','No checking','Checks key claims','Cross-references primary sources and reports what failed'],
+ ['Reasoning trail (log)','Missing or generic','Logs accept, modify, reject','Explains each decision and what the next prompt pushed on'],
+ ['Surface polish','—','Clear and readable','Deliberately low weight: fluency is not the evidence']];
+function buildRubric(){
+  document.getElementById('rub').innerHTML='<thead><tr><th>Criterion</th><th>Emerging</th><th>Competent</th><th>Strong</th></tr></thead><tbody>'+
+   RUB.map(function(r){return '<tr><td><b>'+esc2(r[0])+'</b></td><td>'+esc2(r[1])+'</td><td>'+esc2(r[2])+'</td><td>'+esc2(r[3])+'</td></tr>';}).join('')+'</tbody>';
+}
+function copyLog(){
+  var t=LOG.map(function(r,i){return (i+1)+'. Prompt: '+r.p+' | AI: '+r.a+' | '+r.d+' | Why: '+r.w;}).join('\n');
+  if(!t)return;
+  try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t);return;}}catch(e){}
+  var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy');}catch(e2){}document.body.removeChild(a);
+}
+/* delegated clicks for the new sections */
+document.addEventListener('click',function(e){
+  var t=e.target.closest?e.target.closest('button,.pcard'):null;if(!t)return;
+  if(t.hasAttribute('data-ai')){aSel=parseInt(t.getAttribute('data-ai'),10);buildAtlas();}
+  else if(t.hasAttribute('data-pair')){var k=parseInt(t.getAttribute('data-pair'),10),ix=aPair.indexOf(k);
+    if(ix>=0)aPair.splice(ix,1);else{if(aPair.length>=2)aPair.shift();aPair.push(k);}buildAtlas();}
+  else if(t.hasAttribute('data-fr')){frI=parseInt(t.getAttribute('data-fr'),10);buildFriction();}
+  else if(t.id==='frmode'){frWith=!frWith;buildFriction();}
+  else if(t.hasAttribute('data-pm')){pmI=parseInt(t.getAttribute('data-pm'),10);buildPM();}
+  else if(t.id==='lg-add'){var p=document.getElementById('lg-p'),a=document.getElementById('lg-a'),w=document.getElementById('lg-w'),d=document.getElementById('lg-d');
+    if(!p.value.trim()&&!a.value.trim())return;LOG.push({p:p.value.trim(),a:a.value.trim(),d:d.value,w:w.value.trim()});p.value='';a.value='';w.value='';buildLog();}
+  else if(t.id==='lg-ex'){LOG=[
+    {p:'Attack my plan: students pair-share a Unit 4 problem for ten minutes, then I explain.',a:'Pairs may free-ride; the strongest student answers for both.',d:'Modified',w:'I keep the ten minutes but add a one-minute individual commit before the pairing.'},
+    {p:'What does the plan leave out?',a:'It does not say what you will look for to know it worked.',d:'Accepted',w:'True. I add a one-minute paper as Friday’s evidence.'},
+    {p:'Suggest a replacement for the pair-share with more rigour.',a:'Replace it with a full role-play of eight students.',d:'Rejected',w:'Too much setup for 65 seats in 55 minutes; coverage cost is too high.'}];buildLog();}
+  else if(t.id==='lg-copy')copyLog();
+  else if(t.id==='lg-clr'){LOG=[];buildLog();}
+  else if(t.hasAttribute('data-rc')){var i=parseInt(t.getAttribute('data-rc'),10);rPlace[i]=(rPlace[i]+1)%RSTATES.length;buildRules();}
+  else if(t.id==='r-rev'){rReveal=true;buildRules();}
+  else if(t.id==='r-clr'){rPlace=[0,0,0,0,0,0];rReveal=false;buildRules();}
+});
+function resetAll(){
+  renderMCQ();aSel=0;aPair=[];frI=0;frWith=true;pmI=-1;LOG=[];rPlace=[0,0,0,0,0,0];rReveal=false;
+  buildAtlas();buildFriction();buildPM();buildLog();buildRules();bSel=2;buildPyr();
+}
+buildAtlas();buildFriction();buildPM();buildLog();buildRules();buildRubric();
+/* Bloom pyramid (modelled on the AoL CLO-PLO workshop) */
+var BLOOM=[
+ ['Remember','b1',['define','list','identify','name','recall','state','label']],
+ ['Understand','b2',['explain','describe','summarise','classify','interpret','report']],
+ ['Apply','b3',['apply','solve','demonstrate','calculate','compute','execute','use']],
+ ['Analyse','b4',['analyse','differentiate','diagnose','contrast','examine','infer']],
+ ['Evaluate','b5',['evaluate','assess','justify','appraise','critique','defend','recommend']],
+ ['Create','b6',['create','design','formulate','construct','develop','devise']]];
+var bSel=2;
+function buildPyr(){
+  var h='';for(var i=5;i>=0;i--){h+='<button class="pl'+(i===bSel?' active':'')+'" data-bl="'+i+'" style="background:var(--'+BLOOM[i][1]+');width:'+(38+i*10.5)+'%">'+BLOOM[i][0]+'</button>';}
+  document.getElementById('bpyr').innerHTML=h;
+  var v='',b=BLOOM[bSel];
+  b[2].forEach(function(x,j){v+='<span class="vchip" style="animation-delay:'+(j*60)+'ms">'+x+'</span>';});
+  document.getElementById('bvhead').textContent=b[0].toUpperCase()+' — THE VERBS';
+  document.getElementById('bverbs').innerHTML=v;}
+document.getElementById('bpyr').addEventListener('click',function(e){
+  var b=e.target.closest('[data-bl]');if(!b)return;bSel=parseInt(b.getAttribute('data-bl'),10);buildPyr();});
+(function(){var w=['understand','know','appreciate','be aware of','be familiar with','case discussion'],h='';
+  w.forEach(function(x,i){h+='<span class="tok2" style="animation-delay:'+(i*90)+'ms">'+x+'</span>';});
+  document.getElementById('avoidtoks').innerHTML=h;})();
+buildPyr();
+/* paging */
+var pgs=[].slice.call(document.querySelectorAll('.pg'));
+var pillsBox=document.getElementById('pills');
+var cur=0;
+pgs.forEach(function(s,i){
+  var b=document.createElement('button');b.className='pill';
+  b.textContent=['OPEN','PROBLEM','DILEMMA','OPTIONS','METHODS','CASE','ROLE','SIM','PROJ','FLIP','PEER','DESIGN','STUDIO','DIFFIC','AI','ATLAS','FRICTION','PARTNER','LOG','RULES','ANALYSIS I','ANALYSIS II','ANALYSIS III','APPLY','MCQ 1','MCQ 2','MCQ 3','EXIT'][i]||i;
+  b.addEventListener('click',function(){go(i);});
+  pillsBox.appendChild(b);
+});
+var pills=[].slice.call(pillsBox.children);
+function go(n){cur=Math.max(0,Math.min(pgs.length-1,n));
+  pgs.forEach(function(s,i){s.classList.toggle('active',i===cur);});
+  pills.forEach(function(p,i){p.classList.toggle('cur',i===cur);});}
+function next(){go(cur+1);}function prev(){go(cur-1);}
+document.getElementById('b-next').addEventListener('click',next);
+document.getElementById('b-prev').addEventListener('click',prev);
+document.getElementById('b-theme').addEventListener('click',toggleTheme);
+document.getElementById('b-full').addEventListener('click',goFull);
+function toggleTheme(){var h=document.documentElement;
+  h.setAttribute('data-t',h.getAttribute('data-t')==='dark'?'light':'dark');}
+function goFull(){try{var p;
+  if(!document.fullscreenElement){p=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();}
+  else{p=document.exitFullscreen&&document.exitFullscreen();}
+  if(p&&p.catch)p.catch(function(){});}catch(e){}}
+document.addEventListener('keydown',function(e){
+  var a=document.activeElement,t=a&&a.tagName;
+  if(t==='TEXTAREA'||t==='INPUT'||t==='SELECT')return;
+  if(e.key==='ArrowRight'){e.preventDefault();next();}
+  else if(e.key==='ArrowLeft'){e.preventDefault();prev();}
+  else if(e.key==='d'||e.key==='D'){toggleTheme();}
+  else if(e.key==='f'||e.key==='F'){goFull();}
+  else if(e.key==='Home'){go(0);}else if(e.key==='End'){go(pgs.length-1);}
+  else if(e.key==='r'||e.key==='R'){var n=Date.now();
+    if(n-resetArm<2500){resetArm=0;resetAll();go(0);}else{resetArm=n;}}
+});
+/* method-card navigation: menu cards → detail pages, back buttons → menu */
+var resetArm=0;
+document.getElementById('stage').addEventListener('click',function(e){
+  var g=e.target.closest('[data-go]');
+  if(g){go(parseInt(g.getAttribute('data-go'),10));return;}
+  var m=e.target.closest('.mcard');
+  if(m){go(5+parseInt(m.getAttribute('data-m'),10));return;}
+  if(e.target.closest('.backmenu')){go(4);}
+});
+window.__go=go;window.__pages=pgs;
+go(0);
+})();
+</script>
+</body>
+</html>
