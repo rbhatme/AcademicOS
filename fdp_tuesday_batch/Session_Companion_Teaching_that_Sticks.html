@@ -24,36 +24,36 @@ body{font-family:'Segoe UI',Calibri,Arial,sans-serif;background:var(--paper);col
   display:flex;flex-direction:column;overflow:hidden}
 header{display:flex;align-items:center;gap:12px;padding:9px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
 header .ht{flex:1;min-width:200px}
-header .kick{font-size:9.5px;letter-spacing:2.2px;font-weight:700;color:var(--mid)}
+header .kick{font-size:12px;letter-spacing:2.2px;font-weight:700;color:var(--mid)}
 header h1{font-size:16px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .btn{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;
   padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
 .btn:hover{border-color:var(--acc);color:var(--acc)}
 .pills{display:flex;gap:5px;flex-wrap:wrap}
 .pill{border:1px solid var(--line);background:var(--card);color:var(--mid);border-radius:14px;
-  padding:3px 10px;font-size:10.5px;font-weight:800;cursor:pointer;font-family:inherit}
+  padding:3px 10px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit}
 .pill.cur{background:var(--acc);border-color:var(--acc);color:#fff}
 html[data-t="dark"] .pill.cur{color:#12151E}
 #stage{flex:1;position:relative;min-height:0;overflow:hidden}
 .pg{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;
-  padding:22px 78px;max-width:1120px;width:100%;margin:0 auto}
+  padding:22px 56px;width:100%;margin:0 auto}
 .pg.active{display:flex}
 .aw{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;
   transition-delay:calc(var(--i,1)*.3s)}
 .pg.active .aw{opacity:1;transform:none}
-.sk{font-size:10.5px;letter-spacing:2.4px;font-weight:800;color:var(--acc);margin-bottom:9px}
+.sk{font-size:12px;letter-spacing:2.4px;font-weight:800;color:var(--acc);margin-bottom:9px}
 .h2{font-family:Georgia,serif;font-size:27px;font-weight:700;margin-bottom:14px;line-height:1.2}
 .story{font-family:Georgia,serif;font-size:16.5px;line-height:1.6;max-width:880px;margin-bottom:8px}
 .story em{color:var(--acc)}
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:940px;margin:8px 0}
 .fcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 16px;box-shadow:var(--shadow)}
-.fcard .fk{font-size:10px;letter-spacing:1.8px;font-weight:800;color:var(--acc)}
+.fcard .fk{font-size:12px;letter-spacing:1.8px;font-weight:800;color:var(--acc)}
 .fcard p{font-family:Georgia,serif;font-size:14px;line-height:1.5;margin-top:5px}
 .qzone{margin-top:14px;max-width:920px}
-.qzhead{font-size:10px;letter-spacing:2.2px;font-weight:800;color:var(--gold);margin-bottom:8px}
+.qzhead{font-size:12px;letter-spacing:2.2px;font-weight:800;color:var(--gold);margin-bottom:8px}
 .qcard{background:var(--goldbg);border-left:4px solid var(--gold);border-radius:0 10px 10px 0;
   padding:11px 16px;margin-bottom:8px;font-family:Georgia,serif;font-size:16px;font-style:italic;color:var(--ink)}
-.qcard .qk{display:block;font-size:9.5px;letter-spacing:1.8px;font-weight:800;font-style:normal;
+.qcard .qk{display:block;font-size:12px;letter-spacing:1.8px;font-weight:800;font-style:normal;
   font-family:'Segoe UI',Calibri,sans-serif;color:var(--gold);margin-bottom:3px}
 .cards3m{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:6px 0;max-width:960px}
 .cards3m .fcard{padding:10px 12px}
@@ -91,7 +91,7 @@ html[data-t="dark"] .hlC{background:rgba(226,112,63,.12)}
 .srow2:last-child{border-bottom:none}
 .sn{flex:0 0 24px;height:24px;border-radius:50%;background:var(--acc);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:12px;margin-top:1px}
 .srow2 b{color:var(--acc)}
-.shead{font-size:10px;letter-spacing:2.2px;font-weight:800;color:var(--gold);margin:10px 0 4px}
+.shead{font-size:12px;letter-spacing:2.2px;font-weight:800;color:var(--gold);margin:10px 0 4px}
 /* MCQ */
 #scorebar{font-size:13px;font-weight:800;color:var(--navy);margin-bottom:6px}
 .mcq{max-width:880px;display:flex;flex-direction:column;gap:8px}
@@ -107,15 +107,16 @@ html[data-t="dark"] .hlC{background:rgba(226,112,63,.12)}
 .item.locked .opt{cursor:default;opacity:.85}
 .item .why{display:none;margin-top:7px;font-size:12.5px;color:var(--mid)}
 .item.locked .why{display:block}
-.chk{font-size:11.5px;font-weight:800;padding:5px 12px;float:right}
+.chk{font-size:12px;font-weight:800;padding:5px 12px;float:right}
 .verdict{font-size:12px;font-weight:800;margin-top:5px}
 .verdict.ok{color:var(--ok)}.verdict.bad{color:var(--bad)}
 footer{display:flex;gap:10px;align-items:center;padding:6px 18px;border-top:1px solid var(--line);
-  font-size:10.5px;color:var(--mid)}
+  font-size:12px;color:var(--mid)}
 footer .fx{margin-left:auto;white-space:nowrap}
 /* revised build additions */
 .pg{justify-content:safe center;overflow-y:auto}
 .pg>*{flex-shrink:0}
+.pgi{width:100%}
 .pg{padding-top:16px;padding-bottom:16px}
 .item{padding:5px 14px}
 .mcq{gap:6px}
@@ -128,12 +129,12 @@ footer .fx{margin-left:auto;white-space:nowrap}
 .cards3m .fcard.pcard{cursor:pointer}
 .cards3m .fcard.pcard.on{border-color:var(--acc);background:var(--goldbg)}
 header .pills{order:9;flex:1 1 100%;gap:4px}
-header .pill{padding:2px 8px;font-size:10px}
+header .pill{padding:2px 8px;font-size:12px}
 .atl{display:grid;grid-template-columns:300px 1fr;gap:14px;max-width:1000px;margin-top:2px}
 .alist{display:flex;flex-direction:column;gap:3px}
 .ai{font:inherit;text-align:left;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:5px 10px;font-size:12.5px;font-weight:600;cursor:pointer;display:flex;gap:8px;align-items:center}
 .ai .no{flex:0 0 18px;color:var(--acc);font-weight:800}
-.ai .mn{margin-left:auto;font-size:9.5px;letter-spacing:1px;color:var(--gold);font-weight:800}
+.ai .mn{margin-left:auto;font-size:12px;letter-spacing:1px;color:var(--gold);font-weight:800}
 .ai:hover{border-color:var(--acc)}
 .ai.on{border-color:var(--navy);background:var(--goldbg)}
 .apanel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 16px;box-shadow:var(--shadow);max-height:340px;overflow-y:auto}
@@ -145,8 +146,8 @@ header .pill{padding:2px 8px;font-size:10px}
 .apanel ul{margin:0;padding-left:16px}
 .apanel .fit{margin-top:8px;font-size:12.8px;font-style:italic;border-left:3px solid var(--gold);padding-left:8px;color:var(--mid)}
 .spec{position:relative;height:34px;margin:10px 0 0;max-width:1000px;border-radius:17px;border:1px solid var(--line);background:linear-gradient(90deg,var(--goldbg),var(--okbg))}
-.spl{display:flex;justify-content:space-between;max-width:1000px;font-size:11px;color:var(--mid);margin-bottom:4px}
-.spdot{position:absolute;top:6px;width:20px;height:20px;margin-left:-10px;border-radius:50%;background:var(--navy);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid var(--card);padding:0;font-family:inherit}
+.spl{display:flex;justify-content:space-between;max-width:1000px;font-size:12px;color:var(--mid);margin-bottom:4px}
+.spdot{position:absolute;top:6px;width:20px;height:20px;margin-left:-10px;border-radius:50%;background:var(--navy);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid var(--card);padding:0;font-family:inherit}
 html[data-t="dark"] .spdot{color:#12151E}
 .spdot.on{background:var(--acc);transform:scale(1.3);z-index:2}
 .pairbox{max-width:1000px;font-size:13px;line-height:1.45;margin-top:4px}
@@ -176,20 +177,34 @@ html[data-t="dark"] .frs.on{color:#12151E}
 .tblwrap{max-width:1000px;max-height:230px;overflow:auto;border:1px solid var(--line);border-radius:10px}
 .tbl{border-collapse:collapse;width:100%;font-size:12.5px;line-height:1.4;background:var(--card)}
 .tbl th,.tbl td{padding:6px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-.tbl th{position:sticky;top:0;background:var(--goldbg);font-size:11px;letter-spacing:1px}
+.tbl th{position:sticky;top:0;background:var(--goldbg);font-size:12px;letter-spacing:1px}
 .dec-A{color:var(--ok);font-weight:800}.dec-M{color:var(--gold);font-weight:800}.dec-R{color:var(--bad);font-weight:800}
 .rgrid{display:grid;grid-template-columns:1fr 1.2fr;gap:16px;max-width:1040px}
 @media(max-width:900px){.rgrid,.atl,.fpanel .lane,.apanel .two{grid-template-columns:1fr}.logform{grid-template-columns:1fr 1fr}}
 .rc{display:flex;gap:8px;align-items:center;border:1px solid var(--line);background:var(--card);border-radius:9px;padding:6px 10px;margin-bottom:5px;cursor:pointer;font-size:13px;width:100%;text-align:left;color:var(--ink);font-family:inherit}
 .rc:hover{border-color:var(--acc)}
-.rc .st{margin-left:auto;font-size:10.5px;font-weight:800;letter-spacing:.8px;padding:2px 8px;border-radius:99px;background:var(--line);color:var(--mid);white-space:nowrap}
+.rc .st{margin-left:auto;font-size:12px;font-weight:800;letter-spacing:.8px;padding:2px 8px;border-radius:99px;background:var(--line);color:var(--mid);white-space:nowrap}
 .rc.s1 .st{background:var(--badbg);color:var(--bad)}
 .rc.s2 .st{background:var(--goldbg);color:var(--gold)}
 .rc.s3 .st{background:var(--okbg);color:var(--ok)}
 .rc.s4 .st{background:var(--navy);color:var(--card)}
-.rc .sg{font-size:11px;color:var(--mid);display:block}
+.rc .sg{font-size:12px;color:var(--mid);display:block}
 .rc.match{border-color:var(--ok)}
 .rc.diff{border-color:var(--gold)}
+
+/* glossary */
+.gl{border-bottom:2px dotted var(--acc);cursor:help;transition:background .15s}
+.gl:hover,.gl:focus{background:var(--goldbg);outline:none}
+.glp{position:fixed;left:50%;bottom:52px;transform:translateX(-50%);width:min(1100px,94vw);max-height:48vh;overflow:auto;background:var(--card);color:var(--ink);border:2px solid var(--acc);border-radius:14px;padding:18px 56px 14px 26px;box-shadow:var(--shadow);z-index:40}
+.glp[hidden]{display:none}
+.glp .gt{font-family:Georgia,serif;font-size:28px;font-weight:700;color:var(--acc);margin-bottom:6px}
+.glp .gd{font-family:Georgia,serif;font-size:22px;line-height:1.5}
+.glp .gm{margin-top:10px;font-size:14px;color:var(--mid)}
+.glp .glx{position:absolute;right:14px;top:8px;font-size:30px;line-height:1;background:none;border:none;color:var(--mid);cursor:pointer}
+.glp .gl2{font:inherit;font-size:14px;font-weight:700;color:var(--acc);background:none;border:none;cursor:pointer;text-decoration:underline;padding:0}
+.glp .gchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.glp .gchips button{font:inherit;font-size:16px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:99px;padding:5px 14px;cursor:pointer}
+.glp .gchips button:hover{border-color:var(--acc);color:var(--acc)}
 </style>
 </head>
 <body>
@@ -203,6 +218,7 @@ html[data-t="dark"] .frs.on{color:#12151E}
   <button id="b-next" class="btn">▶</button>
   <button id="b-theme" class="btn">Day ⇄ Night</button>
   <button id="b-full" class="btn">Fullscreen</button>
+  <button id="b-gloss" class="btn">Glossary</button>
 </header>
 <div id="stage">
 
@@ -688,9 +704,10 @@ html[data-t="dark"] .frs.on{color:#12151E}
 </section>
 
 </div>
+<div id="glp" class="glp" hidden role="dialog" aria-live="polite"></div>
 <footer>
   <span>Runs offline · nothing is stored or transmitted · all characters fictional.</span>
-  <span class="fx">keys: <b>←</b>/<b>→</b> page · <b>Home</b>/<b>End</b> · <b>D</b> theme · <b>F</b> fullscreen · <b>R</b>&times;2 reset &nbsp;·&nbsp; © 2026 Ramesh Bhat AcademicOS &nbsp;·&nbsp; Build 2026-11-08a</span>
+  <span class="fx">click <u>dotted terms</u> for meanings · keys: <b>←</b>/<b>→</b> page · <b>Home</b>/<b>End</b> · <b>D</b> theme · <b>F</b> fullscreen · <b>R</b>&times;2 reset &nbsp;·&nbsp; © 2026 Ramesh Bhat AcademicOS &nbsp;·&nbsp; Build 2026-11-09b</span>
 </footer>
 <script>
 (function(){
@@ -1020,9 +1037,19 @@ pgs.forEach(function(s,i){
   pillsBox.appendChild(b);
 });
 var pills=[].slice.call(pillsBox.children);
-function go(n){cur=Math.max(0,Math.min(pgs.length-1,n));
+/* wrap each page so the whole page can be scaled to fill the screen */
+pgs.forEach(function(pg){var w=document.createElement('div');w.className='pgi';while(pg.firstChild)w.appendChild(pg.firstChild);pg.appendChild(w);});
+function fit(pg){var w=pg&&pg.querySelector('.pgi');if(!w)return;
+  var z=2.2;
+  for(;z>1.0;z-=0.05){w.style.zoom=z;if(pg.scrollHeight<=pg.clientHeight+1&&pg.scrollWidth<=pg.clientWidth+1)break;}
+  if(z<=1.0)w.style.zoom=1;}
+var fitT=null;
+function refit(){clearTimeout(fitT);fitT=setTimeout(function(){fit(pgs[cur]);},30);}
+window.addEventListener('resize',refit);
+document.addEventListener('fullscreenchange',refit);
+function go(n){cur=Math.max(0,Math.min(pgs.length-1,n));if(typeof hideGl==='function')hideGl();
   pgs.forEach(function(s,i){s.classList.toggle('active',i===cur);});
-  pills.forEach(function(p,i){p.classList.toggle('cur',i===cur);});}
+  pills.forEach(function(p,i){p.classList.toggle('cur',i===cur);});fit(pgs[cur]);}
 function next(){go(cur+1);}function prev(){go(cur-1);}
 document.getElementById('b-next').addEventListener('click',next);
 document.getElementById('b-prev').addEventListener('click',prev);
@@ -1054,6 +1081,143 @@ document.getElementById('stage').addEventListener('click',function(e){
   if(m){go(5+parseInt(m.getAttribute('data-m'),10));return;}
   if(e.target.closest('.backmenu')){go(4);}
 });
+/* ===== GLOSSARY: click a dotted term for a broad definition ===== */
+var GL=[
+ {k:'blooms',t:'Bloom\u2019s taxonomy',a:['Bloom\u2019s taxonomy','Bloom\u2019s ladder','Bloom\u2019s verbs',"Bloom's taxonomy","Bloom's ladder","Bloom's verbs"],
+  d:'A six-level ladder of thinking: Remember, Understand, Apply, Analyse, Evaluate, Create (revised by Anderson and Krathwohl, 2001). Each level has observable action verbs such as "list", "compute" or "justify", so a teacher can write outcomes that can actually be assessed.'},
+ {k:'ca',t:'Constructive alignment',a:['constructive alignment','constructive misalignment','misalignment'],
+  d:'Biggs\u2019s idea that three things must line up: what students are meant to learn (outcomes), what they do in order to learn it (activities), and how it is assessed. "Constructive" because students build meaning by doing. Misalignment is when the three pull apart, for example an aim to analyse but an exam that only rewards recall.'},
+ {k:'backward',t:'Backward design',a:['backward design'],
+  d:'Planning in reverse (Wiggins and McTighe): first decide the outcome you want, then the evidence that would show it, and only then the activities and content. It stops a course from becoming a list of topics to cover.'},
+ {k:'formative',t:'Formative assessment',a:['formative assessment','formative check','formative evidence','assessment for learning','formative'],
+  d:'Checking understanding while learning is still under way, so that teaching and studying can change. It is for feedback, not for the transcript. A one-minute paper or an exit question are typical examples. Its opposite number is summative assessment, which judges at the end, such as a final exam.'},
+ {k:'direct',t:'Direct and indirect measures',a:['direct measures','indirect measures','indirect ones'],
+  d:'Direct measures look at student work against stated targets: marks, rubric scores, projects. Indirect measures capture opinion and perception: student, employer and alumni surveys. Using both lets you triangulate instead of trusting a single number.'},
+ {k:'rubric',t:'Rubric',a:['rubrics','rubric'],
+  d:'A scoring guide made of a task, a scale, dimensions (criteria) and a description of each performance level. It makes grading consistent and shows students what excellence looks like before they submit.'},
+ {k:'friction',t:'Cognitive friction',a:['cognitive friction','productive struggle'],
+  d:'The productive mental struggle that builds deep understanding: effortful thinking, wrestling with ambiguity, making and repairing mistakes. Good teaching keeps enough of it. Tools that make everything easy can quietly remove it.'},
+ {k:'offload',t:'Cognitive offloading',a:['cognitive offloading'],
+  d:'Passing the effortful part of thinking to a tool or another person, for example asking an AI to frame the problem and write the answer. Sometimes sensible, but when it replaces the very thinking that builds understanding, the learning does not happen.'},
+ {k:'fluency',t:'Fluency heuristic',a:['fluency heuristic'],
+  d:'The mental shortcut of treating something that reads or sounds smooth and polished as more likely to be true. AI text is always fluent, so polish tells you nothing about accuracy.'},
+ {k:'narrowing',t:'Epistemic narrowing',a:['epistemic narrowing'],
+  d:'Converging on one perspective because the source keeps offering the same kind of answer. AI models tend to give convergent, single-viewpoint answers, which can silently shrink the range of ideas a student considers.'},
+ {k:'vigilance',t:'Epistemic vigilance',a:['epistemic vigilance'],
+  d:'The habit of asking "how do we know?": checking sources, premises and possible bias before accepting a claim. With AI it means critiquing outputs against criteria and cross-checking primary sources every time, not occasionally.'},
+ {k:'meta',t:'Metacognition',a:['metacognitive self-regulation','metacognitive','metacognition'],
+  d:'Thinking about one\u2019s own thinking: planning, monitoring, and judging how well a strategy is working. Prompt logs and reflective journals build it, because students must explain why they accepted, modified or rejected a suggestion.'},
+ {k:'germane',t:'Germane cognitive load',a:['germane cognitive load'],
+  d:'The mental effort that goes into building and organising understanding, as opposed to effort wasted on confusing presentation. Desirable difficulties aim to raise this useful load.'},
+ {k:'interleave',t:'Interleaving',a:['interleaving','interleaved','interleave'],
+  d:'Mixing different kinds of problems or topics in practice (A B C A B C) instead of blocking them (A A A B B B). It feels harder, but improves the ability to tell concepts apart and to transfer them to new settings.'},
+ {k:'spaced',t:'Spaced retrieval',a:['spaced retrieval','spacing'],
+  d:'Recalling material again after increasing gaps of time instead of cramming. Each effortful recall strengthens long-term memory.'},
+ {k:'dd',t:'Desirable difficulties',a:['desirable difficulties'],
+  d:'Robert Bjork\u2019s term for learning conditions that feel harder in the short run but give more durable learning: interleaving, spacing, and generating an answer before being told. Unlike plain difficulty, the learner can overcome them.'},
+ {k:'illusion',t:'Illusion of competence',a:['illusion of competence','illusions of competence'],
+  d:'The feeling of having learned something because it felt easy or familiar, such as re-reading perfect notes. The test later disagrees.'},
+ {k:'constructivism',t:'Constructivism',a:['constructivism','constructivist'],
+  d:'The view that learners actively build understanding by connecting new ideas to what they already know, through activity, talk and reflection; knowledge is not simply handed over. Social constructivism adds that this happens through dialogue with others.'},
+ {k:'behaviourism',t:'Behaviourism and direct instruction',a:['behaviourist','behaviorist','behaviourism','direct instruction'],
+  d:'A teacher-controlled approach built on explanation, demonstration, repetition and reinforcement, with clear behavioural objectives and immediate feedback. Efficient for procedures and safety rules; risky when it is the only mode, because students stay passive recipients.'},
+ {k:'tps',t:'Think-pair-share',a:['think-pair-share','pair-shares','pair-share'],
+  d:'Everyone thinks alone for a minute, then discusses with a neighbour, then a few pairs share with the class. It works in large rooms because structure and a timer replace intimacy.'},
+ {k:'omp',t:'One-minute paper',a:['one-minute paper','one-minute papers'],
+  d:'A sixty-second written response at the end of a class, such as "what was the muddiest point?". It gives the teacher formative evidence at almost no marking cost.'},
+ {k:'peer',t:'Peer instruction',a:['peer instruction'],
+  d:'A question-driven routine: each student commits to an answer alone, pairs then argue their answers, and the room votes again. It makes thinking visible in two minutes with no equipment.'},
+ {k:'flipped',t:'Flipped classroom',a:['flipped classroom','first exposure'],
+  d:'First exposure to content happens before class (a reading or video); class time is used for applying and discussing with the expert present. It is a resequencing of time, not a gadget.'},
+ {k:'dt',t:'Design thinking',a:['design thinking','HART rule'],
+  d:'A human-centred, iterative cycle: Empathise, Define, Ideate, Prototype, Test. Used for open problems with no single right answer. The HART rule (Human, Ambiguity, Redesign, Tangibility) summarises its habits.'},
+ {k:'case',t:'Case method',a:['case method','decision-forcing','cold-read','cold read'],
+  d:'Teaching through a real or realistic dilemma in which the learner takes the decision-maker\u2019s seat: "what would I do?". Discussion is led by questions, and students must commit to a position before the answer is revealed. "Cold" means read without preparation.'},
+ {k:'calls',t:'Open, warm and cold calls',a:['cold calls','warm calls','open calls'],
+  d:'Ways of inviting students to speak in a case discussion. An open call asks for volunteers; a warm call tells a student in advance that they will be asked; a cold call picks a student without notice.'},
+ {k:'studio',t:'Studio / atelier pedagogy',a:['atelier','studio'],
+  d:'The artist\u2019s workshop model applied across subjects: teacher demonstration, long stretches of making, display of work in progress, and continuous spoken critique, with teacher talk kept scarce.'},
+ {k:'tacit',t:'Tacit knowledge',a:['tacit learning','tacit mastery','tacit'],
+  d:'Know-how that is hard to put into words, acquired by watching experts and handling real materials, such as a surgeon\u2019s touch or a craftsperson\u2019s eye.'},
+ {k:'freire',t:'Problem-posing education',a:['problem-posing','conscientisation','Freire'],
+  d:'Paulo Freire\u2019s alternative to "banking" education, where teachers deposit facts. Teacher and students pose real-life problems and examine them together, building critical consciousness (conscientisation) about social myths and power.'},
+ {k:'heuristic',t:'Heuristic (discovery) learning',a:['heuristic'],
+  d:'Learning in which students find things out for themselves with guidance, instead of being told. "Heuristic" means serving to discover. It builds ownership, but needs well-timed demonstration and support so learners do not flounder.'},
+ {k:'kash',t:'KASH',a:['KASH'],
+  d:'Knowledge, Attitude, Skills, Habits: the four things learning can change. It reminds teachers that outcomes are not only about what students know.'},
+ {k:'plog',t:'Prompt log',a:['prompt logs','prompt log'],
+  d:'A record of a student\u2019s conversation with an AI: each prompt, what the AI suggested, whether the student accepted, modified or rejected it, why, and what they asked next.'},
+ {k:'orch',t:'Cognitive orchestrator',a:['cognitive orchestrator'],
+  d:'A role for the teacher: designing the order and conditions of tasks (AI-free first, then AI-mediated, then defence) so that students keep doing the hard thinking while they use technology.'},
+ {k:'dialogic',t:'Dialogic',a:['dialogic'],
+  d:'Learning through back-and-forth exchange, where each answer is questioned and answered again. A "dialogic partner" is something you converse with and challenge, not an authority you obey.'},
+ {k:'naac',t:'NAAC',a:['NAAC'],
+  d:'India\u2019s National Assessment and Accreditation Council, which assesses and accredits higher-education institutions through a self-study report and a peer-team visit. Frameworks change, so check the current criteria before you cite them.'},
+ {k:'outcome',t:'Outcome statement',a:['outcome statements','outcome statement','three-part outcome'],
+  d:'A learning outcome written with three parts: Condition (given what), Performance (what the student will do, with an observable verb) and Measurable criterion (how well). "Case discussion" is an activity, not an outcome.'},
+ {k:'pyramid',t:'Retention pyramid',a:['retention pyramid'],
+  d:'The popular chart claiming people retain 5% of what they hear in a lecture, 90% of what they teach, and so on. It is widely cited but its source is weak, so treat the percentages with caution.'},
+ {k:'scaffold',t:'Scaffolding',a:['scaffolding','scaffold'],
+  d:'Temporary support that lets a learner do something just beyond their current reach, then fades as skill grows. With AI, scaffolds include AI-free phases, prompts that challenge, and logs.'},
+ {k:'counterfactual',t:'Counterfactual',a:['counterfactuals','counterfactual'],
+  d:'A "what if?" scenario that changes one condition to see what would follow. Asking an AI for counterfactuals exposes assumptions and omitted perspectives.'},
+ {k:'coverage',t:'The coverage myth',a:['coverage myth'],
+  d:'The belief that covering more syllabus content means more learning. Research points the other way: deeper processing beats volume.'},
+ {k:'capstone',t:'Capstone simulation',a:['capstone'],
+  d:'A culminating exercise in which students use what they learned across a course, often in a simulated organisation, to decide under realistic conditions.'},
+ {k:'devil',t:'Devil\u2019s advocacy',a:['devil\u2019s advocacy',"devil's advocacy"],
+  d:'Deliberately arguing the opposite side to test an idea. With AI: state your thesis and ask the model for the strongest objections.'},
+ {k:'service',t:'Service learning',a:['service learning'],
+  d:'Learning through community service tied to course goals, so students apply theory to real needs and reflect on the experience.'}];
+var GLBYK={},GLMAP={},GLRE;
+(function(){var parts=[];
+  GL.forEach(function(g){GLBYK[g.k]=g;g.a.forEach(function(al){GLMAP[al.toLowerCase().replace(/\u2019/g,"'")]=g.k;parts.push(al);});});
+  parts.sort(function(x,y){return y.length-x.length;});
+  var seen={},u=[];parts.forEach(function(p){var n=p.replace(/\u2019/g,"'");if(!seen[n]){seen[n]=1;u.push(n);}});
+  GLRE=new RegExp('\\b(?:'+u.map(function(p){return p.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/'/g,"['\u2019]");}).join('|')+')\\b','gi');})();
+var GLSKIP='button,input,textarea,select,script,style,th,.gl,.sk,.fk,.qk,.shead,.qzhead,.mcard,.pcard,.rc,.risk,.ai,.spdot,.opt,.frs,.pill,#glp';
+function glossify(root){
+  [].forEach.call(root.querySelectorAll('.pg'),function(pg){
+    var seen={};[].forEach.call(pg.querySelectorAll('.gl'),function(x){seen[x.getAttribute('data-g')]=1;});
+    var w=document.createTreeWalker(pg,NodeFilter.SHOW_TEXT,null),nodes=[];
+    while(w.nextNode()){var n=w.currentNode;if(!n.nodeValue.trim())continue;var p=n.parentNode;if(p&&p.closest&&p.closest(GLSKIP))continue;nodes.push(n);}
+    nodes.forEach(function(n){
+      var txt=n.nodeValue,m,last=0,frag=null;GLRE.lastIndex=0;
+      while((m=GLRE.exec(txt))){
+        var key=GLMAP[m[0].toLowerCase().replace(/\u2019/g,"'")];if(!key||seen[key])continue;
+        seen[key]=1;frag=frag||document.createDocumentFragment();
+        frag.appendChild(document.createTextNode(txt.slice(last,m.index)));
+        var sp=document.createElement('span');sp.className='gl';sp.setAttribute('data-g',key);sp.setAttribute('tabindex','0');sp.setAttribute('role','button');sp.setAttribute('title','Click for the meaning');sp.textContent=m[0];
+        frag.appendChild(sp);last=m.index+m[0].length;}
+      if(frag){frag.appendChild(document.createTextNode(txt.slice(last)));n.parentNode.replaceChild(frag,n);}
+    });
+  });
+}
+var glp=document.getElementById('glp');
+function hideGl(){glp.hidden=true;}
+function showGl(k){var g=GLBYK[k];if(!g)return;glp.hidden=false;
+  glp.innerHTML='<button class="glx" type="button" data-glx aria-label="Close">\u00D7</button><div class="gt">'+esc2(g.t)+'</div><div class="gd">'+esc2(g.d)+'</div><div class="gm">Click anywhere else or press Esc to close \u00B7 <button class="gl2" type="button" data-glidx>All terms</button></div>';}
+function showIdx(){glp.hidden=false;
+  var l=GL.slice().sort(function(a,b){return a.t<b.t?-1:1;});
+  glp.innerHTML='<button class="glx" type="button" data-glx aria-label="Close">\u00D7</button><div class="gt">Glossary: '+l.length+' terms</div><div class="gchips">'+l.map(function(g){return '<button type="button" data-glk="'+g.k+'">'+esc2(g.t)+'</button>';}).join('')+'</div>';}
+document.addEventListener('click',function(e){
+  var t=e.target;if(!t.closest)return;
+  var g=t.closest('.gl');if(g){showGl(g.getAttribute('data-g'));return;}
+  if(t.closest('#b-gloss')||t.closest('[data-glidx]')){showIdx();return;}
+  var c=t.closest('[data-glk]');if(c){showGl(c.getAttribute('data-glk'));return;}
+  if(t.closest('#glp')&&!t.closest('[data-glx]'))return;
+  hideGl();
+});
+document.addEventListener('keydown',function(e){
+  var t=e.target;
+  if(e.key==='Escape'){hideGl();return;}
+  if(t&&t.classList&&t.classList.contains('gl')&&(e.key==='Enter'||e.key===' ')){e.preventDefault();showGl(t.getAttribute('data-g'));}
+},true);
+var glBusy=false,stageEl=document.getElementById('stage');
+var glMO=new MutationObserver(function(){if(glBusy)return;glBusy=true;try{glossify(stageEl);}catch(err){}glMO.takeRecords();glBusy=false;refit();});
+glossify(stageEl);
+try{glMO.observe(stageEl,{childList:true,subtree:true,characterData:true});}catch(e){}
+
 window.__go=go;window.__pages=pgs;
 go(0);
 })();
