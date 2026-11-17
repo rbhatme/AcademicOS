@@ -93,7 +93,7 @@ Rohan read it on the bus home and was irritated before he had finished. The next
 
 "We do," said Anil. They did not discuss what, if anything, should happen next, or whose job it would be. Later that week, at a function, each told a colleague privately that the other's area was really where the problem lay.
 
-The note travelled. Kavita heard of it and said quietly to the Director, "If this goes into a Council document, it will be on a parents' WhatsApp group by New Year." Vivek pointed out that real graduate tracking would need two people full time, which this year's budget did not have. Farida observed that the Council's format had no field for any of this, and that the report as drafted was accurate. All four were right.
+The note travelled. Kavita heard of it and said quietly to the Director, "If this goes into a Council document, it will be on a parents' WhatsApp group by New Year." Vivek pointed out that real graduate tracking would need two people full time, which this year's budget did not have. Farida observed that the Council's format had no field for any of this, and that the report as drafted was accurate. All three were right.
 
 Dr Joshi saw the note on Friday, when the Registrar's office sent it up "for information". She read it twice. She had no way of knowing whether thirty-one graduates were typical. She did know that she had read AITM's placement report every year for twelve years, the last five as Dean, and that it had never contained a sentence like "nobody asked me what I wanted to do".
 
