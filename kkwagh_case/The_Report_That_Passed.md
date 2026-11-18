@@ -364,4 +364,4 @@ For session 2, each participant brings one current initiative from their own are
 - Ibarra, H., Rattan, A. and Johnston, A. (2018). *Satya Nadella at Microsoft: Instilling a growth mindset.* London Business School, CS-18-008 (HBP LBS128). The earlier note gave it as Ibarra and Rattan, 2016; the copy supplied is dated June 2018 and has three authors. Your copy is licensed for educator review only. If participants are to read it, buy copies through Harvard Business Publishing. This pack does not reproduce it.
 - Argyris, C. (1991). "Teaching Smart People How to Learn". *Harvard Business Review*, May to June 1991. (Check the issue.)
 - Dweck, C. S. (2006). *Mindset: The New Psychology of Success.* Random House. (Check the edition you cite.)
-- If you mention Dweck's later warning about a "false growth mindset", check the source (an article of around 2015) before quoting it.
+- Dweck, C. (2016). "What Having a 'Growth Mindset' Actually Means". *HBR.org*, 13 January 2016 (reprint H02LQX). Verified source of "false growth mindset" and the fixed-mindset "persona".
