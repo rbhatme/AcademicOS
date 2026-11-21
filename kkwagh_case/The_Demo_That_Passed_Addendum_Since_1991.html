@@ -594,6 +594,14 @@ html[data-t="dark"]{--teal:#73D2D8}
 }
 @media print{#pg-charter .g2c>div:first-child{display:none}#pg-charter .g2c{display:block}}
 
+/* links between the lab and its addendum */
+a.btn{text-decoration:none;display:inline-block}
+.addlink{display:flex;gap:18px;align-items:center;justify-content:space-between;background:var(--tint);border:1.5px solid var(--rule2);border-left:5px solid var(--part);border-radius:4px;padding:12px 18px;margin-top:10px;max-width:1100px}
+.addlink p{font-size:15px;line-height:1.42;margin-top:3px}
+.addlink .btn{flex:none}
+.ul a,.small a{color:var(--blue)}
+@media(max-width:900px){.addlink{flex-direction:column;align-items:flex-start}}
+
 /* ===== ADDENDUM: since 1991 ===== */
 /* evidence badges */
 .ev{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:99px;vertical-align:1px;white-space:nowrap}
@@ -1074,7 +1082,8 @@ html[data-t="dark"]{--teal:#73D2D8}
       <li><b>“The brain processes a threat to competence like physical danger”:</b> overstated; labelled simplified.</li>
       <li><b>Ladder of inference:</b> Argyris’s, but from his later work, not the 1991 article.</li>
       <li><b>Triple-loop learning:</b> not Argyris’s term; definitions vary. The 2026 review’s themes are reported as found, not as a prescription to abandon top-down modelling.</li></ol>
-      <p class="small">How to use this addendum: 15 to 20 minutes after the Learning Lab, or as reading before session 2. Choose one development per session rather than all five.</p></div>
+      <p class="small">How to use this addendum: 15 to 20 minutes after the Learning Lab, or as reading before session 2. Choose one development per session rather than all five.</p>
+      <div class="row noprint" style="margin-top:6px"><a class="btn" href="The_Demo_That_Passed_Learning_Lab.html" target="_blank" rel="noopener">&larr; Open the Learning Lab</a><span class="small">Keep both files in the same folder.</span></div></div>
     <div><div class="shead">References</div><ul class="ul refs">
       <li>Argyris, C. (1991). Teaching smart people how to learn. <i>Harvard Business Review</i>, May.</li>
       <li>Argyris, C., Putnam, R. and Smith, D. M. (1985). <i>Action Science</i>. Jossey-Bass.</li>
@@ -1102,7 +1111,7 @@ html[data-t="dark"]{--teal:#73D2D8}
 </div>
 <footer>
   <span>Addendum to the Learning Lab · runs offline · nothing you enter is stored or transmitted · click <u>dotted terms</u> for meanings</span>
-  <span class="fx">© 2026 Ramesh Bhat AcademicOS &nbsp;·&nbsp; Build 2026-11-21d</span>
+  <span class="fx">© 2026 Ramesh Bhat AcademicOS &nbsp;·&nbsp; Build 2026-11-21f</span>
 </footer>
 </div>
 </div>
