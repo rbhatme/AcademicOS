@@ -3,7 +3,7 @@ title: "Teaching Manual"
 subtitle: "The Demo That Passed: Learning Lab (40 pages) and Addendum, Since 1991 (16 pages)"
 ---
 
-**How to use this manual.** One row per page: what a good answer looks like, and how to read what you hear. Most pages have no single right answer. Where a file shows "One reading", use it as a benchmark to discuss, never as a mark. Participants write before they discuss; sealed pages enforce this (press **U** to open all seals when projecting). Keys: → or Space next, ← back, D theme, F full screen, M menu, R twice clears. Nothing is stored, so participants must copy or print their pack before closing.
+**How to use this manual.** One row per page: what a good answer looks like, and how to read what you hear. Most pages have no single right answer. Where a file shows "One reading", use it as a benchmark to discuss, never as a mark. Participants write before they discuss; sealed pages enforce this (press **U** to open all seals when projecting). Keys: → or Space next, ← back, D theme, F full screen, M menu, R twice clears. Nothing is stored, so participants must copy or print their pack before closing. Sample answers to the eight written questions are in the Appendix.
 
 # Part A. Learning Lab
 
@@ -16,7 +16,7 @@ subtitle: "The Demo That Passed: Learning Lab (40 pages) and Addendum, Since 199
 | 3 | A good name | "A few people thought it had stopped moving." Aditya's question: products versus purpose. | Ask who in the room answers "what does our department exist for" with activities. |
 | 4 | The Board's minute | The minute asks for a demo, a plan and a budget, and also to "learn quickly". The dashboard measures use, not benefit. | Put "what is asked" against "what is wanted" on the board. |
 | 5 | Monday's meeting | Anjali spoke first; Tanvi said nothing; nobody asked what "learn quickly" meant or what farmers would do differently. | Good groups notice the silence, not only the speakers. |
-| 6 | Commit: Phase A | Q1: any honest sentence (often "we already have it"). Q2: **partly**: real AI, but a strategy needs purpose, farmer outcomes and evidence of use. Q3: understand what farmers need and learn from evidence fast. | "Yes, fully" at Q2 signals single-loop thinking; do not correct it, probe: "how would we know it helps farmers?" |
+| 6 | Commit: Phase A | Q1: any honest sentence (often "we already have it"). Q2: **partly**: real AI, but a strategy needs purpose, farmer outcomes and evidence of use. Q3: understand what farmers need and learn from evidence fast. | "Yes, fully" at Q2 signals single-loop thinking; do not correct it, probe: "how would we know it helps farmers?" **Samples: Appendix A1 to A3.** |
 
 ## Phase B
 
@@ -27,18 +27,18 @@ subtitle: "The Demo That Passed: Learning Lab (40 pages) and Addendum, Since 199
 | 9 | Then we agree | They agreed the finding was weak; they avoided what to do and whose job it was. | The pump-start story shows the cost of a disagreement never voiced. |
 | 10 | The note travelled | Neha, Imran and Rajesh are all right. Rajesh's quiet manual switches are the biggest hidden fact. | "All three were right" yet nobody owns it: the second behaviour. |
 | 11 | Role switch | Right about: Anjali (thirty farms are not proof); Prakash (dealers matter); Neha (competitors exploit weakness); Imran (research costs money); Rajesh (he served farmers); Tanvi (the AI does not know the farm); Aditya (a demo can pass and miss the point). | Speak only in role first. Reveal "right about" only after the room has tried. |
-| 12 | Commit: Phase B | Q1: shared; the MD must convene and assign, not "nobody's". Q2: agreed it was weak; avoided ownership, next steps and their own old conflict. Q3: field complaints, dealer views, other workarounds. | "R&D's problem" or "Sales' problem" alone signals the corridor pattern. |
+| 12 | Commit: Phase B | Q1: shared; the MD must convene and assign, not "nobody's". Q2: agreed it was weak; avoided ownership, next steps and their own old conflict. Q3: field complaints, dealer views, other workarounds. | "R&D's problem" or "Sales' problem" alone signals the corridor pattern. **Samples: Appendix B1 to B3.** |
 
 ## Phase C
 
 | # | Page | Appropriate answers | How to interpret · your move |
 |---|----------|----------------------------|----------------------|
 | 13 | The Monday meeting | Two messages pull apart (Chairman: schedule; independent director: learning). Deadlines are real. | Both directors want the company to do well. |
-| 14 | Predict | Most rooms predict **A**. A good prediction gives a reason from the characters' behaviour. | Keep predictions; they power the poll. |
+| 14 | Predict | Most rooms predict **A**. A good prediction gives a reason from the characters' behaviour. | Keep predictions; they power the poll. **Samples: Appendix C1.** |
 | 15 | Four options | No right option. A: safe, finding buried. B: learning at small cost, a season lost in most districts. C: most learning, slow and visible. D: authority, but ownership leaves the team. | A is defensible only if the review is dated and owned. |
 | 16 | Your choice | Any option. The quality lies in "what would I need to believe for my choice to be wrong?" | Weak answers have no condition under which they would change. |
 | 17 | Room poll | Usually: predicted A, chose B or C. | The gap is the point: we choose differently on paper from how we expect real teams to act. Ask which is more like our Monday meetings. |
-| 18 | Option scorecard | A: keeps commitments / buries the finding / believe the sample is unrepresentative and the review will happen. B: cheap evidence / busy season, unclear lead / believe measures can be agreed. C: trust and ownership / slow, public / believe the market will wait. D: authority, expertise / ownership leaves / believe it is strategic. | The "believe" column shows assumptions; test the most fragile. |
+| 18 | Option scorecard | A: keeps commitments / buries the finding / believe the sample is unrepresentative and the review will happen. B: cheap evidence / busy season, unclear lead / believe measures can be agreed. C: trust and ownership / slow, public / believe the market will wait. D: authority, expertise / ownership leaves / believe it is strategic. | The "believe" column shows assumptions; test the most fragile. **Sample scorecard: Appendix C2.** |
 
 ## Debrief
 
@@ -115,3 +115,115 @@ Use 15 to 20 minutes after the lab, or as reading before session 2. Take one dev
 | 14 | LOOP, updated | L adds triple loop; O adds ladder and AI premises; Own adds psychological safety; P adds intelligent failure. | Ties the addendum back to the lab. |
 | 15 | Three experiments | A safety move (thank, ask, next step); a failure, typed; one AI rule. | Specific beats general. Copy or print before closing. |
 | 16 | Sources and corrections | Five corrections to the original summary; full references. | Read before the session. |
+
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
+
+# Appendix. Sample answers to the written questions
+
+None of these is "the" answer. Use them to recognise what you hear and to choose a probe. The questions ask what participants *would* do, so honest single-loop answers are expected and useful.
+
+## A1. The one sentence you would most probably have said in Monday's meeting
+
+**Model answer:** "Before we build the demo, can we check what farmers actually do with the scheduler we already have?"
+
+| What participants write | Reading · probe |
+|----------------------------|----------------------------|
+| "We already have the scheduler; let's polish it and give the Board a good demo." · "The dealers' meet is fixed; let's have something to show." · "Is there a cost, and who owns this?" · "Give my team two weeks' notice." | Doing the task well (single loop). Most of the room, and honest. Do not correct; it sets up the Mirror reveal. |
+| "What did the Board mean by 'learn quickly'?" · "How many farmers keep the schedule on, not just download the app?" · "Could someone talk to a few farmers first?" | Questioning the task (double loop). If many write this, ask: "Would you really have said it, in front of Anjali, at that table?" |
+
+## A2. Is Saathi's existing scheduler an "AI product strategy"?
+
+**Model answer: partly.** The AI is real: a model trained on 40,000 farms, a proven controller, 600 dealers. A strategy also needs the farmer's problem, evidence that it works (the dashboard measures use, not benefit), choices about where to compete, and a way to learn quickly. A voice assistant and a new dashboard are a demo of features, not a strategy.
+
+| Answer | Reading · probe |
+|----------------------------|----------------------------|
+| **Yes:** "it already uses AI." | Treats a feature as a strategy: the "we already do this" pattern. Probe: "What would a strategy contain that a demo does not?" |
+| **No:** "it is relabelled weather scheduling." | Too dismissive; ignores a real asset. Probe: "What is valuable here that we should keep?" |
+| **Partly:** "real asset, but no farmer problem, no evidence, no plan to learn." | Double loop; strongest if it mentions farmers or evidence. |
+
+## A3. What do you think the Board meant by "learn quickly"?
+
+**Model answer:** find out, fast and cheaply, from real farmers, what AI can change for them, before committing big money: test, measure and adjust rather than launch and hope. The minute asks for two things that can pull apart, a working demonstration and learning; the team heard only the first.
+
+| Answer | Reading · probe |
+|----------------------------|----------------------------|
+| "Move fast; get ahead of the start-ups." | Learning means launching. Partly right: the Chairman's reading. |
+| "Show the Board something working." | Learning means a demo: the team's reading. |
+| "Get our people up to speed on AI." | Learning about tools, not farmers. Narrow. |
+| "Find out from farmers what AI should do, by testing small and fast." | Double loop; the strongest answer. |
+| "We don't know; someone should ask the Board." | Underrated: the simplest double-loop move, which nobody at the table made. |
+
+Probe: "What would the Board need to see in December to know we had *learned* something?"
+
+## B1. Whose problem is Tanvi's finding?
+
+**Model answer:** right now nobody's, and that is the problem. Each department holds a part: R&D (the product ignores power hours), Sales (dealers want pump alerts), Field Service (a year of hidden evidence), Marketing (the dashboard figure and the campaign), Finance (cost of research against cost of a failed launch). It needs one owner named by the MD, working with a cross-functional team that includes Tanvi.
+
+| Answer | Reading · probe |
+|----------------------------|----------------------------|
+| "R&D's: it is their product." | Single department: the corridor pattern. "Could R&D fix it without Field Service's data or the dealers?" |
+| "Sales': it is dealer training." | Anjali's untested assumption. "What evidence would show that?" |
+| "The MD's." | Right about convening; risk of passing it upward. "What should each head do before the MD asks?" |
+| "Everyone's." | Often means no one's. "Who calls the first meeting?" |
+| "Nobody's yet." | Accurate; strong if followed by "and that is the problem". |
+| "Tanvi's." | Risky: loads the problem on the newcomer with least power. |
+
+## B2. Anjali and Prakash "agree". What did they agree on, and what did they avoid?
+
+**Model answer:** they agreed only that Tanvi's evidence was weak. They avoided: what to do next and whose job it was; testing their own claims (Anjali's "farmers always go back to manual"; Prakash asks for research but proposes none); the substance (power hours, pump alerts); involving Tanvi, Rajesh or Aditya; their real disagreement, which surfaced at dinner; and their old grievance over the pump-start promise. In Argyris's terms: control, winning, hiding feelings and looking rational.
+
+| Answer | Reading · probe |
+|----------------------------|----------------------------|
+| "They agreed it was not conclusive. Fair." | Partly right: rigour is legitimate. "What did they propose to make it conclusive?" (Nothing.) |
+| "They avoided conflict." | Yes; ask which conflict: today's and the two-year-old one. |
+| "They protected each other's turf." | Sharp: a polite truce, not agreement. |
+| Defends them as sensible | "If they were right, what would they do next?" |
+
+## B3. Rajesh's technicians switched farms to manual for a year. What else might nobody know?
+
+**Model answer:** specific gaps, each with a way to find out.
+
+| Gap | How to find out |
+|----------------------------|----------------------------|
+| Quiet workarounds: dealers resetting schedules, informal repairs, customer care advising "switch to manual". | Ask technicians and dealers. |
+| Complaints that never reach a system: WhatsApp to dealers, farmers moving to start-ups, warranty patterns. | Dealer logs, churn data. |
+| What the dashboard hides: features actually used (pump start), regional differences, whether advice was right. | App logs beyond "active users". |
+| Model blind spots: power hours, crop stage, village weather were never in the data. | Ask: "What does the model not know?" |
+| Unspoken doubts, including Aditya's own. | Skip-level conversations, anonymous input. |
+
+Read it: vague answers ("lots of things") need "name one, and how would we check?" The strongest answers say where information gets stuck. Campus probe: "What are our lab assistants, clerks or junior faculty quietly fixing that leadership does not know about?"
+
+## C1. What will this team most probably decide on Monday, and why?
+
+**Model answer:** launch as planned and "look into it later" (Option A), because of the deadlines and the Chairman's "cannot slip"; Anjali and Prakash have already dismissed the evidence; Neha fears leaks and Imran has no budget; the demo works; the team does things "exactly as asked"; and the person with the evidence is the most junior. Under time pressure, groups default to the status quo with a promise to review.
+
+| Prediction | Reading · probe |
+|----------------------------|----------------------------|
+| A, launch and log (most rooms) | Realistic; the benchmark. "Who owns the review, and by when?" |
+| B, pilot | "What in Monday's meeting suggests this team would?" |
+| D, ask the Board | Sharp: cover for Aditya; escalation as a way of not owning. |
+| C, redesign | Rarely predicted; usually wishful. Ask for the evidence. |
+
+The question is what the team *will* do, not what it *should* do. Keep the predictions for the room poll: rooms usually predict A and then choose B or C themselves.
+
+## C2. Option scorecard: sample answers
+
+| Option | Strongest advantage | Real cost | What I would need to believe |
+|----------|----------------------|----------------------|----------------------|
+| **A. Launch and log** | Keeps commitments to the Board and 600 dealers; protects the selling season; answers the start-ups; puts no department on trial over 30 visits. | The finding sits in the backlog; farmers get an adviser many have switched off; one bad grape-season advice hurts the controller's name; Tanvi and Rajesh learn bad news goes nowhere. | The 30 farms are untypical or the problems fixable by an update; the review will really happen, with an owner and a date; launching late costs more than launching flawed. |
+| **B. Pilot in two districts** | Real evidence at small cost and risk; tests the power-hours fix; gives the Board a demo and learning. | Other districts' dealers disappointed; start-ups gain a season; time in peak season; unclear lead across four departments; bad news must be acted on in public. | Three measures can be agreed in advance; one person can lead across departments; 90 days is long enough to learn; we will act on what the pilot finds. |
+| **C. Redesign with the farm** | Ownership beyond the leadership team; a product farmers trust; the biggest improvement; leaders learn first-hand together. | Slow and visible; may miss the season; weaknesses aired before dealers and farmers; the Chairman may be displeased; expectations may outrun the budget. | Farmer trust is worth more than one season's sales; start-ups cannot lock farmers in within a season; leaders can handle candour; the Board will back a later launch. |
+| **D. Ask the Board** | The Board's authority and neutrality; outside expertise; no single department carries the decision; the threat is strategic. | Ownership leaves the team; slower; consultants learn what the company needed to learn; may look like a team that could not decide. | The question is beyond the team's authority or skill; the Board will decide before 8 January; consultants will pass the learning back. |
+
+**A strong belief is a condition that could prove you wrong, and that can be checked:**
+
+| Option | Testable belief | How to check |
+|----------|----------------------------|----------------------|
+| A | "Fewer than 1 farm in 5 has the power-hours clash." | App logs, this week |
+| B | "We can name the pilot lead and three measures by Friday." | Ask the team now |
+| C | "No start-up can sign up our dealers within one season." | Ask six dealers |
+| D | "The Board can decide before 8 January." | Ask the Chairman |
+
+Ask the room which belief is most fragile, and test that one first. People who chose A often find their belief ("the review will really happen") rests on the same team habit the case exposed.
